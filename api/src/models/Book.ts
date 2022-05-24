@@ -14,7 +14,7 @@ export enum Status {
 }
 
 export type BookDocument = Document & {
-  isbn: number
+  isbn: string
   title: string
   description: string
   authors: Types.ObjectId[]
@@ -27,11 +27,9 @@ export type BookDocument = Document & {
 
 const bookSchema = new mongoose.Schema({
   isbn: {
-    type: Number,
+    type: String,
     index: true,
     required: true,
-    min: 1000000000,
-    max: 9999999999,
   },
   title: {
     type: String,
