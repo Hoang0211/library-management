@@ -3,6 +3,10 @@ import express from 'express'
 import dotenv from 'dotenv'
 
 import movieRouter from './routers/movie'
+import bookRouter from './routers/book'
+import authorRouter from './routers/author'
+import userRouter from './routers/user'
+import borrowRouter from './routers/borrow'
 import apiErrorHandler from './middlewares/apiErrorHandler'
 import apiContentType from './middlewares/apiContentType'
 
@@ -18,6 +22,10 @@ app.use(express.json())
 
 // Set up routers
 app.use('/api/v1/movies', movieRouter)
+app.use('/api/v1/books', bookRouter)
+app.use('/api/v1/authors', authorRouter)
+app.use('/api/v1/users', userRouter)
+app.use('/api/v1/borrows', borrowRouter)
 
 // Custom API error handler
 app.use(apiErrorHandler)
