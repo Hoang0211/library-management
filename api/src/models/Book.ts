@@ -30,6 +30,7 @@ const bookSchema = new mongoose.Schema({
     type: String,
     index: true,
     required: true,
+    unique: true,
   },
   title: {
     type: String,
@@ -50,6 +51,7 @@ const bookSchema = new mongoose.Schema({
   publishedDate: Date,
   category: {
     type: String,
+    index: true,
     required: true,
     enum: Category,
   },
@@ -59,7 +61,8 @@ const bookSchema = new mongoose.Schema({
     min: 1,
   },
   status: {
-    type: Status,
+    type: String,
+    enum: Status,
     default: Status.Available,
   },
 })
