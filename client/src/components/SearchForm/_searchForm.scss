@@ -1,0 +1,37 @@
+@import '../../styles/variables';
+
+.search-form {
+  height: 50px;
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+
+  .search-bar,
+  .filter,
+  .btn-search {
+    height: 100%;
+    padding: 0 0.5rem;
+    font-size: 1rem;
+    outline: none;
+    border: 2px solid $clr-accent;
+  }
+
+  .search-bar {
+    flex-grow: 1;
+    border-right: none;
+  }
+
+  .filter {
+    width: 150px;
+  }
+
+  .btn-search {
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    background-color: $clr-accent;
+    cursor: pointer;
+  }
+}
