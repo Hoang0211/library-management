@@ -1,0 +1,50 @@
+@import '../../../styles/variables';
+
+.header {
+  .nav {
+    height: $nav-height;
+    padding: 0 1rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: $clr-accent;
+
+    .logo,
+    .user,
+    .login {
+      height: 100%;
+      display: flex;
+      align-items: center;
+
+      &__text {
+        font-size: 1rem;
+        font-weight: bold;
+      }
+    }
+
+    .logo__text {
+      font-size: 1.25rem;
+    }
+
+    .icon {
+      font-size: 1.25rem;
+      &-book {
+        margin-right: 0.5rem;
+      }
+      &-user {
+        margin-right: 0.5rem;
+        font-size: 1rem;
+      }
+    }
+  }
+
+  .btn {
+    background: transparent;
+    outline: none;
+    border: none;
+  }
+}
