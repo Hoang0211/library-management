@@ -1,6 +1,7 @@
 import React from 'react';
 
 import SearchForm from '../../components/SearchForm';
+import ResultPanel from '../../components/ResultPanel';
 import './_home.scss';
 
 const Home = () => {
@@ -13,6 +14,7 @@ const Home = () => {
         <button className='btn home__show-authors'>Authors</button>
       </div>
       <SearchForm />
+      <ResultPanel />
     </main>
   );
 };
