@@ -24,6 +24,14 @@ export type Book = {
   status: Status;
 };
 
+export type Author = {
+  _id: string;
+  firstName: string;
+  lastName: string;
+  biography: string;
+  books: string[];
+};
+
 export type ApiDataType = {
   message: string;
   status: string;

@@ -4,7 +4,7 @@ import { RiBookFill } from 'react-icons/ri';
 import { Book } from '../../types';
 import './_bookItem.scss';
 
-export type BookItemProps = {
+type BookItemProps = {
   book: Book;
   lastItem: boolean;
 };

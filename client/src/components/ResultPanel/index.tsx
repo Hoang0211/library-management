@@ -4,7 +4,8 @@ import { RiArrowDropLeftLine, RiArrowDropRightLine } from 'react-icons/ri';
 import axios, { AxiosResponse } from 'axios';
 
 import BookItem from '../BookItem';
-import { Book, ApiDataType, Status } from '../../types';
+import AuthorItem from '../AuthorItem';
+import { Book, ApiDataType, Status, Author } from '../../types';
 import './_resultPanel.scss';
 
 type ResultPanelProps = {
@@ -50,6 +51,23 @@ const books: Book[] = [
     publishedDate: new Date(),
     category: 'article',
     numPage: 1,
+  },
+];
+
+const authors: Author[] = [
+  {
+    _id: 'id1',
+    firstName: 'Hoang',
+    lastName: 'Nguyen',
+    biography: 'This is the summarize of author Nguyen Hoang.',
+    books: ['Book 1', 'Book 2'],
+  },
+  {
+    _id: 'id2',
+    firstName: 'Quang',
+    lastName: 'Nguyen',
+    biography: 'This is the summarize of author Nguyen Quang.',
+    books: ['Book 3', 'Book 4'],
   },
 ];
 
@@ -113,15 +131,21 @@ const ResultPanel = ({ currentDisplay }: ResultPanelProps) => {
         )}
       </div>
       <div className='display'>
-        {books.map((book) => {
-          return (
-            <BookItem
-              key={book._id}
-              book={book}
-              lastItem={book === books[books.length - 1]}
-            />
-          );
-        })}
+        {currentDisplay === 'books'
+          ? books.map((book) => (
+              <BookItem
+                key={book._id}
+                book={book}
+                lastItem={book === books[books.length - 1]}
+              />
+            ))
+          : authors.map((author) => (
+              <AuthorItem
+                key={author._id}
+                author={author}
+                lastItem={author === authors[authors.length - 1]}
+              />
+            ))}
       </div>
       <div className='pagination'>
         <button className='btn btn-first'>
