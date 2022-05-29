@@ -1,7 +1,6 @@
 @import '../../styles/variables';
 
 .result-panel {
-  min-height: 400px;
   width: 100%;
   max-width: 800px;
   display: flex;
@@ -40,6 +39,11 @@
         width: 20px;
       }
     }
+  }
+
+  .display {
+    flex: 1;
+    justify-content: flex-start;
   }
 
   .pagination {
