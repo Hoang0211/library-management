@@ -10,7 +10,7 @@ const Header = () => {
       <nav className='nav'>
         <button className='btn logo'>
           <FaBook className='icon icon-book' />
-          <span className='logo__text'>Local Library</span>
+          <h1 className='logo__text'>Local Library</h1>
         </button>
         {/* <button className='btn user'>
           <FaUser className='icon icon-user' />
