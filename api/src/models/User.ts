@@ -5,6 +5,14 @@ export enum Role {
   Admin = 'admin',
 }
 
+export type User = {
+  firstName: string
+  lastName: string
+  email: string
+  password: string
+  role: Role
+}
+
 export type UserDocument = Document & {
   firstName: string
   lastName: string
@@ -30,7 +38,6 @@ const userSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    required: true,
   },
   role: {
     type: String,

@@ -5,6 +5,11 @@ const findAll = async (): Promise<UserDocument[]> => {
   return User.find().sort({ firstName: 1 })
 }
 
+const findOne = async (email: string): Promise<UserDocument | null> => {
+  console.log('email:', email)
+  return User.findOne({ email })
+}
+
 const findById = async (userId: string): Promise<UserDocument> => {
   const foundUser = await User.findById(userId)
 
@@ -47,6 +52,7 @@ const deleteUser = async (userId: string): Promise<UserDocument | null> => {
 
 export default {
   findAll,
+  findOne,
   findById,
   create,
   update,
