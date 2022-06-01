@@ -5,7 +5,7 @@ import axios, { AxiosResponse } from 'axios';
 
 import BookItem from '../BookItem';
 import AuthorItem from '../AuthorItem';
-import { Book, ApiDataType, Status, Author } from '../../types';
+import { Book, Status, Author } from '../../types';
 import './_resultPanel.scss';
 
 type ResultPanelProps = {

@@ -1,3 +1,52 @@
+import { AxiosError } from 'axios';
+
+// Action types
+export const SIGN_IN = 'SIGN_IN';
+export const SIGN_OUT = 'SIGN_OUT';
+
+export type AppState = {
+  user: UserState;
+};
+
+// Guard
+export function isAxiosError(candidate: any): candidate is AxiosError {
+  return candidate.isAxiosError === true;
+}
+
+// USER
+export enum Role {
+  User = 'user',
+  Admin = 'admin',
+}
+
+export type User = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  role: Role;
+};
+
+export type UserState = {
+  user: User | null;
+  token: string;
+};
+
+export type SignInAction = {
+  type: typeof SIGN_IN;
+  payload: {
+    user: User;
+    token: string;
+  };
+};
+
+export type SignOutAction = {
+  type: typeof SIGN_OUT;
+};
+
+export type UserActions = SignInAction | SignOutAction;
+
+// BOOK
 export enum Category {
   Journal = 'journal',
   Article = 'article',
@@ -30,11 +79,4 @@ export type Author = {
   lastName: string;
   biography: string;
   books: string[];
-};
-
-export type ApiDataType = {
-  message: string;
-  status: string;
-  books: Book[];
-  book?: Book;
 };
