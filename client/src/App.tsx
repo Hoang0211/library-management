@@ -6,7 +6,8 @@ import Header from './components/layout/Header';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
-import AddBook from './pages/AddBook';
+import Users from './pages/Users';
+import Borrows from './pages/Borrows';
 
 const App = () => {
   return (
@@ -24,10 +25,18 @@ const App = () => {
           }
         />
         <Route
-          path='/books/add'
+          path='/users'
           element={
             <ProtectedRoute adminOnly={true}>
-              <AddBook />
+              <Users />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path='/borrows'
+          element={
+            <ProtectedRoute adminOnly={true}>
+              <Borrows />
             </ProtectedRoute>
           }
         />
