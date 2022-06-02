@@ -1,13 +1,31 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 
-import { AppState } from '../types';
+import { AppState, User } from '../types';
 import createRootReducer from './reducers';
+
+export const getUserFromLocal = (): User | null => {
+  const user = localStorage.getItem('user');
+  if (user !== null) {
+    return JSON.parse(user);
+  } else {
+    return null;
+  }
+};
+
+export const getTokenFromLocal = (): string => {
+  const token = localStorage.getItem('token');
+  if (token !== null) {
+    return JSON.parse(token);
+  } else {
+    return '';
+  }
+};
 
 const initState: AppState = {
   user: {
-    user: JSON.parse(localStorage.getItem('user') || '{}'),
-    token: JSON.parse(localStorage.getItem('token') || '{}'),
+    user: getUserFromLocal(),
+    token: getTokenFromLocal(),
   },
 };
 

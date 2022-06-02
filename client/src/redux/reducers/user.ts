@@ -1,9 +1,10 @@
+import { getUserFromLocal, getTokenFromLocal } from '../store';
 import { SIGN_IN, SIGN_OUT, UserActions, UserState } from '../../types';
 
 export default function user(
   state: UserState = {
-    user: JSON.parse(localStorage.getItem('user') || '{}'),
-    token: JSON.parse(localStorage.getItem('token') || '{}'),
+    user: getUserFromLocal(),
+    token: getTokenFromLocal(),
   },
   action: UserActions
 ): UserState {
