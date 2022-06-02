@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { Navigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
 
@@ -13,7 +14,11 @@ const clientId =
 const Login = () => {
   const dispatch = useDispatch<any>();
 
-  const { token } = useSelector((state: AppState) => state.user);
+  const { user, token } = useSelector((state: AppState) => state.user);
+
+  if (user) {
+    return <Navigate to='/' />;
+  }
 
   // console.log('token:', token);
   // console.log('user:', user);
