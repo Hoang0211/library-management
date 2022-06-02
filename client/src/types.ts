@@ -1,7 +1,9 @@
 import { AxiosError } from 'axios';
 
 // Action types
-export const SIGN_IN = 'SIGN_IN';
+export const SIGN_IN_REQUEST = 'SIGN_IN_REQUEST';
+export const SIGN_IN_SUCCESS = 'SIGN_IN_SUCCESS';
+export const SIGN_IN_FAILURE = 'SIGN_IN_FAILURE';
 export const SIGN_OUT = 'SIGN_OUT';
 
 export type AppState = {
@@ -28,15 +30,31 @@ export type User = {
 };
 
 export type UserState = {
+  loading: boolean;
+  error: Error | null;
   user: User | null;
   token: string;
 };
 
-export type SignInAction = {
-  type: typeof SIGN_IN;
+export type SignInRequestAction = {
+  type: typeof SIGN_IN_REQUEST;
+  payload: {
+    googleTokenId: string;
+  };
+};
+
+export type SignInSuccessAction = {
+  type: typeof SIGN_IN_SUCCESS;
   payload: {
     user: User;
     token: string;
+  };
+};
+
+export type SignInFailureAction = {
+  type: typeof SIGN_IN_FAILURE;
+  payload: {
+    error: Error;
   };
 };
 
@@ -44,7 +62,11 @@ export type SignOutAction = {
   type: typeof SIGN_OUT;
 };
 
-export type UserActions = SignInAction | SignOutAction;
+export type UserActions =
+  | SignInRequestAction
+  | SignInSuccessAction
+  | SignInFailureAction
+  | SignOutAction;
 
 // BOOK
 export enum Category {

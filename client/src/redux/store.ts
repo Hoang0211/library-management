@@ -24,6 +24,8 @@ export const getTokenFromLocal = (): string => {
 
 const initState: AppState = {
   user: {
+    loading: false,
+    error: null,
     user: getUserFromLocal(),
     token: getTokenFromLocal(),
   },

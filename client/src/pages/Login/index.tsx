@@ -11,28 +11,16 @@ const clientId =
   '305036799412-m3i8638rrtmqqa4pu90k9167evp9sndo.apps.googleusercontent.com';
 
 const Login = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<any>();
 
   const { token } = useSelector((state: AppState) => state.user);
 
   // console.log('token:', token);
   // console.log('user:', user);
 
-  const handleSucess = async (googleResponse: any) => {
-    const tokenId = googleResponse.credential;
-
-    const res = await axios.post(
-      'http://localhost:5000/google-login',
-      {},
-      {
-        headers: {
-          Authorization: `Bearer ${tokenId}`,
-        },
-      }
-    );
-    const token = res.data.token;
-    const user = res.data.user;
-    dispatch(signIn(user, token));
+  const handleSucess = (googleResponse: any) => {
+    const googleTokenId = googleResponse.credential;
+    dispatch(signIn(googleTokenId));
   };
 
   // This is for testing
