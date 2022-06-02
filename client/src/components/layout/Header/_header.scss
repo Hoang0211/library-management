@@ -12,13 +12,18 @@
     justify-content: space-between;
     align-items: center;
     background-color: $clr-accent;
+    .icon {
+      font-size: 1.25rem;
+    }
 
-    .btn-logo,
+    .logo,
     .user,
-    .btn-login {
+    .login-btn {
       height: 100%;
       display: flex;
       align-items: center;
+      color: $clr-dark;
+      cursor: pointer;
 
       &__text {
         font-size: 1rem;
@@ -26,27 +31,62 @@
       }
     }
 
-    .logo__text {
-      font-size: 1.25rem;
-    }
-
-    .icon {
-      font-size: 1.25rem;
-      &-book {
+    .logo {
+      &__icon {
         margin-right: 0.5rem;
       }
-      &-user {
+
+      &__text {
+        font-size: 1.25rem;
+      }
+    }
+
+    .user {
+      &__icon {
         margin-right: 0.5rem;
         font-size: 1rem;
       }
-    }
-  }
 
-  .btn {
-    color: $clr-dark;
-    background: transparent;
-    outline: none;
-    border: none;
-    cursor: pointer;
+      &__options {
+        width: 300px;
+        display: none;
+        border-radius: 5px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+          0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        &-show {
+          display: flex;
+          flex-direction: column;
+          position: absolute;
+          top: $nav-height;
+          right: 1rem;
+        }
+        background-color: $clr-light;
+      }
+
+      &__option {
+        padding: 0.5rem 1rem;
+        font-weight: 600;
+        text-align: left;
+        font-size: 1rem;
+        outline: none;
+        border: none;
+        border-bottom: 1px solid gray;
+        background-color: transparent;
+        color: $clr-dark;
+        cursor: pointer;
+        &:hover {
+          background-color: rgba(230, 230, 230, 0.678);
+        }
+        &-last {
+          border: none;
+        }
+      }
+    }
+
+    .login-btn {
+      &__icon {
+        margin-right: 0.5rem;
+      }
+    }
   }
 }
