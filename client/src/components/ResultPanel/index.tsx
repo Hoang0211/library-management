@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { FaAngleDoubleLeft, FaAngleDoubleRight } from 'react-icons/fa';
 import { RiArrowDropLeftLine, RiArrowDropRightLine } from 'react-icons/ri';
+import { IoAdd } from 'react-icons/io5';
 import axios, { AxiosResponse } from 'axios';
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import BookItem from '../BookItem';
 import AuthorItem from '../AuthorItem';
-import { Book, Status, Author } from '../../types';
+import { Book, Status, Author, AppState, Role } from '../../types';
 import './_resultPanel.scss';
 
 type ResultPanelProps = {
@@ -72,6 +75,7 @@ const authors: Author[] = [
 ];
 
 const ResultPanel = ({ currentDisplay }: ResultPanelProps) => {
+  const { user } = useSelector((state: AppState) => state.user);
   // const [data, setData] = useState();
 
   // useEffect(() => {
@@ -128,6 +132,15 @@ const ResultPanel = ({ currentDisplay }: ResultPanelProps) => {
             <label>Available</label>
             <input type='checkbox'></input>
           </div>
+        )}
+        {user?.role === Role.Admin && currentDisplay === 'books' ? (
+          <Link to='/add-book' className='add'>
+            <IoAdd />
+          </Link>
+        ) : (
+          <Link to='/add-author' className='add'>
+            <IoAdd />
+          </Link>
         )}
       </div>
       <div className='display'>

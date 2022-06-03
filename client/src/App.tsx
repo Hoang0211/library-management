@@ -7,6 +7,8 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
 import Returns from './pages/Returns';
+import AddBook from './pages/AddBook';
+import AddAuthor from './pages/AddAuthor';
 
 const App = () => {
   return (
@@ -28,6 +30,22 @@ const App = () => {
           element={
             <ProtectedRoute adminOnly={true}>
               <Returns />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path='/add-book'
+          element={
+            <ProtectedRoute adminOnly={true}>
+              <AddBook />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path='/add-author'
+          element={
+            <ProtectedRoute adminOnly={true}>
+              <AddAuthor />
             </ProtectedRoute>
           }
         />
