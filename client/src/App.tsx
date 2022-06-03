@@ -6,8 +6,7 @@ import Header from './components/layout/Header';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
-import Users from './pages/Users';
-import Borrows from './pages/Borrows';
+import Returns from './pages/Returns';
 
 const App = () => {
   return (
@@ -25,18 +24,10 @@ const App = () => {
           }
         />
         <Route
-          path='/users'
+          path='/returns'
           element={
             <ProtectedRoute adminOnly={true}>
-              <Users />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path='/borrows'
-          element={
-            <ProtectedRoute adminOnly={true}>
-              <Borrows />
+              <Returns />
             </ProtectedRoute>
           }
         />
