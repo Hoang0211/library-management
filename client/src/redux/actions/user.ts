@@ -6,10 +6,8 @@ import {
   SIGN_IN_SUCCESS,
   SIGN_IN_FAILURE,
   SIGN_OUT,
-  UserActions,
-  User,
-  isAxiosError,
-} from '../../types';
+} from '../../constants/userConstants';
+import { UserActions, User, isAxiosError } from '../../types';
 
 export function signInRequest(googleTokenId: string): UserActions {
   return {

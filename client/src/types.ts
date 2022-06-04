@@ -1,19 +1,20 @@
 import { AxiosError } from 'axios';
+import {
+  SIGN_IN_REQUEST,
+  SIGN_IN_SUCCESS,
+  SIGN_IN_FAILURE,
+  SIGN_OUT,
+} from './constants/userConstants';
 
-// Action types
-export const SIGN_IN_REQUEST = 'SIGN_IN_REQUEST';
-export const SIGN_IN_SUCCESS = 'SIGN_IN_SUCCESS';
-export const SIGN_IN_FAILURE = 'SIGN_IN_FAILURE';
-export const SIGN_OUT = 'SIGN_OUT';
-
-export type AppState = {
-  user: UserState;
-};
-
-// Guard
+// Type guard
 export function isAxiosError(candidate: any): candidate is AxiosError {
   return candidate.isAxiosError === true;
 }
+
+// APP
+export type AppState = {
+  user: UserState;
+};
 
 // USER
 export enum Role {

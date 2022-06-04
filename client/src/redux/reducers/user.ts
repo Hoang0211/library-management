@@ -4,9 +4,8 @@ import {
   SIGN_IN_SUCCESS,
   SIGN_IN_FAILURE,
   SIGN_OUT,
-  UserActions,
-  UserState,
-} from '../../types';
+} from '../../constants/userConstants';
+import { UserActions, UserState } from '../../types';
 
 export default function user(
   state: UserState = {

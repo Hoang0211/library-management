@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { FaAngleDoubleLeft, FaAngleDoubleRight } from 'react-icons/fa';
 import { RiArrowDropLeftLine, RiArrowDropRightLine } from 'react-icons/ri';
 import { IoAdd } from 'react-icons/io5';
-import axios, { AxiosResponse } from 'axios';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
@@ -76,30 +75,6 @@ const authors: Author[] = [
 
 const ResultPanel = ({ currentDisplay }: ResultPanelProps) => {
   const { user } = useSelector((state: AppState) => state.user);
-  // const [data, setData] = useState();
-
-  // useEffect(() => {
-  //   const fetchBooks = async (): Promise<AxiosResponse<ApiDataType>> => {
-  //     try {
-  //       console.log('Hello');
-  //       const books: AxiosResponse<ApiDataType> = await axios.get(
-  //         'http://localhost:5000/api/v1/books'
-  //       );
-  //       console.log('Hello');
-
-  //       console.log(books);
-  //       return books;
-  //     } catch (error) {
-  //       console.log(error);
-  //       throw new Error();
-  //     }
-  //   };
-
-  //   fetchBooks()
-  //     .then(({ data: { books } }: Book[] | any) => setData(books))
-  //     .then(() => console.log(data))
-  //     .catch((err: Error) => console.log(err));
-  // }, []);
 
   return (
     <div className='result-panel'>

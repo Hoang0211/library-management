@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FaUser, FaBook } from 'react-icons/fa';
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
-import { Link, Navigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { signOut } from '../../../redux/actions';
