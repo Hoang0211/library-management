@@ -62,6 +62,24 @@ const ResultPanel = ({ currentDisplay }: ResultPanelProps) => {
     (state: AppState) => state.author
   );
 
+  const displayAddBtn = () => {
+    if (user && user.role === Role.Admin) {
+      if (currentDisplay === 'books') {
+        return (
+          <Link to='/add-book' className='add'>
+            <IoAdd />
+          </Link>
+        );
+      } else {
+        return (
+          <Link to='/add-author' className='add'>
+            <IoAdd />
+          </Link>
+        );
+      }
+    }
+  };
+
   return (
     <div className='result-panel'>
       <div className='settings'>
@@ -94,15 +112,7 @@ const ResultPanel = ({ currentDisplay }: ResultPanelProps) => {
             <input type='checkbox'></input>
           </div>
         )}
-        {user?.role === Role.Admin && currentDisplay === 'books' ? (
-          <Link to='/add-book' className='add'>
-            <IoAdd />
-          </Link>
-        ) : (
-          <Link to='/add-author' className='add'>
-            <IoAdd />
-          </Link>
-        )}
+        {displayAddBtn()}
       </div>
       <div className='display'>
         {loading && 'Loading...'}
