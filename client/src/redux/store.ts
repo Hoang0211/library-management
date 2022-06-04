@@ -29,6 +29,11 @@ const initState: AppState = {
     user: getUserFromLocal(),
     token: getTokenFromLocal(),
   },
+  author: {
+    loading: false,
+    error: null,
+    authors: [],
+  },
 };
 
 export default function makeStore(initialState = initState) {

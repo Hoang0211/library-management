@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 import BookItem from '../BookItem';
 import AuthorItem from '../AuthorItem';
-import { Book, Status, Author, AppState, Role } from '../../types';
+import { Book, Status, AppState, Role } from '../../types';
 import './_resultPanel.scss';
 
 type ResultPanelProps = {
@@ -56,25 +56,11 @@ const books: Book[] = [
   },
 ];
 
-const authors: Author[] = [
-  {
-    _id: 'id1',
-    firstName: 'Hoang',
-    lastName: 'Nguyen',
-    biography: 'This is the summarize of author Nguyen Hoang.',
-    books: ['Book 1', 'Book 2'],
-  },
-  {
-    _id: 'id2',
-    firstName: 'Quang',
-    lastName: 'Nguyen',
-    biography: 'This is the summarize of author Nguyen Quang.',
-    books: ['Book 3', 'Book 4'],
-  },
-];
-
 const ResultPanel = ({ currentDisplay }: ResultPanelProps) => {
   const { user } = useSelector((state: AppState) => state.user);
+  const { loading, error, authors } = useSelector(
+    (state: AppState) => state.author
+  );
 
   return (
     <div className='result-panel'>
@@ -119,7 +105,9 @@ const ResultPanel = ({ currentDisplay }: ResultPanelProps) => {
         )}
       </div>
       <div className='display'>
-        {currentDisplay === 'books'
+        {loading && 'Loading...'}
+        {error && `${error.message}`}
+        {!loading && !error && currentDisplay === 'books'
           ? books.map((book) => (
               <BookItem
                 key={book._id}

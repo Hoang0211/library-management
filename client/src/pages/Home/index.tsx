@@ -1,13 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
 import SearchForm from '../../components/SearchForm';
 import ResultPanel from '../../components/ResultPanel';
+import { getAllAuthor } from '../../redux/actions';
 import './_home.scss';
 
 const Home = () => {
+  const dispatch = useDispatch<any>();
+
   const [currentDisplay, setCurrentDisplay] = useState<'books' | 'authors'>(
-    'books'
+    'authors'
   );
+
+  useEffect(() => {
+    dispatch(getAllAuthor());
+  }, [dispatch]);
 
   const changeCurrentDisplay = () => {
     if (currentDisplay === 'books') {

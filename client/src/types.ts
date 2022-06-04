@@ -5,6 +5,11 @@ import {
   SIGN_IN_FAILURE,
   SIGN_OUT,
 } from './constants/userConstants';
+import {
+  GET_ALL_AUTHOR_REQUEST,
+  GET_ALL_AUTHOR_SUCCESS,
+  GET_ALL_AUTHOR_FAILURE,
+} from './constants/authorConstants';
 
 // Type guard
 export function isAxiosError(candidate: any): candidate is AxiosError {
@@ -14,6 +19,7 @@ export function isAxiosError(candidate: any): candidate is AxiosError {
 // APP
 export type AppState = {
   user: UserState;
+  author: AuthorState;
 };
 
 // USER
@@ -69,6 +75,44 @@ export type UserActions =
   | SignInFailureAction
   | SignOutAction;
 
+// AUTHOR
+export type Author = {
+  _id: string;
+  firstName: string;
+  lastName: string;
+  biography: string;
+  books: string[];
+};
+
+export type AuthorState = {
+  loading: boolean;
+  error: Error | null;
+  authors: Author[];
+};
+
+export type GetAllAuthorRequestAction = {
+  type: typeof GET_ALL_AUTHOR_REQUEST;
+};
+
+export type GetAllAuthorSuccessAction = {
+  type: typeof GET_ALL_AUTHOR_SUCCESS;
+  payload: {
+    authors: Author[];
+  };
+};
+
+export type GetAllAuthorFailureAction = {
+  type: typeof GET_ALL_AUTHOR_FAILURE;
+  payload: {
+    error: Error;
+  };
+};
+
+export type AuthorActions =
+  | GetAllAuthorRequestAction
+  | GetAllAuthorSuccessAction
+  | GetAllAuthorFailureAction;
+
 // BOOK
 export enum Category {
   Journal = 'journal',
@@ -94,12 +138,4 @@ export type Book = {
   category: string;
   numPage: number;
   status: Status;
-};
-
-export type Author = {
-  _id: string;
-  firstName: string;
-  lastName: string;
-  biography: string;
-  books: string[];
 };
