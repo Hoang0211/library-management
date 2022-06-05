@@ -43,14 +43,7 @@ const App = () => {
           }
         />
         <Route path='/authors'>
-          <Route
-            path=':authorId'
-            element={
-              <ProtectedRoute adminOnly={true}>
-                <AuthorDetails />
-              </ProtectedRoute>
-            }
-          />
+          <Route path=':authorId' element={<AuthorDetails />} />
           <Route
             path='add'
             element={
