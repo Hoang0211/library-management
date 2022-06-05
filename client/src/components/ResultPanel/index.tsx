@@ -59,7 +59,7 @@ const books: Book[] = [
 const ResultPanel = ({ currentDisplay }: ResultPanelProps) => {
   const { user } = useSelector((state: AppState) => state.user);
   const { loading, error, authors } = useSelector(
-    (state: AppState) => state.author
+    (state: AppState) => state.authors
   );
 
   const displayAddBtn = () => {

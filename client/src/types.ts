@@ -22,7 +22,8 @@ export function isAxiosError(candidate: any): candidate is AxiosError {
 // APP
 export type AppState = {
   user: UserState;
-  author: AuthorState;
+  authors: AuthorsState;
+  authorDetails: AuthorDetailsState;
 };
 
 // USER
@@ -78,7 +79,7 @@ export type UserActions =
   | SignInFailureAction
   | SignOutAction;
 
-// AUTHOR
+// AUTHORS
 export type Author = {
   _id: string;
   firstName: string;
@@ -87,11 +88,10 @@ export type Author = {
   books: string[];
 };
 
-export type AuthorState = {
+export type AuthorsState = {
   loading: boolean;
   error: Error | null;
   authors: Author[];
-  author: Author | null;
 };
 
 export type GetAllAuthorRequestAction = {
@@ -112,6 +112,18 @@ export type GetAllAuthorFailureAction = {
   };
 };
 
+export type AuthorsActions =
+  | GetAllAuthorRequestAction
+  | GetAllAuthorSuccessAction
+  | GetAllAuthorFailureAction;
+
+// AUTHOR DETAILS
+export type AuthorDetailsState = {
+  loading: boolean;
+  error: Error | null;
+  author: Author | null;
+};
+
 export type GetAuthorDetailsRequestAction = {
   type: typeof GET_AUTHOR_DETAILS_REQUEST;
 };
@@ -130,10 +142,7 @@ export type GetAuthorDetailsFailureAction = {
   };
 };
 
-export type AuthorActions =
-  | GetAllAuthorRequestAction
-  | GetAllAuthorSuccessAction
-  | GetAllAuthorFailureAction
+export type AuthorDetailsActions =
   | GetAuthorDetailsRequestAction
   | GetAuthorDetailsSuccessAction
   | GetAuthorDetailsFailureAction;

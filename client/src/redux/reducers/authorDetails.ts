@@ -1,41 +1,19 @@
 import {
-  GET_ALL_AUTHOR_REQUEST,
-  GET_ALL_AUTHOR_SUCCESS,
-  GET_ALL_AUTHOR_FAILURE,
   GET_AUTHOR_DETAILS_REQUEST,
   GET_AUTHOR_DETAILS_SUCCESS,
   GET_AUTHOR_DETAILS_FAILURE,
 } from '../../constants/authorConstants';
-import { AuthorActions, AuthorState } from '../../types';
+import { AuthorDetailsActions, AuthorDetailsState } from '../../types';
 
-export default function author(
-  state: AuthorState = {
+export default function authorDetails(
+  state: AuthorDetailsState = {
     loading: false,
     error: null,
-    authors: [],
     author: null,
   },
-  action: AuthorActions
-): AuthorState {
+  action: AuthorDetailsActions
+): AuthorDetailsState {
   switch (action.type) {
-    case GET_ALL_AUTHOR_REQUEST:
-      return {
-        ...state,
-        loading: true,
-        error: null,
-      };
-    case GET_ALL_AUTHOR_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        authors: action.payload.authors,
-      };
-    case GET_ALL_AUTHOR_FAILURE:
-      return {
-        ...state,
-        loading: false,
-        error: action.payload.error,
-      };
     case GET_AUTHOR_DETAILS_REQUEST:
       return {
         ...state,

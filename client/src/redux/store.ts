@@ -29,10 +29,14 @@ const initState: AppState = {
     user: getUserFromLocal(),
     token: getTokenFromLocal(),
   },
-  author: {
+  authors: {
     loading: false,
     error: null,
     authors: [],
+  },
+  authorDetails: {
+    loading: false,
+    error: null,
     author: null,
   },
 };

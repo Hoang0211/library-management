@@ -13,7 +13,7 @@ const AuthorDetails = () => {
 
   const { user } = useSelector((state: AppState) => state.user);
   const { loading, error, author } = useSelector(
-    (state: AppState) => state.author
+    (state: AppState) => state.authorDetails
   );
 
   const { authorId } = useParams<{ authorId?: string }>();
