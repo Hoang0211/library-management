@@ -1,0 +1,77 @@
+@import '../../styles/variables';
+
+.author-detail {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .container {
+    width: 80%;
+    max-width: 800px;
+    margin-top: $nav-height;
+    padding: 1rem 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    border-radius: 5px;
+    border: 2px solid $clr-accent;
+    box-shadow: 3px 3px 3px $clr-accent;
+
+    .header {
+      height: min-content;
+      width: 100%;
+      margin-bottom: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .title {
+        font-size: 2rem;
+        color: $clr-accent;
+      }
+      .actions {
+        display: flex;
+        .action {
+          margin-left: 0.5rem;
+          display: flex;
+          justify-content: center;
+          font-size: 1.75rem;
+          color: $clr-accent;
+          cursor: pointer;
+          transition: 500ms;
+        }
+        .action:hover {
+          transform: scale(1.2);
+        }
+      }
+    }
+
+    p {
+      margin-bottom: 0.5rem;
+      font-size: 1.25rem;
+    }
+
+    .btn {
+      font-size: 1rem;
+      border: none;
+      border-radius: 5px;
+      color: $clr-dark;
+      background-color: $clr-accent;
+      cursor: pointer;
+
+      &-home {
+        margin: 0.5rem auto 0;
+        padding: 0.5rem 1rem;
+      }
+    }
+
+    button {
+      outline: none;
+      border: none;
+      background-color: transparent;
+    }
+  }
+}

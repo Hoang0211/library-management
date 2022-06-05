@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
 import Returns from './pages/Returns';
+import AuthorDetails from './pages/AuthorDetails';
 import AddBook from './pages/AddBook';
 import AddAuthor from './pages/AddAuthor';
 
@@ -41,14 +42,24 @@ const App = () => {
             </ProtectedRoute>
           }
         />
-        <Route
-          path='/add-author'
-          element={
-            <ProtectedRoute adminOnly={true}>
-              <AddAuthor />
-            </ProtectedRoute>
-          }
-        />
+        <Route path='/authors'>
+          <Route
+            path=':authorId'
+            element={
+              <ProtectedRoute adminOnly={true}>
+                <AuthorDetails />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path='add'
+            element={
+              <ProtectedRoute adminOnly={true}>
+                <AddAuthor />
+              </ProtectedRoute>
+            }
+          />
+        </Route>
       </Routes>
     </div>
   );

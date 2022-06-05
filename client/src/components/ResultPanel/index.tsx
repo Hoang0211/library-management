@@ -72,7 +72,7 @@ const ResultPanel = ({ currentDisplay }: ResultPanelProps) => {
         );
       } else {
         return (
-          <Link to='/add-author' className='add'>
+          <Link to='/authors/add' className='add'>
             <IoAdd />
           </Link>
         );

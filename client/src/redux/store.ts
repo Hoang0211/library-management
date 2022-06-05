@@ -33,6 +33,7 @@ const initState: AppState = {
     loading: false,
     error: null,
     authors: [],
+    author: null,
   },
 };
 

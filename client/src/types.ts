@@ -9,6 +9,9 @@ import {
   GET_ALL_AUTHOR_REQUEST,
   GET_ALL_AUTHOR_SUCCESS,
   GET_ALL_AUTHOR_FAILURE,
+  GET_AUTHOR_DETAILS_REQUEST,
+  GET_AUTHOR_DETAILS_SUCCESS,
+  GET_AUTHOR_DETAILS_FAILURE,
 } from './constants/authorConstants';
 
 // Type guard
@@ -88,6 +91,7 @@ export type AuthorState = {
   loading: boolean;
   error: Error | null;
   authors: Author[];
+  author: Author | null;
 };
 
 export type GetAllAuthorRequestAction = {
@@ -108,10 +112,31 @@ export type GetAllAuthorFailureAction = {
   };
 };
 
+export type GetAuthorDetailsRequestAction = {
+  type: typeof GET_AUTHOR_DETAILS_REQUEST;
+};
+
+export type GetAuthorDetailsSuccessAction = {
+  type: typeof GET_AUTHOR_DETAILS_SUCCESS;
+  payload: {
+    author: Author;
+  };
+};
+
+export type GetAuthorDetailsFailureAction = {
+  type: typeof GET_AUTHOR_DETAILS_FAILURE;
+  payload: {
+    error: Error;
+  };
+};
+
 export type AuthorActions =
   | GetAllAuthorRequestAction
   | GetAllAuthorSuccessAction
-  | GetAllAuthorFailureAction;
+  | GetAllAuthorFailureAction
+  | GetAuthorDetailsRequestAction
+  | GetAuthorDetailsSuccessAction
+  | GetAuthorDetailsFailureAction;
 
 // BOOK
 export enum Category {

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import { Author } from '../../types';
 import './_authorItem.scss';
@@ -17,7 +18,9 @@ const AuthorItem = ({ author, lastItem }: AuthorItemProps) => {
         </p>
         <p>Number of books: {author.books.length}</p>
       </div>
-      <button className='btn btn-details'>More Details</button>
+      <Link to={`/authors/${author._id}`} className='btn btn-details'>
+        More Details
+      </Link>
     </div>
   );
 };
