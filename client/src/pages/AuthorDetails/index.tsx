@@ -40,20 +40,19 @@ const AuthorDetails = () => {
             </div>
           )}
         </div>
-        {loading && <p className='loading'>Please wait...</p>}
-        {!loading && author && (
-          <>
-            <p className='first-name'>First name: {author.firstName}</p>
-            <p className='last-name'>Last name: {author.lastName}</p>
-            <p className='biography'>Biography: {author.biography}</p>
-            <p className='book-list'>List of book:</p>
-            <ul>
-              {author.books.map((book) => (
-                <li>book</li>
-              ))}
-            </ul>
-          </>
-        )}
+        <p className='first-name'>
+          First name: {!loading && author && author.firstName}
+        </p>
+        <p className='last-name'>
+          Last name: {!loading && author && author.lastName}
+        </p>
+        <p className='biography'>
+          Biography: {!loading && author && author.biography}
+        </p>
+        <p className='book-list'>List of book:</p>
+        <ul>
+          {!loading && author && author.books.map((book) => <li>book</li>)}
+        </ul>
         <Link to='/' className='btn btn-home'>
           Home
         </Link>
