@@ -57,13 +57,13 @@ export function deleteAuthor(token: string, authorId: string) {
   };
 }
 
-export function resetDeleteAuthor() {
+export function resetDeleteAuthor(): DeleteAuthorActions {
   return {
     type: RESET_DELETE_AUTHOR,
   };
 }
 
-export function clearDeleteAuthorError() {
+export function clearDeleteAuthorError(): DeleteAuthorActions {
   return {
     type: CLEAR_DELETE_AUTHOR_ERROR,
   };

@@ -61,13 +61,13 @@ export function addAuthor(token: string, author: Partial<Author>) {
   };
 }
 
-export function resetAddAuthor() {
+export function resetAddAuthor(): AddAuthorActions {
   return {
     type: RESET_ADD_AUTHOR,
   };
 }
 
-export function clearAddAuthorError() {
+export function clearAddAuthorError(): AddAuthorActions {
   return {
     type: CLEAR_ADD_AUTHOR_ERROR,
   };
