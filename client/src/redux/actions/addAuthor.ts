@@ -16,12 +16,9 @@ export function addAuthorRequest(): AddAuthorActions {
   };
 }
 
-export function addAuthorSuccess(author: Author): AddAuthorActions {
+export function addAuthorSuccess(): AddAuthorActions {
   return {
     type: ADD_AUTHOR_SUCCESS,
-    payload: {
-      author,
-    },
   };
 }
 
@@ -38,7 +35,7 @@ export function addAuthor(token: string, author: Partial<Author>) {
   return async (dispatch: Dispatch) => {
     dispatch(addAuthorRequest());
     try {
-      const res = await axios.post(
+      await axios.post(
         `http://localhost:5000/api/v1/authors/`,
         {
           firstName: author.firstName,
@@ -51,8 +48,7 @@ export function addAuthor(token: string, author: Partial<Author>) {
           },
         }
       );
-      const addedAuthor = res.data;
-      return dispatch(addAuthorSuccess(addedAuthor));
+      return dispatch(addAuthorSuccess());
     } catch (err) {
       if (isAxiosError(err)) {
         return dispatch(addAuthorFailure(err));

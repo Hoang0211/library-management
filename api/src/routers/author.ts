@@ -18,6 +18,6 @@ router.get('/', findAllAuthors)
 router.get('/:authorId', findAuthorById)
 router.post('/', verifyAuth, verifyAdmin, createAuthor)
 router.put('/:authorId', updateAuthor)
-router.delete('/:authorId', deleteAuthor)
+router.delete('/:authorId', verifyAuth, verifyAdmin, deleteAuthor)
 
 export default router

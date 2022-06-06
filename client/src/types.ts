@@ -18,6 +18,11 @@ import {
   ADD_AUTHOR_FAILURE,
   RESET_ADD_AUTHOR,
   CLEAR_ADD_AUTHOR_ERROR,
+  EDIT_AUTHOR_REQUEST,
+  EDIT_AUTHOR_SUCCESS,
+  EDIT_AUTHOR_FAILURE,
+  RESET_EDIT_AUTHOR,
+  CLEAR_EDIT_AUTHOR_ERROR,
   DELETE_AUTHOR_REQUEST,
   DELETE_AUTHOR_SUCCESS,
   DELETE_AUTHOR_FAILURE,
@@ -36,6 +41,7 @@ export type AppState = {
   authors: AuthorsState;
   authorDetails: AuthorDetailsState;
   addAuthor: AddAuthorState;
+  editAuthor: EditAuthorState;
   deleteAuthor: DeleteAuthorState;
 };
 
@@ -178,9 +184,6 @@ export type AddAuthorRequestAction = {
 
 export type AddAuthorSuccessAction = {
   type: typeof ADD_AUTHOR_SUCCESS;
-  payload: {
-    author: Author;
-  };
 };
 
 export type AddAuthorFailureAction = {
@@ -205,6 +208,43 @@ export type AddAuthorActions =
   | ResetAddAuthorAction
   | ClearAddAuthorErrorAction;
 
+// EDIT AUTHOR
+export type EditAuthorState = {
+  loading: boolean;
+  error: Error | null;
+  updated: boolean;
+};
+
+export type EditAuthorRequestAction = {
+  type: typeof EDIT_AUTHOR_REQUEST;
+};
+
+export type EditAuthorSuccessAction = {
+  type: typeof EDIT_AUTHOR_SUCCESS;
+};
+
+export type EditAuthorFailureAction = {
+  type: typeof EDIT_AUTHOR_FAILURE;
+  payload: {
+    error: Error;
+  };
+};
+
+export type ResetEditAuthorAction = {
+  type: typeof RESET_EDIT_AUTHOR;
+};
+
+export type ClearEditAuthorErrorAction = {
+  type: typeof CLEAR_EDIT_AUTHOR_ERROR;
+};
+
+export type EditAuthorActions =
+  | EditAuthorRequestAction
+  | EditAuthorSuccessAction
+  | EditAuthorFailureAction
+  | ResetEditAuthorAction
+  | ClearEditAuthorErrorAction;
+
 // DELETE AUTHOR
 export type DeleteAuthorState = {
   loading: boolean;
@@ -218,9 +258,6 @@ export type DeleteAuthorRequestAction = {
 
 export type DeleteAuthorSuccessAction = {
   type: typeof DELETE_AUTHOR_SUCCESS;
-  payload: {
-    author: Author;
-  };
 };
 
 export type DeleteAuthorFailureAction = {

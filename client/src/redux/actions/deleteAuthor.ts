@@ -8,7 +8,7 @@ import {
   RESET_DELETE_AUTHOR,
   CLEAR_DELETE_AUTHOR_ERROR,
 } from '../../constants/authorConstants';
-import { DeleteAuthorActions, Author, isAxiosError } from '../../types';
+import { DeleteAuthorActions, isAxiosError } from '../../types';
 
 export function deleteAuthorRequest(): DeleteAuthorActions {
   return {
@@ -16,12 +16,9 @@ export function deleteAuthorRequest(): DeleteAuthorActions {
   };
 }
 
-export function deleteAuthorSuccess(author: Author): DeleteAuthorActions {
+export function deleteAuthorSuccess(): DeleteAuthorActions {
   return {
     type: DELETE_AUTHOR_SUCCESS,
-    payload: {
-      author,
-    },
   };
 }
 
@@ -38,16 +35,12 @@ export function deleteAuthor(token: string, authorId: string) {
   return async (dispatch: Dispatch) => {
     dispatch(deleteAuthorRequest());
     try {
-      const res = await axios.delete(
-        `http://localhost:5000/api/v1/authors/${authorId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      const deletedAuthor = res.data;
-      return dispatch(deleteAuthorSuccess(deletedAuthor));
+      await axios.delete(`http://localhost:5000/api/v1/authors/${authorId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return dispatch(deleteAuthorSuccess());
     } catch (err) {
       if (isAxiosError(err)) {
         return dispatch(deleteAuthorFailure(err));
