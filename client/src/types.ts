@@ -12,6 +12,7 @@ import {
   GET_AUTHOR_DETAILS_REQUEST,
   GET_AUTHOR_DETAILS_SUCCESS,
   GET_AUTHOR_DETAILS_FAILURE,
+  CLEAR_GET_AUTHOR_DETAILS_ERROR,
   ADD_AUTHOR_REQUEST,
   ADD_AUTHOR_SUCCESS,
   ADD_AUTHOR_FAILURE,
@@ -154,10 +155,15 @@ export type GetAuthorDetailsFailureAction = {
   };
 };
 
+export type ClearGetAuthorDetailsAction = {
+  type: typeof CLEAR_GET_AUTHOR_DETAILS_ERROR;
+};
+
 export type AuthorDetailsActions =
   | GetAuthorDetailsRequestAction
   | GetAuthorDetailsSuccessAction
-  | GetAuthorDetailsFailureAction;
+  | GetAuthorDetailsFailureAction
+  | ClearGetAuthorDetailsAction;
 
 // NEW AUTHOR
 export type AddAuthorState = {

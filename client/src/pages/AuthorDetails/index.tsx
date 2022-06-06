@@ -4,6 +4,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import { MdEdit, MdDelete } from 'react-icons/md';
 
 import {
+  clearGetAuthorDetailsError,
   deleteAuthor,
   resetDeleteAuthor,
   clearDeleteAuthorError,
@@ -31,7 +32,16 @@ const AuthorDetails = () => {
     }
   };
 
+  const navigateToHomeHandler = () => {
+    navigate('/');
+  };
+
   useEffect(() => {
+    if (error) {
+      alert(error.message);
+      dispatch(clearGetAuthorDetailsError());
+    }
+
     if (deleteError) {
       alert(deleteError.message);
       dispatch(clearDeleteAuthorError());
@@ -42,7 +52,7 @@ const AuthorDetails = () => {
       navigate('/');
       dispatch(resetDeleteAuthor());
     }
-  }, [dispatch, navigate, authorId, deleteError, deleted]);
+  }, [dispatch, navigate, error, deleteError, deleted]);
 
   return (
     <main className='author-detail'>
@@ -76,9 +86,9 @@ const AuthorDetails = () => {
         <ul>
           {!loading && author && author.books.map((book) => <li>book</li>)}
         </ul>
-        <Link to='/' className='btn btn-home'>
+        <button className='btn btn-home' onClick={navigateToHomeHandler}>
           Home
-        </Link>
+        </button>
       </div>
     </main>
   );

@@ -5,6 +5,7 @@ import {
   GET_AUTHOR_DETAILS_REQUEST,
   GET_AUTHOR_DETAILS_SUCCESS,
   GET_AUTHOR_DETAILS_FAILURE,
+  CLEAR_GET_AUTHOR_DETAILS_ERROR,
 } from '../../constants/authorConstants';
 import { AuthorDetailsActions, Author, isAxiosError } from '../../types';
 
@@ -46,5 +47,11 @@ export function getAuthorDetails(authorId: string) {
         return dispatch(getAuthorDetailsFailure(err));
       }
     }
+  };
+}
+
+export function clearGetAuthorDetailsError(): AuthorDetailsActions {
+  return {
+    type: CLEAR_GET_AUTHOR_DETAILS_ERROR,
   };
 }

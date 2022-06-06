@@ -2,6 +2,7 @@ import {
   GET_AUTHOR_DETAILS_REQUEST,
   GET_AUTHOR_DETAILS_SUCCESS,
   GET_AUTHOR_DETAILS_FAILURE,
+  CLEAR_GET_AUTHOR_DETAILS_ERROR,
 } from '../../constants/authorConstants';
 import { AuthorDetailsActions, AuthorDetailsState } from '../../types';
 
@@ -18,7 +19,6 @@ export default function authorDetails(
       return {
         ...state,
         loading: true,
-        error: null,
         author: null,
       };
     case GET_AUTHOR_DETAILS_SUCCESS:
@@ -32,6 +32,11 @@ export default function authorDetails(
         ...state,
         loading: false,
         error: action.payload.error,
+      };
+    case CLEAR_GET_AUTHOR_DETAILS_ERROR:
+      return {
+        ...state,
+        error: null,
       };
     default:
       return state;
