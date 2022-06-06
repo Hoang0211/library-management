@@ -39,6 +39,11 @@ const initState: AppState = {
     error: null,
     author: null,
   },
+  addAuthor: {
+    loading: false,
+    error: null,
+    author: null,
+  },
 };
 
 export default function makeStore(initialState = initState) {

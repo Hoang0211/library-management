@@ -12,6 +12,11 @@ import {
   GET_AUTHOR_DETAILS_REQUEST,
   GET_AUTHOR_DETAILS_SUCCESS,
   GET_AUTHOR_DETAILS_FAILURE,
+  ADD_AUTHOR_REQUEST,
+  ADD_AUTHOR_SUCCESS,
+  ADD_AUTHOR_FAILURE,
+  RESET_ADD_AUTHOR,
+  CLEAR_AUTHOR_ERROR,
 } from './constants/authorConstants';
 
 // Type guard
@@ -24,6 +29,7 @@ export type AppState = {
   user: UserState;
   authors: AuthorsState;
   authorDetails: AuthorDetailsState;
+  addAuthor: AddAuthorState;
 };
 
 // USER
@@ -146,6 +152,46 @@ export type AuthorDetailsActions =
   | GetAuthorDetailsRequestAction
   | GetAuthorDetailsSuccessAction
   | GetAuthorDetailsFailureAction;
+
+// NEW AUTHOR
+export type AddAuthorState = {
+  loading: boolean;
+  error: Error | null;
+  author: Author | null;
+};
+
+export type AddAuthorRequestAction = {
+  type: typeof ADD_AUTHOR_REQUEST;
+};
+
+export type AddAuthorSuccessAction = {
+  type: typeof ADD_AUTHOR_SUCCESS;
+  payload: {
+    author: Author;
+  };
+};
+
+export type AddAuthorFailureAction = {
+  type: typeof ADD_AUTHOR_FAILURE;
+  payload: {
+    error: Error;
+  };
+};
+
+export type ResetAddAuthorAction = {
+  type: typeof RESET_ADD_AUTHOR;
+};
+
+export type ClearAuthorErrorAction = {
+  type: typeof CLEAR_AUTHOR_ERROR;
+};
+
+export type AddAuthorActions =
+  | AddAuthorRequestAction
+  | AddAuthorSuccessAction
+  | AddAuthorFailureAction
+  | ResetAddAuthorAction
+  | ClearAuthorErrorAction;
 
 // BOOK
 export enum Category {
