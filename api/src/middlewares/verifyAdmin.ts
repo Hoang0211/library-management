@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express'
 import jwt from 'jsonwebtoken'
-import { User } from '../models/User'
+import { User, Role } from '../models/User'
 import { ForbiddenError } from '../helpers/apiError'
 
 export default function verifyAuth(
@@ -9,12 +9,12 @@ export default function verifyAuth(
   next: NextFunction
 ) {
   try {
-    const auth = req.headers.authorization || ''
-    const token = auth.split(' ')[1]
-    const JWT_SECRET = process.env.JWT_SECRET as string
+    const user = req.user as User
 
-    const user = jwt.verify(token, JWT_SECRET) as User
-    req.user = user
+    if (user.role !== Role.Admin) {
+      throw new ForbiddenError()
+    }
+
     next()
   } catch (error) {
     console.log('error:', error)

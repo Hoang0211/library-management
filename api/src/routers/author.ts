@@ -7,6 +7,8 @@ import {
   updateAuthor,
   deleteAuthor,
 } from '../controllers/author'
+import verifyAuth from '../middlewares/verifyAuth'
+import verifyAdmin from '../middlewares/verifyAdmin'
 
 const router = express.Router()
 
@@ -14,7 +16,7 @@ const router = express.Router()
 
 router.get('/', findAllAuthors)
 router.get('/:authorId', findAuthorById)
-router.post('/', createAuthor)
+router.post('/', verifyAuth, verifyAdmin, createAuthor)
 router.put('/:authorId', updateAuthor)
 router.delete('/:authorId', deleteAuthor)
 
