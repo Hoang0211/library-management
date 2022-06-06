@@ -17,7 +17,6 @@ export function deleteAuthorRequest(): DeleteAuthorActions {
 }
 
 export function deleteAuthorSuccess(author: Author): DeleteAuthorActions {
-  console.log('Deleted');
   return {
     type: DELETE_AUTHOR_SUCCESS,
     payload: {
