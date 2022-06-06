@@ -3,3 +3,4 @@ export * from './authors';
 export * from './authorDetails';
 export * from './addAuthor';
 export * from './deleteAuthor';
+export * from './editAuthor';

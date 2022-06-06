@@ -4,6 +4,7 @@ import user from './user';
 import authors from './authors';
 import authorDetails from './authorDetails';
 import addAuthor from './addAuthor';
+import editAuthor from './editAuthor';
 import deleteAuthor from './deleteAuthor';
 
 const createRootReducer = () =>
@@ -12,6 +13,7 @@ const createRootReducer = () =>
     authors,
     authorDetails,
     addAuthor,
+    editAuthor,
     deleteAuthor,
   });
 

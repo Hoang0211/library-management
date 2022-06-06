@@ -1,0 +1,79 @@
+@import '../../styles/variables';
+
+.edit-author {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .container {
+    width: 80%;
+    max-width: 800px;
+    margin-top: $nav-height;
+    padding: 1rem 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    border-radius: 5px;
+    border: 2px solid $clr-accent;
+    box-shadow: 3px 3px 3px $clr-accent;
+
+    .title {
+      margin-bottom: 1rem;
+      font-size: 2rem;
+      color: $clr-accent;
+    }
+
+    .input-controller {
+      width: 100%;
+      margin-bottom: 1rem;
+      display: flex;
+      flex-direction: column;
+
+      label {
+        margin-bottom: 0.25rem;
+        font-size: 1.25rem;
+      }
+
+      input,
+      textarea {
+        padding: 0.25rem 0.5rem;
+        outline: none;
+        border: 2px solid $clr-accent;
+        border-radius: 5px;
+        font-size: 1rem;
+      }
+
+      input {
+        height: 45px;
+      }
+
+      textarea {
+        min-height: 100px;
+        overflow-y: visible;
+      }
+    }
+
+    .btns {
+      margin: 0.5rem auto;
+      .btn {
+        padding: 0.5rem 1rem;
+        width: 130px;
+        font-size: 1rem;
+        outline: none;
+        border: none;
+        border-radius: 5px;
+        color: $clr-dark;
+        background-color: $clr-accent;
+        cursor: pointer;
+
+        &-save {
+          margin-right: 1rem;
+        }
+      }
+    }
+  }
+}

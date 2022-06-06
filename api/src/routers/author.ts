@@ -17,7 +17,7 @@ const router = express.Router()
 router.get('/', findAllAuthors)
 router.get('/:authorId', findAuthorById)
 router.post('/', verifyAuth, verifyAdmin, createAuthor)
-router.put('/:authorId', updateAuthor)
+router.put('/:authorId', verifyAuth, verifyAdmin, updateAuthor)
 router.delete('/:authorId', verifyAuth, verifyAdmin, deleteAuthor)
 
 export default router

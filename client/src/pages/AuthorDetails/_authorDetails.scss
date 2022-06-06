@@ -32,9 +32,9 @@
         font-size: 2rem;
         color: $clr-accent;
       }
-      .actions {
+      .btns {
         display: flex;
-        .action {
+        .btn {
           margin-left: 0.5rem;
           display: flex;
           justify-content: center;
@@ -43,7 +43,7 @@
           cursor: pointer;
           transition: 500ms;
         }
-        .action:hover {
+        .btn:hover {
           transform: scale(1.2);
         }
       }
@@ -54,18 +54,15 @@
       font-size: 1.25rem;
     }
 
-    .btn {
+    .btn-home {
+      margin: 0.5rem auto 0;
+      padding: 0.5rem 1rem;
       font-size: 1rem;
       border: none;
       border-radius: 5px;
       color: $clr-dark;
       background-color: $clr-accent;
       cursor: pointer;
-
-      &-home {
-        margin: 0.5rem auto 0;
-        padding: 0.5rem 1rem;
-      }
     }
 
     button {

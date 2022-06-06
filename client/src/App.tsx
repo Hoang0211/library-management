@@ -10,6 +10,7 @@ import Returns from './pages/Returns';
 import AuthorDetails from './pages/AuthorDetails';
 import AddBook from './pages/AddBook';
 import AddAuthor from './pages/AddAuthor';
+import EditAuthor from './pages/EditAuthor';
 
 const App = () => {
   return (
@@ -49,6 +50,14 @@ const App = () => {
             element={
               <ProtectedRoute adminOnly={true}>
                 <AddAuthor />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path='edit/:authorId'
+            element={
+              <ProtectedRoute adminOnly={true}>
+                <EditAuthor />
               </ProtectedRoute>
             }
           />

@@ -44,6 +44,11 @@ const initState: AppState = {
     error: null,
     added: false,
   },
+  editAuthor: {
+    loading: false,
+    error: null,
+    updated: false,
+  },
   deleteAuthor: {
     loading: false,
     error: null,

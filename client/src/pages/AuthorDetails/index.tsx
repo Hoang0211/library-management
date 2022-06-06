@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { MdEdit, MdDelete } from 'react-icons/md';
 
 import {
@@ -32,6 +32,10 @@ const AuthorDetails = () => {
     }
   };
 
+  const navigateToEditHandler = () => {
+    navigate(`/authors/edit/${authorId}`);
+  };
+
   const navigateToHomeHandler = () => {
     navigate('/');
   };
@@ -60,14 +64,11 @@ const AuthorDetails = () => {
         <div className='header'>
           <h2 className='title'>Author Details</h2>
           {user?.role === Role.Admin && (
-            <div className='actions'>
-              <Link to='/authors/edit' className='action action-edit'>
+            <div className='btns'>
+              <button className='btn btn-edit' onClick={navigateToEditHandler}>
                 <MdEdit />
-              </Link>
-              <button
-                className='action action-delete'
-                onClick={deleteAuthorHandler}
-              >
+              </button>
+              <button className='btn btn-delete' onClick={deleteAuthorHandler}>
                 <MdDelete />
               </button>
             </div>
