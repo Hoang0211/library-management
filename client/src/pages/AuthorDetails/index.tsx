@@ -1,27 +1,48 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import { MdEdit, MdDelete } from 'react-icons/md';
 
-import { getAuthorDetails } from '../../redux/actions';
+import {
+  deleteAuthor,
+  resetDeleteAuthor,
+  clearDeleteAuthorError,
+} from '../../redux/actions';
 import { AppState, Role } from '../../types';
 import './_authorDetails.scss';
 
 const AuthorDetails = () => {
   const dispatch = useDispatch<any>();
+  const navigate = useNavigate();
 
-  const { user } = useSelector((state: AppState) => state.user);
+  const { user, token } = useSelector((state: AppState) => state.user);
   const { loading, error, author } = useSelector(
     (state: AppState) => state.authorDetails
+  );
+  const { error: deleteError, deleted } = useSelector(
+    (state: AppState) => state.deleteAuthor
   );
 
   const { authorId } = useParams<{ authorId?: string }>();
 
-  useEffect(() => {
+  const deleteAuthorHandler = () => {
     if (authorId) {
-      dispatch(getAuthorDetails(authorId));
+      dispatch(deleteAuthor(token, authorId));
     }
-  }, [dispatch, authorId]);
+  };
+
+  useEffect(() => {
+    if (deleteError) {
+      alert(deleteError.message);
+      dispatch(clearDeleteAuthorError());
+    }
+
+    if (deleted) {
+      alert('Deleted author successfully!');
+      navigate('/');
+      dispatch(resetDeleteAuthor());
+    }
+  }, [dispatch, navigate, authorId, deleteError, deleted]);
 
   return (
     <main className='author-detail'>
@@ -33,7 +54,10 @@ const AuthorDetails = () => {
               <Link to='/authors/edit' className='action action-edit'>
                 <MdEdit />
               </Link>
-              <button className='action action-delete'>
+              <button
+                className='action action-delete'
+                onClick={deleteAuthorHandler}
+              >
                 <MdDelete />
               </button>
             </div>

@@ -3,7 +3,7 @@ import {
   ADD_AUTHOR_SUCCESS,
   ADD_AUTHOR_FAILURE,
   RESET_ADD_AUTHOR,
-  CLEAR_AUTHOR_ERROR,
+  CLEAR_ADD_AUTHOR_ERROR,
 } from '../../constants/authorConstants';
 import { AddAuthorActions, AddAuthorState } from '../../types';
 
@@ -11,7 +11,7 @@ export default function addAuthor(
   state: AddAuthorState = {
     loading: false,
     error: null,
-    author: null,
+    added: false,
   },
   action: AddAuthorActions
 ): AddAuthorState {
@@ -25,7 +25,7 @@ export default function addAuthor(
       return {
         ...state,
         loading: false,
-        author: action.payload.author,
+        added: true,
       };
     case ADD_AUTHOR_FAILURE:
       return {
@@ -36,9 +36,9 @@ export default function addAuthor(
     case RESET_ADD_AUTHOR:
       return {
         ...state,
-        author: null,
+        added: false,
       };
-    case CLEAR_AUTHOR_ERROR:
+    case CLEAR_ADD_AUTHOR_ERROR:
       return {
         ...state,
         error: null,

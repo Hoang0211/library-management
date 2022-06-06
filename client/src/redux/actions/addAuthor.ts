@@ -6,7 +6,7 @@ import {
   ADD_AUTHOR_SUCCESS,
   ADD_AUTHOR_FAILURE,
   RESET_ADD_AUTHOR,
-  CLEAR_AUTHOR_ERROR,
+  CLEAR_ADD_AUTHOR_ERROR,
 } from '../../constants/authorConstants';
 import { AddAuthorActions, Author, isAxiosError } from '../../types';
 
@@ -67,8 +67,8 @@ export function resetAddAuthor() {
   };
 }
 
-export function clearAuthorError() {
+export function clearAddAuthorError() {
   return {
-    type: CLEAR_AUTHOR_ERROR,
+    type: CLEAR_ADD_AUTHOR_ERROR,
   };
 }

@@ -1,6 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
+import { getAuthorDetails } from '../../redux/actions';
 import { Author } from '../../types';
 import './_authorItem.scss';
 
@@ -10,6 +12,14 @@ type AuthorItemProps = {
 };
 
 const AuthorItem = ({ author, lastItem }: AuthorItemProps) => {
+  const dispatch = useDispatch<any>();
+  const navigate = useNavigate();
+
+  const navigateToAuthorDetailsHandler = () => {
+    navigate(`/authors/${author._id}`);
+    dispatch(getAuthorDetails(author._id));
+  };
+
   return (
     <div className={`author-item ${lastItem && 'author-item-last'}`}>
       <div className='info'>
@@ -18,9 +28,12 @@ const AuthorItem = ({ author, lastItem }: AuthorItemProps) => {
         </p>
         <p>Number of books: {author.books.length}</p>
       </div>
-      <Link to={`/authors/${author._id}`} className='btn btn-details'>
+      <button
+        className='btn btn-details'
+        onClick={navigateToAuthorDetailsHandler}
+      >
         More Details
-      </Link>
+      </button>
     </div>
   );
 };

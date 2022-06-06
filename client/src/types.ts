@@ -16,7 +16,12 @@ import {
   ADD_AUTHOR_SUCCESS,
   ADD_AUTHOR_FAILURE,
   RESET_ADD_AUTHOR,
-  CLEAR_AUTHOR_ERROR,
+  CLEAR_ADD_AUTHOR_ERROR,
+  DELETE_AUTHOR_REQUEST,
+  DELETE_AUTHOR_SUCCESS,
+  DELETE_AUTHOR_FAILURE,
+  RESET_DELETE_AUTHOR,
+  CLEAR_DELETE_AUTHOR_ERROR,
 } from './constants/authorConstants';
 
 // Type guard
@@ -30,6 +35,7 @@ export type AppState = {
   authors: AuthorsState;
   authorDetails: AuthorDetailsState;
   addAuthor: AddAuthorState;
+  deleteAuthor: DeleteAuthorState;
 };
 
 // USER
@@ -157,7 +163,7 @@ export type AuthorDetailsActions =
 export type AddAuthorState = {
   loading: boolean;
   error: Error | null;
-  author: Author | null;
+  added: boolean;
 };
 
 export type AddAuthorRequestAction = {
@@ -182,8 +188,8 @@ export type ResetAddAuthorAction = {
   type: typeof RESET_ADD_AUTHOR;
 };
 
-export type ClearAuthorErrorAction = {
-  type: typeof CLEAR_AUTHOR_ERROR;
+export type ClearAddAuthorErrorAction = {
+  type: typeof CLEAR_ADD_AUTHOR_ERROR;
 };
 
 export type AddAuthorActions =
@@ -191,7 +197,47 @@ export type AddAuthorActions =
   | AddAuthorSuccessAction
   | AddAuthorFailureAction
   | ResetAddAuthorAction
-  | ClearAuthorErrorAction;
+  | ClearAddAuthorErrorAction;
+
+// DELETE AUTHOR
+export type DeleteAuthorState = {
+  loading: boolean;
+  error: Error | null;
+  deleted: boolean;
+};
+
+export type DeleteAuthorRequestAction = {
+  type: typeof DELETE_AUTHOR_REQUEST;
+};
+
+export type DeleteAuthorSuccessAction = {
+  type: typeof DELETE_AUTHOR_SUCCESS;
+  payload: {
+    author: Author;
+  };
+};
+
+export type DeleteAuthorFailureAction = {
+  type: typeof DELETE_AUTHOR_FAILURE;
+  payload: {
+    error: Error;
+  };
+};
+
+export type ResetDeleteAuthorAction = {
+  type: typeof RESET_DELETE_AUTHOR;
+};
+
+export type ClearDeleteAuthorErrorAction = {
+  type: typeof CLEAR_DELETE_AUTHOR_ERROR;
+};
+
+export type DeleteAuthorActions =
+  | DeleteAuthorRequestAction
+  | DeleteAuthorSuccessAction
+  | DeleteAuthorFailureAction
+  | ResetDeleteAuthorAction
+  | ClearDeleteAuthorErrorAction;
 
 // BOOK
 export enum Category {

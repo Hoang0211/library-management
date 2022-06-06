@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import {
   addAuthor,
   resetAddAuthor,
-  clearAuthorError,
+  clearAddAuthorError,
 } from '../../redux/actions';
 import { Author, AppState } from '../../types';
 import './_addAuthor.scss';
@@ -15,7 +15,7 @@ const AddAuthor = () => {
   const navigate = useNavigate();
 
   const { token } = useSelector((state: AppState) => state.user);
-  const { loading, error, author } = useSelector(
+  const { loading, error, added } = useSelector(
     (state: AppState) => state.addAuthor
   );
 
@@ -60,17 +60,15 @@ const AddAuthor = () => {
   useEffect(() => {
     if (error) {
       alert(error);
-      dispatch(clearAuthorError());
+      dispatch(clearAddAuthorError());
     }
 
-    if (author) {
-      alert(
-        `Successfully created author ${author.firstName} ${author.lastName}!`
-      );
+    if (added) {
+      alert('Created author successfully!');
       navigate('/');
       dispatch(resetAddAuthor());
     }
-  }, [dispatch, navigate, error, author]);
+  }, [dispatch, navigate, error, added]);
 
   return (
     <main className='add-author'>
