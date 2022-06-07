@@ -70,6 +70,7 @@ export type AppState = {
   editAuthor: EditAuthorState;
   deleteAuthor: DeleteAuthorState;
   books: BooksState;
+  addBook: AddBookState;
 };
 
 // USER
@@ -314,7 +315,7 @@ export type DeleteAuthorActions =
   | ResetDeleteAuthorAction
   | ClearDeleteAuthorErrorAction;
 
-// BOOK
+// BOOKS
 export enum Category {
   Journal = 'journal',
   Article = 'article',
@@ -374,3 +375,40 @@ export type BooksActions =
   | GetAllBookSuccessAction
   | GetAllBookFailureAction
   | ClearGetAllBookAction;
+
+// NEW BOOK
+export type AddBookState = {
+  loading: boolean;
+  error: Error | null;
+  added: boolean;
+};
+
+export type AddBookRequestAction = {
+  type: typeof ADD_BOOK_REQUEST;
+};
+
+export type AddBookSuccessAction = {
+  type: typeof ADD_BOOK_SUCCESS;
+};
+
+export type AddBookFailureAction = {
+  type: typeof ADD_BOOK_FAILURE;
+  payload: {
+    error: Error;
+  };
+};
+
+export type ResetAddBookAction = {
+  type: typeof RESET_ADD_BOOK;
+};
+
+export type ClearAddBookErrorAction = {
+  type: typeof CLEAR_ADD_BOOK_ERROR;
+};
+
+export type AddBookActions =
+  | AddBookRequestAction
+  | AddBookSuccessAction
+  | AddBookFailureAction
+  | ResetAddBookAction
+  | ClearAddBookErrorAction;
