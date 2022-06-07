@@ -35,14 +35,25 @@ const App = () => {
             </ProtectedRoute>
           }
         />
-        <Route
-          path='/add-book'
-          element={
-            <ProtectedRoute adminOnly={true}>
-              <AddBook />
-            </ProtectedRoute>
-          }
-        />
+        <Route path='/books'>
+          <Route path=':bookId' element={<AuthorDetails />} />
+          <Route
+            path='add'
+            element={
+              <ProtectedRoute adminOnly={true}>
+                <AddBook />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path='edit/:bookId'
+            element={
+              <ProtectedRoute adminOnly={true}>
+                <EditAuthor />
+              </ProtectedRoute>
+            }
+          />
+        </Route>
         <Route path='/authors'>
           <Route path=':authorId' element={<AuthorDetails />} />
           <Route
