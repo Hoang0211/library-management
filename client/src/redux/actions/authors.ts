@@ -5,6 +5,7 @@ import {
   GET_ALL_AUTHOR_REQUEST,
   GET_ALL_AUTHOR_SUCCESS,
   GET_ALL_AUTHOR_FAILURE,
+  CLEAR_GET_ALL_AUTHOR_ERROR,
 } from '../../constants/authorConstants';
 import { AuthorsActions, Author, isAxiosError } from '../../types';
 
@@ -44,5 +45,11 @@ export function getAllAuthor() {
         return dispatch(getAllAuthorFailure(err));
       }
     }
+  };
+}
+
+export function clearGetAllAuthorError(): AuthorsActions {
+  return {
+    type: CLEAR_GET_ALL_AUTHOR_ERROR,
   };
 }

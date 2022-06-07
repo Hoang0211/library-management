@@ -1,23 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState } from 'react';
 
 import SearchForm from '../../components/SearchForm';
 import ResultPanel from '../../components/ResultPanel';
-import { getAllAuthor } from '../../redux/actions';
 import './_home.scss';
 
 const Home = () => {
-  const dispatch = useDispatch<any>();
-
   const [currentDisplay, setCurrentDisplay] = useState<'books' | 'authors'>(
-    'authors'
+    'books'
   );
 
-  useEffect(() => {
-    dispatch(getAllAuthor());
-  }, [dispatch]);
-
-  const changeCurrentDisplay = () => {
+  const changeCurrentDisplayHandler = () => {
     if (currentDisplay === 'books') {
       setCurrentDisplay('authors');
     } else {
@@ -30,14 +22,14 @@ const Home = () => {
       <div className='home__show'>
         <button
           className='btn home__show-books'
-          onClick={changeCurrentDisplay}
+          onClick={changeCurrentDisplayHandler}
           disabled={currentDisplay === 'books'}
         >
           Books
         </button>
         <button
           className='btn home__show-authors'
-          onClick={changeCurrentDisplay}
+          onClick={changeCurrentDisplayHandler}
           disabled={currentDisplay === 'authors'}
         >
           Authors

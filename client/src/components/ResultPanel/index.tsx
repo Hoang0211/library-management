@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { FaAngleDoubleLeft, FaAngleDoubleRight } from 'react-icons/fa';
 import { RiArrowDropLeftLine, RiArrowDropRightLine } from 'react-icons/ri';
 import { IoAdd } from 'react-icons/io5';
-import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 
 import BookItem from '../BookItem';
 import AuthorItem from '../AuthorItem';
+import { getAllAuthor, clearGetAllAuthorError } from '../../redux/actions';
 import { Book, Status, AppState, Role } from '../../types';
 import './_resultPanel.scss';
 
@@ -57,6 +58,8 @@ const books: Book[] = [
 ];
 
 const ResultPanel = ({ currentDisplay }: ResultPanelProps) => {
+  const dispatch = useDispatch<any>();
+
   const { user } = useSelector((state: AppState) => state.user);
   const { loading, error, authors } = useSelector(
     (state: AppState) => state.authors
@@ -79,6 +82,15 @@ const ResultPanel = ({ currentDisplay }: ResultPanelProps) => {
       }
     }
   };
+
+  useEffect(() => {
+    if (error) {
+      alert(error);
+      dispatch(clearGetAllAuthorError());
+    }
+
+    dispatch(getAllAuthor());
+  }, [dispatch, error]);
 
   return (
     <div className='result-panel'>

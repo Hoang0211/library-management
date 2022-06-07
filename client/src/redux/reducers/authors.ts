@@ -2,6 +2,7 @@ import {
   GET_ALL_AUTHOR_REQUEST,
   GET_ALL_AUTHOR_SUCCESS,
   GET_ALL_AUTHOR_FAILURE,
+  CLEAR_GET_ALL_AUTHOR_ERROR,
 } from '../../constants/authorConstants';
 import { AuthorsActions, AuthorsState } from '../../types';
 
@@ -18,7 +19,6 @@ export default function authors(
       return {
         ...state,
         loading: true,
-        error: null,
       };
     case GET_ALL_AUTHOR_SUCCESS:
       return {
@@ -31,6 +31,12 @@ export default function authors(
         ...state,
         loading: false,
         error: action.payload.error,
+      };
+
+    case CLEAR_GET_ALL_AUTHOR_ERROR:
+      return {
+        ...state,
+        error: null,
       };
     default:
       return state;
