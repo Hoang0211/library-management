@@ -54,6 +54,11 @@ const initState: AppState = {
     error: null,
     deleted: false,
   },
+  books: {
+    loading: false,
+    error: null,
+    books: [],
+  },
 };
 
 export default function makeStore(initialState = initState) {

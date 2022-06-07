@@ -1,13 +1,18 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { FaAngleDoubleLeft, FaAngleDoubleRight } from 'react-icons/fa';
 import { RiArrowDropLeftLine, RiArrowDropRightLine } from 'react-icons/ri';
 import { IoAdd } from 'react-icons/io5';
 
 import BookItem from '../BookItem';
 import AuthorItem from '../AuthorItem';
-import { getAllAuthor, clearGetAllAuthorError } from '../../redux/actions';
+import {
+  getAllAuthor,
+  clearGetAllAuthorError,
+  getAllBook,
+  clearGetAllBookError,
+} from '../../redux/actions';
 import { Book, Status, AppState, Role } from '../../types';
 import './_resultPanel.scss';
 
@@ -15,82 +20,93 @@ type ResultPanelProps = {
   currentDisplay: 'books' | 'authors';
 };
 
-const books: Book[] = [
-  {
-    _id: 'id1',
-    authors: ['Hoang', 'Viet'],
-    status: Status.Available,
-    isbn: '1000000000-x',
-    title: 'Hello World',
-    description:
-      'This is the description for the first book called Hello World.',
-    publisher: 'Nguyen Hoang',
-    publishedDate: new Date(),
-    category: 'article',
-    numPage: 1,
-  },
-  {
-    _id: 'id2',
-    authors: ['Hoang', 'Quang'],
-    status: Status.Available,
-    isbn: '1000000000-x',
-    title: 'Hello Mars',
-    description:
-      'This is the description for the second book called Hello Mars.',
-    publisher: 'Nguyen Hoang',
-    publishedDate: new Date(),
-    category: 'article',
-    numPage: 1,
-  },
-  {
-    _id: 'id3',
-    authors: ['Hoang', 'Anh'],
-    status: Status.Available,
-    isbn: '1000000000-x',
-    title: 'Hello Moon',
-    description:
-      'This is the description for the third book called Hello Moon.',
-    publisher: 'Nguyen Hoang',
-    publishedDate: new Date(),
-    category: 'article',
-    numPage: 1,
-  },
-];
-
 const ResultPanel = ({ currentDisplay }: ResultPanelProps) => {
   const dispatch = useDispatch<any>();
+  const navigate = useNavigate();
 
   const { user } = useSelector((state: AppState) => state.user);
-  const { loading, error, authors } = useSelector(
-    (state: AppState) => state.authors
-  );
+  const {
+    loading: booksLoading,
+    error: booksError,
+    books,
+  } = useSelector((state: AppState) => state.books);
+  const {
+    loading: authorsLoading,
+    error: authorsError,
+    authors,
+  } = useSelector((state: AppState) => state.authors);
+
+  console.log(books);
 
   const displayAddBtn = () => {
     if (user && user.role === Role.Admin) {
       if (currentDisplay === 'books') {
         return (
-          <Link to='/add-book' className='add'>
+          <button
+            className='btn btn-add'
+            onClick={() => navigate('/books/add')}
+          >
             <IoAdd />
-          </Link>
+          </button>
         );
       } else {
         return (
-          <Link to='/authors/add' className='add'>
+          <button
+            className='btn btn-add'
+            onClick={() => navigate('/authors/add')}
+          >
             <IoAdd />
-          </Link>
+          </button>
         );
       }
     }
   };
 
-  useEffect(() => {
-    if (error) {
-      alert(error);
-      dispatch(clearGetAllAuthorError());
+  const displayResults = () => {
+    if (currentDisplay === 'books') {
+      if (booksLoading) {
+        return <p>Loading...</p>;
+      } else {
+        return books.map((book) => (
+          <BookItem
+            key={book._id}
+            book={book}
+            lastItem={book === books[books.length - 1]}
+          />
+        ));
+      }
+    } else {
+      if (authorsLoading) {
+        return <p>Loading...</p>;
+      } else {
+        return authors.map((author) => (
+          <AuthorItem
+            key={author._id}
+            author={author}
+            lastItem={author === authors[authors.length - 1]}
+          />
+        ));
+      }
     }
+  };
 
-    dispatch(getAllAuthor());
-  }, [dispatch, error]);
+  useEffect(() => {
+    if (currentDisplay === 'books') {
+      if (booksError) {
+        alert(booksError);
+        dispatch(clearGetAllBookError());
+      }
+
+      dispatch(getAllBook());
+    } else {
+      if (authorsError) {
+        alert(authorsError);
+        dispatch(clearGetAllAuthorError());
+      }
+
+      dispatch(getAllAuthor());
+    }
+  }, [dispatch, currentDisplay, authorsError, booksError]);
 
   return (
     <div className='result-panel'>
@@ -126,25 +142,7 @@ const ResultPanel = ({ currentDisplay }: ResultPanelProps) => {
         )}
         {displayAddBtn()}
       </div>
-      <div className='display'>
-        {loading && 'Loading...'}
-        {error && `${error.message}`}
-        {!loading && !error && currentDisplay === 'books'
-          ? books.map((book) => (
-              <BookItem
-                key={book._id}
-                book={book}
-                lastItem={book === books[books.length - 1]}
-              />
-            ))
-          : authors.map((author) => (
-              <AuthorItem
-                key={author._id}
-                author={author}
-                lastItem={author === authors[authors.length - 1]}
-              />
-            ))}
-      </div>
+      <div className='display'>{displayResults()}</div>
       <div className='pagination'>
         <button className='btn btn-first'>
           <FaAngleDoubleLeft className='icon icon-first' />

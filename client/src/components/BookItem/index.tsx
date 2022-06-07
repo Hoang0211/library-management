@@ -14,7 +14,7 @@ const BookItem = ({ book, lastItem }: BookItemProps) => {
     <div className={`book-item ${lastItem && 'book-item-last'}`}>
       <div className='info'>
         <p className='title'>
-          {book.title} ({book.publishedDate.getFullYear()})
+          {book.title} ({new Date(book.publishedDate).getFullYear()})
         </p>
         <div className='category'>
           <RiBookFill className='icon category__icon' />

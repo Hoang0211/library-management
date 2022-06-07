@@ -6,6 +6,7 @@ import authorDetails from './authorDetails';
 import addAuthor from './addAuthor';
 import editAuthor from './editAuthor';
 import deleteAuthor from './deleteAuthor';
+import books from './books';
 
 const createRootReducer = () =>
   combineReducers({
@@ -15,6 +16,7 @@ const createRootReducer = () =>
     addAuthor,
     editAuthor,
     deleteAuthor,
+    books,
   });
 
 export default createRootReducer;

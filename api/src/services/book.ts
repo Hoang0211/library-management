@@ -2,7 +2,7 @@ import Book, { BookDocument } from '../models/Book'
 import { NotFoundError } from '../helpers/apiError'
 
 const findAll = async (): Promise<BookDocument[]> => {
-  return Book.find().sort({ numPage: 1 })
+  return Book.find().sort({ numPage: 1 }).populate('authors')
 }
 
 const findById = async (bookId: string): Promise<BookDocument> => {

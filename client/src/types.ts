@@ -30,6 +30,31 @@ import {
   RESET_DELETE_AUTHOR,
   CLEAR_DELETE_AUTHOR_ERROR,
 } from './constants/authorConstants';
+import {
+  GET_ALL_BOOK_REQUEST,
+  GET_ALL_BOOK_SUCCESS,
+  GET_ALL_BOOK_FAILURE,
+  CLEAR_GET_ALL_BOOK_ERROR,
+  GET_BOOK_DETAILS_REQUEST,
+  GET_BOOK_DETAILS_SUCCESS,
+  GET_BOOK_DETAILS_FAILURE,
+  CLEAR_GET_BOOK_DETAILS_ERROR,
+  ADD_BOOK_REQUEST,
+  ADD_BOOK_SUCCESS,
+  ADD_BOOK_FAILURE,
+  RESET_ADD_BOOK,
+  CLEAR_ADD_BOOK_ERROR,
+  EDIT_BOOK_REQUEST,
+  EDIT_BOOK_SUCCESS,
+  EDIT_BOOK_FAILURE,
+  RESET_EDIT_BOOK,
+  CLEAR_EDIT_BOOK_ERROR,
+  DELETE_BOOK_REQUEST,
+  DELETE_BOOK_SUCCESS,
+  DELETE_BOOK_FAILURE,
+  RESET_DELETE_BOOK,
+  CLEAR_DELETE_BOOK_ERROR,
+} from './constants/bookConstants';
 
 // Type guard
 export function isAxiosError(candidate: any): candidate is AxiosError {
@@ -44,6 +69,7 @@ export type AppState = {
   addAuthor: AddAuthorState;
   editAuthor: EditAuthorState;
   deleteAuthor: DeleteAuthorState;
+  books: BooksState;
 };
 
 // USER
@@ -309,8 +335,42 @@ export type Book = {
   description: string;
   authors: string[];
   publisher: string;
-  publishedDate: Date;
+  publishedDate: string;
   category: string;
   numPage: number;
   status: Status;
 };
+
+export type BooksState = {
+  loading: boolean;
+  error: Error | null;
+  books: Book[];
+};
+
+export type GetAllBookRequestAction = {
+  type: typeof GET_ALL_BOOK_REQUEST;
+};
+
+export type GetAllBookSuccessAction = {
+  type: typeof GET_ALL_BOOK_SUCCESS;
+  payload: {
+    books: Book[];
+  };
+};
+
+export type GetAllBookFailureAction = {
+  type: typeof GET_ALL_BOOK_FAILURE;
+  payload: {
+    error: Error;
+  };
+};
+
+export type ClearGetAllBookAction = {
+  type: typeof CLEAR_GET_ALL_BOOK_ERROR;
+};
+
+export type BooksActions =
+  | GetAllBookRequestAction
+  | GetAllBookSuccessAction
+  | GetAllBookFailureAction
+  | ClearGetAllBookAction;
