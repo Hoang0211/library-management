@@ -32,7 +32,6 @@ export default function authors(
         loading: false,
         error: action.payload.error,
       };
-
     case CLEAR_GET_ALL_AUTHOR_ERROR:
       return {
         ...state,

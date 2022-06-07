@@ -9,6 +9,7 @@
   align-items: center;
 
   .container {
+    height: 85%;
     width: 80%;
     max-width: 800px;
     margin-top: $nav-height;
@@ -20,6 +21,7 @@
     border-radius: 5px;
     border: 2px solid $clr-accent;
     box-shadow: 3px 3px 3px $clr-accent;
+    overflow-y: auto;
 
     .title {
       margin-bottom: 1rem;
@@ -52,7 +54,7 @@
       }
 
       textarea {
-        min-height: 100px;
+        min-height: 80px;
         overflow-y: visible;
       }
     }
