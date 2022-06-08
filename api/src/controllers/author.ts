@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from 'express'
 
 import Author from '../models/Author'
 import AuthorService from '../services/Author'
+import BookService from '../services/Book'
 import { BadRequestError } from '../helpers/apiError'
 
 // GET /authors
@@ -91,7 +92,13 @@ export const deleteAuthor = async (
   next: NextFunction
 ) => {
   try {
+    const deletedAuthor = await AuthorService.findById(req.params.authorId)
+    await deletedAuthor.books.forEach((bookId) =>
+      BookService.removeFromAuthors(bookId, deletedAuthor._id)
+    )
+
     await AuthorService.deleteAuthor(req.params.authorId)
+
     res.status(204).end()
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {

@@ -1,3 +1,5 @@
+import { Types } from 'mongoose'
+
 import Book, { BookDocument } from '../models/Book'
 import { NotFoundError } from '../helpers/apiError'
 
@@ -35,6 +37,26 @@ const update = async (
   return foundBook
 }
 
+const removeFromAuthors = async (
+  bookId: Types.ObjectId,
+  authorId: string
+): Promise<BookDocument | null> => {
+  const foundBook = await Book.findByIdAndUpdate(
+    bookId,
+    { $pull: { authors: authorId } },
+    {
+      new: true,
+      runValidators: true,
+    }
+  )
+
+  if (!foundBook) {
+    throw new NotFoundError(`Book ${bookId} not found`)
+  }
+
+  return foundBook
+}
+
 const deleteBook = async (bookId: string): Promise<BookDocument | null> => {
   const foundBook = Book.findByIdAndDelete(bookId)
 
@@ -50,5 +72,6 @@ export default {
   findById,
   create,
   update,
+  removeFromAuthors,
   deleteBook,
 }
