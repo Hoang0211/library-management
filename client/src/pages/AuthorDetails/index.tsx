@@ -59,7 +59,7 @@ const AuthorDetails = () => {
   }, [dispatch, navigate, error, deleteError, deleted]);
 
   return (
-    <main className='author-detail'>
+    <main className='author-details'>
       <div className='container'>
         <div className='header'>
           <h2 className='title'>Author Details</h2>
