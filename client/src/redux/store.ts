@@ -69,6 +69,11 @@ const initState: AppState = {
     error: null,
     added: false,
   },
+  deleteBook: {
+    loading: false,
+    error: null,
+    deleted: false,
+  },
 };
 
 export default function makeStore(initialState = initState) {
