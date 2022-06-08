@@ -3,7 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
 import { MdEdit, MdDelete } from 'react-icons/md';
 
-import { clearGetBookDetailsError } from '../../redux/actions';
+import {
+  clearGetBookDetailsError,
+  deleteBook,
+  resetDeleteBook,
+  clearDeleteBookError,
+} from '../../redux/actions';
 import { AppState, Role } from '../../types';
 import './_bookDetails.scss';
 
@@ -11,14 +16,21 @@ const BookDetails = () => {
   const dispatch = useDispatch<any>();
   const navigate = useNavigate();
 
-  const { user } = useSelector((state: AppState) => state.user);
+  const { user, token } = useSelector((state: AppState) => state.user);
   const { loading, error, book } = useSelector(
     (state: AppState) => state.bookDetails
+  );
+  const { error: deleteError, deleted } = useSelector(
+    (state: AppState) => state.deleteBook
   );
 
   const { bookId } = useParams<{ bookId?: string }>();
 
-  const deleteBookHandler = () => {};
+  const deleteBookHandler = () => {
+    if (bookId) {
+      dispatch(deleteBook(token, bookId));
+    }
+  };
 
   const navigateToEditHandler = () => {
     navigate(`/books/edit/${bookId}`);
@@ -33,7 +45,18 @@ const BookDetails = () => {
       alert(error.message);
       dispatch(clearGetBookDetailsError());
     }
-  }, [dispatch, navigate, error]);
+
+    if (deleteError) {
+      alert(deleteError.message);
+      dispatch(clearDeleteBookError());
+    }
+
+    if (deleted) {
+      alert('Deleted book successfully!');
+      navigate('/');
+      dispatch(resetDeleteBook());
+    }
+  }, [dispatch, navigate, error, deleteError, deleted]);
 
   return (
     <main className='book-details'>

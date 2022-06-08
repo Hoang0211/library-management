@@ -74,7 +74,7 @@ export const createBook = async (
     await BookService.create(book)
 
     await authors.forEach((authorId: string) => {
-      AuthorService.updateBooks(authorId, book._id, 'add')
+      AuthorService.addToBooks(authorId, book._id)
     })
 
     res.json(book)
@@ -114,7 +114,13 @@ export const deleteBook = async (
   next: NextFunction
 ) => {
   try {
+    const deletedBook = await BookService.findById(req.params.bookId)
+    await deletedBook.authors.forEach((authorId) =>
+      AuthorService.removeFromBooks(authorId, deletedBook._id)
+    )
+
     await BookService.deleteBook(req.params.bookId)
+
     res.status(204).end()
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
