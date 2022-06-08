@@ -9,6 +9,7 @@ import deleteAuthor from './deleteAuthor';
 import books from './books';
 import bookDetails from './bookDetails';
 import addBook from './addBook';
+import editBook from './editBook';
 import deleteBook from './deleteBook';
 
 const createRootReducer = () =>
@@ -22,6 +23,7 @@ const createRootReducer = () =>
     books,
     bookDetails,
     addBook,
+    editBook,
     deleteBook,
   });
 

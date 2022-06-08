@@ -69,6 +69,11 @@ const initState: AppState = {
     error: null,
     added: false,
   },
+  editBook: {
+    loading: false,
+    error: null,
+    updated: false,
+  },
   deleteBook: {
     loading: false,
     error: null,

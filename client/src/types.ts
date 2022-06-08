@@ -74,6 +74,7 @@ export type AppState = {
   books: BooksState;
   bookDetails: BookDetailsState;
   addBook: AddBookState;
+  editBook: EditBookState;
   deleteBook: DeleteBookState;
 };
 
@@ -451,6 +452,43 @@ export type AddBookActions =
   | AddBookFailureAction
   | ResetAddBookAction
   | ClearAddBookErrorAction;
+
+// EDIT BOOK
+export type EditBookState = {
+  loading: boolean;
+  error: Error | null;
+  updated: boolean;
+};
+
+export type EditBookRequestAction = {
+  type: typeof EDIT_BOOK_REQUEST;
+};
+
+export type EditBookSuccessAction = {
+  type: typeof EDIT_BOOK_SUCCESS;
+};
+
+export type EditBookFailureAction = {
+  type: typeof EDIT_BOOK_FAILURE;
+  payload: {
+    error: Error;
+  };
+};
+
+export type ResetEditBookAction = {
+  type: typeof RESET_EDIT_BOOK;
+};
+
+export type ClearEditBookErrorAction = {
+  type: typeof CLEAR_EDIT_BOOK_ERROR;
+};
+
+export type EditBookActions =
+  | EditBookRequestAction
+  | EditBookSuccessAction
+  | EditBookFailureAction
+  | ResetEditBookAction
+  | ClearEditBookErrorAction;
 
 // DELETE BOOK
 export type DeleteBookState = {
