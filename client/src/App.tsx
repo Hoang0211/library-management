@@ -7,11 +7,12 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
 import Returns from './pages/Returns';
-import AddBook from './pages/AddBook';
-import BookDetails from './pages/BookDetails';
 import AuthorDetails from './pages/AuthorDetails';
 import AddAuthor from './pages/AddAuthor';
 import EditAuthor from './pages/EditAuthor';
+import BookDetails from './pages/BookDetails';
+import AddBook from './pages/AddBook';
+import EditBook from './pages/EditBook';
 
 const App = () => {
   return (
@@ -50,7 +51,7 @@ const App = () => {
             path='edit/:bookId'
             element={
               <ProtectedRoute adminOnly={true}>
-                <EditAuthor />
+                <EditBook />
               </ProtectedRoute>
             }
           />

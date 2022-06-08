@@ -342,7 +342,7 @@ export type Book = {
   authors: Author[];
   publisher: string;
   publishedDate: string;
-  category: string;
+  category: Category;
   numPage: number;
   status: Status;
 };

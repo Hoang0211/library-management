@@ -37,7 +37,16 @@ export function editBook(token: string, bookId: string, book: Partial<Book>) {
     try {
       await axios.put(
         `http://localhost:5000/api/v1/books/${bookId}`,
-        {},
+        {
+          isbn: book.isbn,
+          title: book.title,
+          description: book.description,
+          authors: book.authors,
+          publisher: book.publisher,
+          publishedDate: book.publishedDate,
+          category: book.category,
+          numPage: book.numPage,
+        },
         {
           headers: {
             Authorization: `Bearer ${token}`,

@@ -96,7 +96,19 @@ export const updateBook = async (
   try {
     const update = req.body
     const bookId = req.params.bookId
+
+    const updateBook = await BookService.findById(req.params.bookId)
+
+    await updateBook.authors.forEach((authorId) =>
+      AuthorService.removeFromBooks(authorId, updateBook._id)
+    )
+
     const updatedBook = await BookService.update(bookId, update)
+
+    await updatedBook?.authors.forEach((authorId) => {
+      AuthorService.addToBooks(authorId, updateBook._id)
+    })
+
     res.json(updatedBook)
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {

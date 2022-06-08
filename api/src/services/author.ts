@@ -38,7 +38,7 @@ const update = async (
 }
 
 const addToBooks = async (
-  authorId: string,
+  authorId: string | Types.ObjectId,
   bookId: string
 ): Promise<AuthorDocument | null> => {
   const foundAuthor = await Author.findByIdAndUpdate(
