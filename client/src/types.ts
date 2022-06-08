@@ -64,12 +64,15 @@ export function isAxiosError(candidate: any): candidate is AxiosError {
 // APP
 export type AppState = {
   user: UserState;
+
   authors: AuthorsState;
   authorDetails: AuthorDetailsState;
   addAuthor: AddAuthorState;
   editAuthor: EditAuthorState;
   deleteAuthor: DeleteAuthorState;
+
   books: BooksState;
+  bookDetails: BookDetailsState;
   addBook: AddBookState;
 };
 
@@ -375,6 +378,41 @@ export type BooksActions =
   | GetAllBookSuccessAction
   | GetAllBookFailureAction
   | ClearGetAllBookAction;
+
+// BOOK DETAILS
+export type BookDetailsState = {
+  loading: boolean;
+  error: Error | null;
+  book: Book | null;
+};
+
+export type GetBookDetailsRequestAction = {
+  type: typeof GET_BOOK_DETAILS_REQUEST;
+};
+
+export type GetBookDetailsSuccessAction = {
+  type: typeof GET_BOOK_DETAILS_SUCCESS;
+  payload: {
+    book: Book;
+  };
+};
+
+export type GetBookDetailsFailureAction = {
+  type: typeof GET_BOOK_DETAILS_FAILURE;
+  payload: {
+    error: Error;
+  };
+};
+
+export type ClearGetBookDetailsAction = {
+  type: typeof CLEAR_GET_BOOK_DETAILS_ERROR;
+};
+
+export type BookDetailsActions =
+  | GetBookDetailsRequestAction
+  | GetBookDetailsSuccessAction
+  | GetBookDetailsFailureAction
+  | ClearGetBookDetailsAction;
 
 // NEW BOOK
 export type AddBookState = {

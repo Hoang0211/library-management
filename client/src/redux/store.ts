@@ -59,6 +59,11 @@ const initState: AppState = {
     error: null,
     books: [],
   },
+  bookDetails: {
+    loading: false,
+    error: null,
+    book: null,
+  },
   addBook: {
     loading: false,
     error: null,
