@@ -1,7 +1,10 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { RiBookFill } from 'react-icons/ri';
 
-import { Book, Author } from '../../types';
+import { getBookDetails } from '../../redux/actions';
+import { Book } from '../../types';
 import './_bookItem.scss';
 
 type BookItemProps = {
@@ -10,6 +13,14 @@ type BookItemProps = {
 };
 
 const BookItem = ({ book, lastItem }: BookItemProps) => {
+  const dispatch = useDispatch<any>();
+  const navigate = useNavigate();
+
+  const navigateToAuthorDetailsHandler = () => {
+    navigate(`/books/${book._id}`);
+    dispatch(getBookDetails(book._id));
+  };
+
   return (
     <div className={`book-item ${lastItem && 'book-item-last'}`}>
       <div className='info'>
@@ -28,7 +39,12 @@ const BookItem = ({ book, lastItem }: BookItemProps) => {
         </p>
         <p className='status'>Status: Available</p>
       </div>
-      <button className='btn btn-details'>More Details</button>
+      <button
+        className='btn btn-details'
+        onClick={navigateToAuthorDetailsHandler}
+      >
+        More Details
+      </button>
     </div>
   );
 };

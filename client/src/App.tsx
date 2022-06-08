@@ -7,8 +7,9 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
 import Returns from './pages/Returns';
-import AuthorDetails from './pages/AuthorDetails';
 import AddBook from './pages/AddBook';
+import BookDetails from './pages/BookDetails';
+import AuthorDetails from './pages/AuthorDetails';
 import AddAuthor from './pages/AddAuthor';
 import EditAuthor from './pages/EditAuthor';
 
@@ -36,7 +37,7 @@ const App = () => {
           }
         />
         <Route path='/books'>
-          <Route path=':bookId' element={<AuthorDetails />} />
+          <Route path=':bookId' element={<BookDetails />} />
           <Route
             path='add'
             element={
