@@ -1,7 +1,7 @@
 import React from 'react';
 import { RiBookFill } from 'react-icons/ri';
 
-import { Book } from '../../types';
+import { Book, Author } from '../../types';
 import './_bookItem.scss';
 
 type BookItemProps = {
@@ -20,7 +20,12 @@ const BookItem = ({ book, lastItem }: BookItemProps) => {
           <RiBookFill className='icon category__icon' />
           <span className='category__text'>{book.category}</span>
         </div>
-        <p className='authors'>Authors: {book.authors.join(', ')}</p>
+        <p className='authors'>
+          Authors:{' '}
+          {book.authors
+            .map((author) => author.firstName + ' ' + author.lastName)
+            .join(', ')}
+        </p>
         <p className='status'>Status: Available</p>
       </div>
       <button className='btn btn-details'>More Details</button>

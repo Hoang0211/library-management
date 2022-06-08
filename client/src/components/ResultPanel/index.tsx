@@ -36,8 +36,6 @@ const ResultPanel = ({ currentDisplay }: ResultPanelProps) => {
     authors,
   } = useSelector((state: AppState) => state.authors);
 
-  console.log(books);
-
   const displayAddBtn = () => {
     if (user && user.role === Role.Admin) {
       if (currentDisplay === 'books') {

@@ -41,7 +41,7 @@ export function addBook(token: string, book: Partial<Book>) {
           isbn: book.isbn,
           title: book.title,
           description: book.description,
-          authors: book.authors,
+          authors: book.authors?.map((author) => author._id),
           publisher: book.publisher,
           publishedDate: book.publishedDate,
           category: book.category,

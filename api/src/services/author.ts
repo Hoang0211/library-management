@@ -6,7 +6,7 @@ const findAll = async (): Promise<AuthorDocument[]> => {
 }
 
 const findById = async (authorId: string): Promise<AuthorDocument> => {
-  const foundAuthor = await Author.findById(authorId)
+  const foundAuthor = await Author.findById(authorId).populate('books')
 
   if (!foundAuthor) {
     throw new NotFoundError(`Author ${authorId} not found`)
@@ -35,6 +35,35 @@ const update = async (
   return foundAuthor
 }
 
+const updateBooks = async (
+  authorId: string,
+  bookId: string,
+  action: 'add' | 'delete'
+): Promise<AuthorDocument | null> => {
+  const getActionObject = () => {
+    if (action === 'add') {
+      return { $push: { books: bookId } }
+    } else {
+      return { $pull: { books: bookId } }
+    }
+  }
+
+  const foundAuthor = await Author.findByIdAndUpdate(
+    authorId,
+    getActionObject(),
+    {
+      new: true,
+      runValidators: true,
+    }
+  )
+
+  if (!foundAuthor) {
+    throw new NotFoundError(`Author ${authorId} not found`)
+  }
+
+  return foundAuthor
+}
+
 const deleteAuthor = async (
   authorId: string
 ): Promise<AuthorDocument | null> => {
@@ -52,5 +81,6 @@ export default {
   findById,
   create,
   update,
+  updateBooks,
   deleteAuthor,
 }

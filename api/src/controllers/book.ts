@@ -2,6 +2,8 @@ import { Request, Response, NextFunction } from 'express'
 
 import Book from '../models/Book'
 import BookService from '../services/Book'
+import Author from '../models/Author'
+import AuthorService from '../services/Author'
 import { BadRequestError } from '../helpers/apiError'
 
 // GET /books/
@@ -70,6 +72,11 @@ export const createBook = async (
     })
 
     await BookService.create(book)
+
+    await authors.forEach((authorId: string) => {
+      AuthorService.updateBooks(authorId, book._id, 'add')
+    })
+
     res.json(book)
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {

@@ -132,7 +132,7 @@ export type Author = {
   firstName: string;
   lastName: string;
   biography: string;
-  books: string[];
+  books: Book[];
 };
 
 export type AuthorsState = {
@@ -334,7 +334,7 @@ export type Book = {
   isbn: string;
   title: string;
   description: string;
-  authors: string[];
+  authors: Author[];
   publisher: string;
   publishedDate: string;
   category: string;

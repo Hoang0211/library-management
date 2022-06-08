@@ -85,7 +85,9 @@ const AuthorDetails = () => {
         </p>
         <p className='book-list'>List of book:</p>
         <ul>
-          {!loading && author && author.books.map((book) => <li>book</li>)}
+          {!loading &&
+            author &&
+            author.books.map((book) => <li key={book._id}>{book.title}</li>)}
         </ul>
         <button className='btn btn-home' onClick={navigateToHomeHandler}>
           Home
