@@ -79,6 +79,11 @@ const initState: AppState = {
     error: null,
     deleted: false,
   },
+  loan: {
+    loading: false,
+    error: null,
+    loaned: false,
+  },
 };
 
 export default function makeStore(initialState = initState) {

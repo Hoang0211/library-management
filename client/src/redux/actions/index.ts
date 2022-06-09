@@ -9,3 +9,4 @@ export * from './bookDetails';
 export * from './addBook';
 export * from './editBook';
 export * from './deleteBook';
+export * from './loan';

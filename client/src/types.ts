@@ -55,6 +55,22 @@ import {
   RESET_DELETE_BOOK,
   CLEAR_DELETE_BOOK_ERROR,
 } from './constants/bookConstants';
+import {
+  GET_ALL_BORROW_REQUEST,
+  GET_ALL_BORROW_SUCCESS,
+  GET_ALL_BORROW_FAILURE,
+  CLEAR_GET_ALL_BORROW_ERROR,
+  LOAN_REQUEST,
+  LOAN_SUCCESS,
+  LOAN_FAILURE,
+  RESET_LOAN,
+  CLEAR_LOAN_ERROR,
+  RETURN_REQUEST,
+  RETURN_SUCCESS,
+  RETURN_FAILURE,
+  RESET_RETURN,
+  CLEAR_RETURN_ERROR,
+} from './constants/borrowConstants';
 
 // Type guard
 export function isAxiosError(candidate: any): candidate is AxiosError {
@@ -76,6 +92,8 @@ export type AppState = {
   addBook: AddBookState;
   editBook: EditBookState;
   deleteBook: DeleteBookState;
+
+  loan: LoanState;
 };
 
 // USER
@@ -526,3 +544,46 @@ export type DeleteBookActions =
   | DeleteBookFailureAction
   | ResetDeleteBookAction
   | ClearDeleteBookErrorAction;
+
+export type Borrow = {
+  _id: string;
+  userId: string;
+  bookIds: string[];
+};
+
+// LOAN
+export type LoanState = {
+  loading: boolean;
+  error: Error | null;
+  loaned: boolean;
+};
+
+export type LoanRequestAction = {
+  type: typeof LOAN_REQUEST;
+};
+
+export type LoanSuccessAction = {
+  type: typeof LOAN_SUCCESS;
+};
+
+export type LoanFailureAction = {
+  type: typeof LOAN_FAILURE;
+  payload: {
+    error: Error;
+  };
+};
+
+export type ResetLoanAction = {
+  type: typeof RESET_LOAN;
+};
+
+export type ClearLoanErrorAction = {
+  type: typeof CLEAR_LOAN_ERROR;
+};
+
+export type LoanActions =
+  | LoanRequestAction
+  | LoanSuccessAction
+  | LoanFailureAction
+  | ResetLoanAction
+  | ClearLoanErrorAction;
