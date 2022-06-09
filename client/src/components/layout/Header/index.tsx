@@ -45,6 +45,9 @@ const Header = () => {
 
               {user.role === Role.Admin && (
                 <>
+                  <Link to='/loan' className='user__option'>
+                    Loan
+                  </Link>
                   <Link to='/returns' className='user__option'>
                     Returns
                   </Link>

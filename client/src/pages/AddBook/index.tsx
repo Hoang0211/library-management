@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import AllAuthorModal from '../../components/AllAuthorModal';
 import { addBook, resetAddBook, clearAddBookError } from '../../redux/actions';
-import { Category, AppState, Book, Author } from '../../types';
+import { AppState, Category, Book, Author } from '../../types';
 import './_addBook.scss';
 
 const AddBook = () => {

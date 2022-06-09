@@ -1,0 +1,37 @@
+@import '../../styles/variables';
+
+.books-modal {
+  &__input,
+  &__rows-title {
+    font-size: 1.25rem;
+    color: $clr-accent;
+  }
+
+  &__input {
+    margin-bottom: 1rem;
+  }
+
+  &__rows-title {
+    margin-bottom: 0.5rem;
+  }
+
+  &__row {
+    width: 100%;
+    margin-bottom: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    display: flex;
+    justify-content: space-between;
+
+    .btn {
+      padding: 0.25rem 0.5rem;
+      width: 130px;
+      font-size: 1rem;
+      outline: none;
+      border: none;
+      border-radius: 5px;
+      color: $clr-dark;
+      background-color: $clr-accent;
+      cursor: pointer;
+    }
+  }
+}
