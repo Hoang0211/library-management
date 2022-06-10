@@ -8,7 +8,7 @@ import {
   RESET_LOAN,
   CLEAR_LOAN_ERROR,
 } from '../../constants/borrowConstants';
-import { LoanActions, isAxiosError } from '../../types';
+import { Loan, LoanActions, isAxiosError } from '../../types';
 
 export function loanRequest(): LoanActions {
   return {
@@ -31,10 +31,7 @@ export function loanFailure(error: Error): LoanActions {
   };
 }
 
-export function loan(
-  token: string,
-  loan: { userEmail: string; bookIds: string[] }
-) {
+export function loan(token: string, loan: Loan) {
   return async (dispatch: Dispatch) => {
     dispatch(loanRequest());
     try {
@@ -43,6 +40,8 @@ export function loan(
         {
           userEmail: loan.userEmail,
           bookIds: loan.bookIds,
+          loanDate: loan.loanDate,
+          dueDate: loan.dueDate,
         },
         {
           headers: {
