@@ -47,7 +47,7 @@ export const createBorrow = async (
   next: NextFunction
 ) => {
   try {
-    const { userEmail, bookIds, loanDate, dueDate } = req.body
+    const { userEmail, bookIds, borrowDate, dueDate } = req.body
 
     // Validate and get user by email
     const user = await UserService.findOneForBorrow(userEmail)
@@ -57,13 +57,13 @@ export const createBorrow = async (
     }
 
     // Validate and change status for each book
-    bookIds.forEach((bookId: string) => BookService.loan(bookId))
+    bookIds.forEach((bookId: string) => BookService.borrow(bookId))
 
     // Create borrow
     const borrow = new Borrow({
       userId,
       bookIds,
-      loanDate,
+      borrowDate,
       dueDate,
     })
     await BorrowService.create(borrow)

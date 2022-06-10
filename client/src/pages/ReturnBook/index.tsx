@@ -7,7 +7,7 @@ const ReturnBook = () => {
     <main className='return-book'>
       <div className='container'>
         <h1 className='title'>Return Book</h1>
-        <div className='loan-list'></div>
+        <div className='borrows-list'></div>
       </div>
     </main>
   );

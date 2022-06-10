@@ -3,18 +3,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import AllBookModal from '../../components/AllBookModal';
-import { loan, resetLoan, clearLoanError } from '../../redux/actions';
-import { AppState, Book, Loan } from '../../types';
+import { borrow, resetBorrow, clearBorrowError } from '../../redux/actions';
+import { AppState, Book, Borrow } from '../../types';
 import { dateFormat } from '../../utils/dateFormat';
-import './_loan.scss';
+import './_borrow.scss';
 
-const LoanBook = () => {
+const BorrowBook = () => {
   const dispatch = useDispatch<any>();
   const navigate = useNavigate();
 
   const { token } = useSelector((state: AppState) => state.user);
-  const { loading, error, loaned } = useSelector(
-    (state: AppState) => state.loan
+  const { loading, error, borrowed } = useSelector(
+    (state: AppState) => state.borrow
   );
 
   // Form inputs state
@@ -25,7 +25,7 @@ const LoanBook = () => {
   const [showBookList, setShowBookList] = useState(false);
 
   // Get date
-  const loanDate = new Date(Date.now());
+  const borrowDate = new Date(Date.now());
   const dueDate = new Date(Date.now() + 12096e5);
 
   // Form inputs onChange handler
@@ -55,14 +55,14 @@ const LoanBook = () => {
       return;
     }
 
-    const formData: Loan = {
+    const formData: Borrow = {
       userEmail: emailInput,
       bookIds: booksInput.map((book) => book._id),
-      loanDate: loanDate,
+      borrowDate: borrowDate,
       dueDate: dueDate,
     };
 
-    dispatch(loan(token, formData));
+    dispatch(borrow(token, formData));
   };
 
   const discardHandler = () => {
@@ -72,20 +72,20 @@ const LoanBook = () => {
   useEffect(() => {
     if (error) {
       alert(error);
-      dispatch(clearLoanError());
+      dispatch(clearBorrowError());
     }
 
-    if (loaned) {
-      alert('Created book successfully!');
+    if (borrowed) {
+      alert('Borrow successfully!');
       navigate('/');
-      dispatch(resetLoan());
+      dispatch(resetBorrow());
     }
-  }, [dispatch, navigate, error, loaned]);
+  }, [dispatch, navigate, error, borrowed]);
 
   return (
-    <main className='loan'>
+    <main className='borrow-book'>
       <form className='container' onSubmit={formSubmitHandler}>
-        <h2 className='title'>Loan</h2>
+        <h2 className='title'>Borrow</h2>
         <div className='input-controller'>
           <label className='label label-email' htmlFor='email'>
             Email:
@@ -100,11 +100,11 @@ const LoanBook = () => {
         </div>
         <div className='input-controller'>
           <label className='label label-books' htmlFor='books'>
-            Loan books:{' '}
+            Borrow books:{' '}
           </label>
-          <ul className='loan-items'>
+          <ul className='borrow-items'>
             {booksInput.map((book) => (
-              <li className='loan-item' key={book._id}>
+              <li className='borrow-item' key={book._id}>
                 {book.title} ({book.isbn})
               </li>
             ))}
@@ -151,4 +151,4 @@ const LoanBook = () => {
   );
 };
 
-export default LoanBook;
+export default BorrowBook;

@@ -91,7 +91,7 @@ const AllBookModal = ({
     <Modal onClose={onCloseHandler}>
       <>
         <p className='books-modal__input'>
-          Loan books: {booksInput.map((book) => book.title).join(', ')}
+          Borrow books: {booksInput.map((book) => book.title).join(', ')}
         </p>
 
         <div className='books-modal__rows'>

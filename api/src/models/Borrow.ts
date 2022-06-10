@@ -3,7 +3,7 @@ import mongoose, { Document, Schema, Types } from 'mongoose'
 export type BorrowDocument = Document & {
   userId: Types.ObjectId
   bookIds: Types.ObjectId[]
-  loanDate: Date
+  borrowDate: Date
   dueDate: Date
 }
 
@@ -20,7 +20,7 @@ const borrowSchema = new mongoose.Schema({
       required: true,
     },
   ],
-  loanDate: {
+  borrowDate: {
     type: Date,
     require: true,
   },

@@ -56,15 +56,15 @@ import {
   CLEAR_DELETE_BOOK_ERROR,
 } from './constants/bookConstants';
 import {
-  GET_ALL_LOAN_REQUEST,
-  GET_ALL_LOAN_SUCCESS,
-  GET_ALL_LOAN_FAILURE,
-  CLEAR_GET_ALL_LOAN_ERROR,
-  LOAN_REQUEST,
-  LOAN_SUCCESS,
-  LOAN_FAILURE,
-  RESET_LOAN,
-  CLEAR_LOAN_ERROR,
+  GET_ALL_BORROWS_REQUEST,
+  GET_ALL_BORROWS_SUCCESS,
+  GET_ALL_BORROWS_FAILURE,
+  CLEAR_GET_ALL_BORROWS_ERROR,
+  BORROW_REQUEST,
+  BORROW_SUCCESS,
+  BORROW_FAILURE,
+  RESET_BORROW,
+  CLEAR_BORROW_ERROR,
   RETURN_REQUEST,
   RETURN_SUCCESS,
   RETURN_FAILURE,
@@ -93,8 +93,8 @@ export type AppState = {
   editBook: EditBookState;
   deleteBook: DeleteBookState;
 
-  loans: LoansState;
-  loan: LoanState;
+  getBorrows: GetBorrowsState;
+  borrow: BorrowState;
 };
 
 // USER
@@ -546,81 +546,81 @@ export type DeleteBookActions =
   | ResetDeleteBookAction
   | ClearDeleteBookErrorAction;
 
-// LOANS
-export type Loan = {
+// ALL BORROWS
+export type Borrow = {
   userEmail: string;
   bookIds: string[];
-  loanDate: Date;
+  borrowDate: Date;
   dueDate: Date;
 };
 
-export type LoansState = {
+export type GetBorrowsState = {
   loading: boolean;
   error: Error | null;
-  loans: Loan[];
+  borrows: Borrow[];
 };
 
-export type GetAllLoanRequestAction = {
-  type: typeof GET_ALL_LOAN_REQUEST;
+export type GetAllBorrowsRequestAction = {
+  type: typeof GET_ALL_BORROWS_REQUEST;
 };
 
-export type GetAllLoanSuccessAction = {
-  type: typeof GET_ALL_LOAN_SUCCESS;
+export type GetAllBorrowsSuccessAction = {
+  type: typeof GET_ALL_BORROWS_SUCCESS;
   payload: {
-    loans: Loan[];
+    borrows: Borrow[];
   };
 };
 
-export type GetAllLoanFailureAction = {
-  type: typeof GET_ALL_LOAN_FAILURE;
+export type GetAllBorrowsFailureAction = {
+  type: typeof GET_ALL_BORROWS_FAILURE;
   payload: {
     error: Error;
   };
 };
 
-export type ClearGetAllLoanAction = {
-  type: typeof CLEAR_GET_ALL_LOAN_ERROR;
+export type ClearGetAllBorrowsAction = {
+  type: typeof CLEAR_GET_ALL_BORROWS_ERROR;
 };
 
-export type LoansActions =
-  | GetAllLoanRequestAction
-  | GetAllLoanSuccessAction
-  | GetAllLoanFailureAction
-  | ClearGetAllLoanAction;
+export type GetBorrowsActions =
+  | GetAllBorrowsRequestAction
+  | GetAllBorrowsSuccessAction
+  | GetAllBorrowsFailureAction
+  | ClearGetAllBorrowsAction;
 
-// LOAN
-export type LoanState = {
+// BORROW
+export type BorrowState = {
   loading: boolean;
   error: Error | null;
-  loaned: boolean;
+  borrowed: boolean;
 };
 
-export type LoanRequestAction = {
-  type: typeof LOAN_REQUEST;
+export type BorrowRequestAction = {
+  type: typeof BORROW_REQUEST;
 };
 
-export type LoanSuccessAction = {
-  type: typeof LOAN_SUCCESS;
+export type BorrowSuccessAction = {
+  type: typeof BORROW_SUCCESS;
 };
 
-export type LoanFailureAction = {
-  type: typeof LOAN_FAILURE;
+export type BorrowFailureAction = {
+  type: typeof BORROW_FAILURE;
   payload: {
     error: Error;
   };
 };
 
-export type ResetLoanAction = {
-  type: typeof RESET_LOAN;
+export type ResetBorrowAction = {
+  type: typeof RESET_BORROW;
 };
 
-export type ClearLoanErrorAction = {
-  type: typeof CLEAR_LOAN_ERROR;
+export type ClearBorrowErrorAction = {
+  type: typeof CLEAR_BORROW_ERROR;
 };
 
-export type LoanActions =
-  | LoanRequestAction
-  | LoanSuccessAction
-  | LoanFailureAction
-  | ResetLoanAction
-  | ClearLoanErrorAction;
+export type BorrowActions =
+  | BorrowRequestAction
+  | BorrowSuccessAction
+  | BorrowFailureAction
+  | ResetBorrowAction
+  | ClearBorrowErrorAction;

@@ -6,7 +6,7 @@ import Header from './components/layout/Header';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
-import LoanBook from './pages/LoanBook';
+import BorrowBook from './pages/Borrow';
 import ReturnBook from './pages/ReturnBook';
 import AuthorDetails from './pages/AuthorDetails';
 import AddAuthor from './pages/AddAuthor';
@@ -31,10 +31,10 @@ const App = () => {
           }
         />
         <Route
-          path='/loan'
+          path='/borrow'
           element={
             <ProtectedRoute adminOnly={true}>
-              <LoanBook />
+              <BorrowBook />
             </ProtectedRoute>
           }
         />

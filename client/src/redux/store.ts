@@ -79,15 +79,15 @@ const initState: AppState = {
     error: null,
     deleted: false,
   },
-  loans: {
+  getBorrows: {
     loading: false,
     error: null,
-    loans: [],
+    borrows: [],
   },
-  loan: {
+  borrow: {
     loading: false,
     error: null,
-    loaned: false,
+    borrowed: false,
   },
 };
 

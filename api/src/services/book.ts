@@ -58,8 +58,8 @@ const removeFromAuthors = async (
   return foundBook
 }
 
-// Loan
-const loan = async (bookId: string): Promise<BookDocument | null> => {
+// Borrow
+const borrow = async (bookId: string): Promise<BookDocument | null> => {
   const foundBook = await Book.findByIdAndUpdate(
     bookId,
     { status: Status.Borrowed },
@@ -94,6 +94,6 @@ export default {
   create,
   update,
   removeFromAuthors,
-  loan,
+  borrow,
   deleteBook,
 }

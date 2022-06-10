@@ -1,44 +1,44 @@
 import {
-  LOAN_REQUEST,
-  LOAN_SUCCESS,
-  LOAN_FAILURE,
-  RESET_LOAN,
-  CLEAR_LOAN_ERROR,
+  BORROW_REQUEST,
+  BORROW_SUCCESS,
+  BORROW_FAILURE,
+  RESET_BORROW,
+  CLEAR_BORROW_ERROR,
 } from '../../constants/borrowConstants';
-import { LoanActions, LoanState } from '../../types';
+import { BorrowActions, BorrowState } from '../../types';
 
-export default function addAuthor(
-  state: LoanState = {
+export default function borrow(
+  state: BorrowState = {
     loading: false,
     error: null,
-    loaned: false,
+    borrowed: false,
   },
-  action: LoanActions
-): LoanState {
+  action: BorrowActions
+): BorrowState {
   switch (action.type) {
-    case LOAN_REQUEST:
+    case BORROW_REQUEST:
       return {
         ...state,
         loading: true,
       };
-    case LOAN_SUCCESS:
+    case BORROW_SUCCESS:
       return {
         ...state,
         loading: false,
-        loaned: true,
+        borrowed: true,
       };
-    case LOAN_FAILURE:
+    case BORROW_FAILURE:
       return {
         ...state,
         loading: false,
         error: action.payload.error,
       };
-    case RESET_LOAN:
+    case RESET_BORROW:
       return {
         ...state,
-        loaned: false,
+        borrowed: false,
       };
-    case CLEAR_LOAN_ERROR:
+    case CLEAR_BORROW_ERROR:
       return {
         ...state,
         error: null,
