@@ -552,6 +552,13 @@ export type Borrow = {
 };
 
 // LOAN
+export type Loan = {
+  userEmail: string;
+  bookIds: string[];
+  loanDate: Date;
+  dueDate: Date;
+};
+
 export type LoanState = {
   loading: boolean;
   error: Error | null;
