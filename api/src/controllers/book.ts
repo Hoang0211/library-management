@@ -97,14 +97,18 @@ export const updateBook = async (
     const update = req.body
     const bookId = req.params.bookId
 
+    // Validate book
     const updateBook = await BookService.findById(req.params.bookId)
 
+    // Remove this book from all author's books list before updating book
     await updateBook.authors.forEach((authorId) =>
       AuthorService.removeFromBooks(authorId, updateBook._id)
     )
 
+    // Update book
     const updatedBook = await BookService.update(bookId, update)
 
+    // Add this book to all author's books list after updating book
     await updatedBook?.authors.forEach((authorId) => {
       AuthorService.addToBooks(authorId, updateBook._id)
     })

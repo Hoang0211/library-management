@@ -92,13 +92,16 @@ export const deleteAuthor = async (
   next: NextFunction
 ) => {
   try {
+    // Validate author
     const deletedAuthor = await AuthorService.findById(req.params.authorId)
+
+    // Update author list for each book
     await deletedAuthor.books.forEach((bookId) =>
       BookService.removeFromAuthors(bookId, deletedAuthor._id)
     )
 
+    // Delete author
     await AuthorService.deleteAuthor(req.params.authorId)
-
     res.status(204).end()
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
