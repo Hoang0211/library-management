@@ -4,9 +4,11 @@ import {
   findAllBorrows,
   findBorrowById,
   createBorrow,
-  updateBorrow,
+  // updateBorrow,
   deleteBorrow,
 } from '../controllers/borrow'
+import verifyAuth from '../middlewares/verifyAuth'
+import verifyAdmin from '../middlewares/verifyAdmin'
 
 const router = express.Router()
 
@@ -14,8 +16,8 @@ const router = express.Router()
 
 router.get('/', findAllBorrows)
 router.get('/:borrowId', findBorrowById)
-router.post('/', createBorrow)
-router.put('/:borrowId', updateBorrow)
-router.delete('/:borrowId', deleteBorrow)
+router.post('/', verifyAuth, verifyAdmin, createBorrow)
+// router.put('/:borrowId', updateBorrow)
+router.delete('/:borrowId', verifyAuth, verifyAdmin, deleteBorrow)
 
 export default router
