@@ -37,7 +37,9 @@ const BookItem = ({ book, lastItem }: BookItemProps) => {
             .map((author) => author.firstName + ' ' + author.lastName)
             .join(', ')}
         </p>
-        <p className='status'>Status: Available</p>
+        <p className='status'>
+          Status: {book.status.charAt(0).toUpperCase() + book.status.slice(1)}
+        </p>
       </div>
       <button
         className='btn btn-details'
