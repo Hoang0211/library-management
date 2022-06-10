@@ -5,9 +5,20 @@ const findAll = async (): Promise<UserDocument[]> => {
   return User.find().sort({ firstName: 1 })
 }
 
-const findOne = async (email: string): Promise<UserDocument | null> => {
-  console.log('email:', email)
+const findOneForLogin = async (email: string): Promise<UserDocument | null> => {
   return User.findOne({ email })
+}
+
+const findOneForBorrow = async (
+  email: string
+): Promise<UserDocument | null> => {
+  const foundUser = await User.findOne({ email })
+
+  if (!foundUser) {
+    throw new NotFoundError(`Email ${email} not found`)
+  }
+
+  return foundUser
 }
 
 const findById = async (userId: string): Promise<UserDocument> => {
@@ -52,7 +63,8 @@ const deleteUser = async (userId: string): Promise<UserDocument | null> => {
 
 export default {
   findAll,
-  findOne,
+  findOneForLogin,
+  findOneForBorrow,
   findById,
   create,
   update,
