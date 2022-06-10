@@ -6,7 +6,7 @@ import Header from './components/layout/Header';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
-import Loan from './pages/Loan';
+import LoanBook from './pages/Loan';
 import Returns from './pages/Returns';
 import AuthorDetails from './pages/AuthorDetails';
 import AddAuthor from './pages/AddAuthor';
@@ -34,7 +34,7 @@ const App = () => {
           path='/loan'
           element={
             <ProtectedRoute adminOnly={true}>
-              <Loan />
+              <LoanBook />
             </ProtectedRoute>
           }
         />

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import Modal from '../ui/Modal';
 import { getAllBook, clearGetAllBookError } from '../../redux/actions';
-import { AppState, Book } from '../../types';
+import { AppState, Book, Status } from '../../types';
 import './_allBookModal.scss';
 
 type BookRowProps = {
@@ -99,15 +99,17 @@ const AllBookModal = ({
           {loading ? (
             <p>Loading...</p>
           ) : (
-            books.map((book) => (
-              <BookRow
-                key={book._id}
-                booksInput={booksInput}
-                book={book}
-                addBookInputHandler={addBookInputHandler}
-                removeBookInputHandler={removeBookInputHandler}
-              />
-            ))
+            books
+              .filter((book) => book.status === Status.Available)
+              .map((book) => (
+                <BookRow
+                  key={book._id}
+                  booksInput={booksInput}
+                  book={book}
+                  addBookInputHandler={addBookInputHandler}
+                  removeBookInputHandler={removeBookInputHandler}
+                />
+              ))
           )}
         </div>
       </>

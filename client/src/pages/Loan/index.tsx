@@ -1,17 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import AllBookModal from '../../components/AllBookModal';
-import { AppState, Category, Book, Author } from '../../types';
+import { loan, resetLoan, clearLoanError } from '../../redux/actions';
+import { AppState, Book, Loan } from '../../types';
 import { dateFormat } from '../../utils/dateFormat';
 import './_loan.scss';
 
-const Loan = () => {
+const LoanBook = () => {
   const dispatch = useDispatch<any>();
   const navigate = useNavigate();
 
   const { token } = useSelector((state: AppState) => state.user);
+  const { loading, error, loaned } = useSelector(
+    (state: AppState) => state.loan
+  );
 
   // Form inputs state
   const [emailInput, setEmailInput] = useState('');
@@ -20,27 +24,63 @@ const Loan = () => {
   // List of book state
   const [showBookList, setShowBookList] = useState(false);
 
+  // Get date
+  const loanDate = new Date(Date.now());
+  const dueDate = new Date(Date.now() + 12096e5);
+
   // Form inputs onChange handler
-  const emailInputChangeHandler = (
-    e: React.FormEvent<HTMLInputElement>
-  ): void => {
+  const emailInputChangeHandler = (e: React.FormEvent<HTMLInputElement>) => {
     setEmailInput(e.currentTarget.value);
   };
-  const toggleListOfBooksHandler = (): void => {
+  const toggleListOfBooksHandler = () => {
     setShowBookList((prevState) => !prevState);
   };
-  const addBookInputHandler = (book: Book): void => {
+  const addBookInputHandler = (book: Book) => {
     setBooksInput([...booksInput, book]);
   };
-  const removeBookInputHandler = (book: Book): void => {
+  const removeBookInputHandler = (book: Book) => {
     setBooksInput(booksInput.filter((thisBook) => thisBook._id !== book._id));
   };
 
-  const formSubmitHandler = (): void => {};
+  const formSubmitHandler = (e: React.FormEvent) => {
+    e.preventDefault();
 
-  const discardHandler = (): void => {
+    if (!emailInput) {
+      alert('Please enter user email!');
+      return;
+    }
+
+    if (booksInput.length < 1) {
+      alert('Please select atleast 1 book!');
+      return;
+    }
+
+    const formData: Loan = {
+      userEmail: emailInput,
+      bookIds: booksInput.map((book) => book._id),
+      loanDate: loanDate,
+      dueDate: dueDate,
+    };
+
+    dispatch(loan(token, formData));
+  };
+
+  const discardHandler = () => {
     navigate('/');
   };
+
+  useEffect(() => {
+    if (error) {
+      alert(error);
+      dispatch(clearLoanError());
+    }
+
+    if (loaned) {
+      alert('Created book successfully!');
+      navigate('/');
+      dispatch(resetLoan());
+    }
+  }, [dispatch, navigate, error, loaned]);
 
   return (
     <main className='loan'>
@@ -94,7 +134,7 @@ const Loan = () => {
             className='btn btn-save'
             type='submit'
             onClick={formSubmitHandler}
-            // disabled={loading ? true : false}
+            disabled={loading ? true : false}
           >
             Add
           </button>
@@ -111,4 +151,4 @@ const Loan = () => {
   );
 };
 
-export default Loan;
+export default LoanBook;
