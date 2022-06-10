@@ -11,6 +11,7 @@ import bookDetails from './bookDetails';
 import addBook from './addBook';
 import editBook from './editBook';
 import deleteBook from './deleteBook';
+import loans from './loans';
 import loan from './loan';
 
 const createRootReducer = () =>
@@ -26,6 +27,7 @@ const createRootReducer = () =>
     addBook,
     editBook,
     deleteBook,
+    loans,
     loan,
   });
 

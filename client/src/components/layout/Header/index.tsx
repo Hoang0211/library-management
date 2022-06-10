@@ -48,8 +48,8 @@ const Header = () => {
                   <Link to='/loan' className='user__option'>
                     Loan
                   </Link>
-                  <Link to='/returns' className='user__option'>
-                    Returns
+                  <Link to='/return' className='user__option'>
+                    Return
                   </Link>
                 </>
               )}

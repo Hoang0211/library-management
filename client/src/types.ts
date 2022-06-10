@@ -56,10 +56,10 @@ import {
   CLEAR_DELETE_BOOK_ERROR,
 } from './constants/bookConstants';
 import {
-  GET_ALL_BORROW_REQUEST,
-  GET_ALL_BORROW_SUCCESS,
-  GET_ALL_BORROW_FAILURE,
-  CLEAR_GET_ALL_BORROW_ERROR,
+  GET_ALL_LOAN_REQUEST,
+  GET_ALL_LOAN_SUCCESS,
+  GET_ALL_LOAN_FAILURE,
+  CLEAR_GET_ALL_LOAN_ERROR,
   LOAN_REQUEST,
   LOAN_SUCCESS,
   LOAN_FAILURE,
@@ -93,6 +93,7 @@ export type AppState = {
   editBook: EditBookState;
   deleteBook: DeleteBookState;
 
+  loans: LoansState;
   loan: LoanState;
 };
 
@@ -545,13 +546,7 @@ export type DeleteBookActions =
   | ResetDeleteBookAction
   | ClearDeleteBookErrorAction;
 
-export type Borrow = {
-  _id: string;
-  userId: string;
-  bookIds: string[];
-};
-
-// LOAN
+// LOANS
 export type Loan = {
   userEmail: string;
   bookIds: string[];
@@ -559,6 +554,41 @@ export type Loan = {
   dueDate: Date;
 };
 
+export type LoansState = {
+  loading: boolean;
+  error: Error | null;
+  loans: Loan[];
+};
+
+export type GetAllLoanRequestAction = {
+  type: typeof GET_ALL_LOAN_REQUEST;
+};
+
+export type GetAllLoanSuccessAction = {
+  type: typeof GET_ALL_LOAN_SUCCESS;
+  payload: {
+    loans: Loan[];
+  };
+};
+
+export type GetAllLoanFailureAction = {
+  type: typeof GET_ALL_LOAN_FAILURE;
+  payload: {
+    error: Error;
+  };
+};
+
+export type ClearGetAllLoanAction = {
+  type: typeof CLEAR_GET_ALL_LOAN_ERROR;
+};
+
+export type LoansActions =
+  | GetAllLoanRequestAction
+  | GetAllLoanSuccessAction
+  | GetAllLoanFailureAction
+  | ClearGetAllLoanAction;
+
+// LOAN
 export type LoanState = {
   loading: boolean;
   error: Error | null;

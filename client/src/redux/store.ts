@@ -79,6 +79,11 @@ const initState: AppState = {
     error: null,
     deleted: false,
   },
+  loans: {
+    loading: false,
+    error: null,
+    loans: [],
+  },
   loan: {
     loading: false,
     error: null,

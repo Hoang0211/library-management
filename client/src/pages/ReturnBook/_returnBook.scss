@@ -1,0 +1,30 @@
+@import '../../styles/variables';
+
+.return-book {
+  height: 300vh;
+  width: 100%;
+  margin-top: $nav-height;
+  display: flex;
+  justify-content: space-around;
+
+  .container {
+    .title {
+      color: $clr-accent;
+    }
+  }
+
+  .panel {
+    height: 100vh;
+    width: 20%;
+    position: fixed;
+    top: 0;
+
+    &-left {
+      left: 0;
+    }
+
+    &-right {
+      right: 0;
+    }
+  }
+}

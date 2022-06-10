@@ -6,8 +6,8 @@ import Header from './components/layout/Header';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
-import LoanBook from './pages/Loan';
-import Returns from './pages/Returns';
+import LoanBook from './pages/LoanBook';
+import ReturnBook from './pages/ReturnBook';
 import AuthorDetails from './pages/AuthorDetails';
 import AddAuthor from './pages/AddAuthor';
 import EditAuthor from './pages/EditAuthor';
@@ -39,10 +39,10 @@ const App = () => {
           }
         />
         <Route
-          path='/returns'
+          path='/return'
           element={
             <ProtectedRoute adminOnly={true}>
-              <Returns />
+              <ReturnBook />
             </ProtectedRoute>
           }
         />
