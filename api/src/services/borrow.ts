@@ -19,21 +19,21 @@ const create = async (borrow: BorrowDocument): Promise<BorrowDocument> => {
   return borrow.save()
 }
 
-const update = async (
-  borrowId: string,
-  update: Partial<BorrowDocument>
-): Promise<BorrowDocument | null> => {
-  const foundBorrow = await Borrow.findByIdAndUpdate(borrowId, update, {
-    new: true,
-    runValidators: true,
-  })
+// const update = async (
+//   borrowId: string,
+//   update: Partial<BorrowDocument>
+// ): Promise<BorrowDocument | null> => {
+//   const foundBorrow = await Borrow.findByIdAndUpdate(borrowId, update, {
+//     new: true,
+//     runValidators: true,
+//   })
 
-  if (!foundBorrow) {
-    throw new NotFoundError(`Borrow ${borrowId} not found`)
-  }
+//   if (!foundBorrow) {
+//     throw new NotFoundError(`Borrow ${borrowId} not found`)
+//   }
 
-  return foundBorrow
-}
+//   return foundBorrow
+// }
 
 const deleteBorrow = async (
   borrowId: string
@@ -51,6 +51,6 @@ export default {
   findAll,
   findById,
   create,
-  update,
+  // update,
   deleteBorrow,
 }

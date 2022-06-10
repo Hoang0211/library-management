@@ -37,6 +37,7 @@ const update = async (
   return foundAuthor
 }
 
+// Add book to author's books list when adding new book
 const addToBooks = async (
   authorId: string | Types.ObjectId,
   bookId: string
@@ -57,6 +58,7 @@ const addToBooks = async (
   return foundAuthor
 }
 
+// Remove book from author's books list when deleting book
 const removeFromBooks = async (
   authorId: Types.ObjectId,
   bookId: string

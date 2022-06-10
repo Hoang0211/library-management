@@ -1,5 +1,7 @@
 import { Request, Response, NextFunction } from 'express'
 
+import UserService from '../services/User'
+import BookService from '../services/Book'
 import Borrow from '../models/Borrow'
 import BorrowService from '../services/Borrow'
 import { BadRequestError } from '../helpers/apiError'
@@ -45,15 +47,25 @@ export const createBorrow = async (
   next: NextFunction
 ) => {
   try {
-    const { bookId, userId, borrowDate, returnDate } = req.body
+    const { userEmail, bookIds, loanDate, dueDate } = req.body
 
+    // Validate and get user by email
+    const user = await UserService.findOneForBorrow(userEmail)
+    let userId = ''
+    if (user !== null) {
+      userId = user._id
+    }
+
+    // Validate and change status for each book
+    bookIds.forEach((bookId: string) => BookService.loan(bookId))
+
+    // Create borrow
     const borrow = new Borrow({
-      bookId,
       userId,
-      borrowDate,
-      returnDate,
+      bookIds,
+      loanDate,
+      dueDate,
     })
-
     await BorrowService.create(borrow)
     res.json(borrow)
   } catch (error) {
@@ -66,24 +78,24 @@ export const createBorrow = async (
 }
 
 // PUT /borrows/:borrowId
-export const updateBorrow = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  try {
-    const update = req.body
-    const borrowId = req.params.borrowId
-    const updatedBorrow = await BorrowService.update(borrowId, update)
-    res.json(updatedBorrow)
-  } catch (error) {
-    if (error instanceof Error && error.name == 'ValidationError') {
-      next(new BadRequestError('Invalid Request', error))
-    } else {
-      next(error)
-    }
-  }
-}
+// export const updateBorrow = async (
+//   req: Request,
+//   res: Response,
+//   next: NextFunction
+// ) => {
+//   try {
+//     const update = req.body
+//     const borrowId = req.params.borrowId
+//     const updatedBorrow = await BorrowService.update(borrowId, update)
+//     res.json(updatedBorrow)
+//   } catch (error) {
+//     if (error instanceof Error && error.name == 'ValidationError') {
+//       next(new BadRequestError('Invalid Request', error))
+//     } else {
+//       next(error)
+//     }
+//   }
+// }
 
 // DELETE /borrows/:borrowId
 export const deleteBorrow = async (
