@@ -2,7 +2,7 @@ import Borrow, { BorrowDocument } from '../models/Borrow'
 import { NotFoundError } from '../helpers/apiError'
 
 const findAll = async (): Promise<BorrowDocument[]> => {
-  return Borrow.find().sort({ returnDate: 1 })
+  return Borrow.find().sort({ returnDate: 1 }).populate('user').populate('book')
 }
 
 const findById = async (borrowId: string): Promise<BorrowDocument> => {

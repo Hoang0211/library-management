@@ -73,8 +73,6 @@ const borrow = async (bookId: string): Promise<BookDocument | null> => {
     throw new NotFoundError(`Book ${bookId} not found`)
   }
 
-  console.log(foundBook)
-
   return foundBook
 }
 

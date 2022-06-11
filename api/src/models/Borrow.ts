@@ -1,25 +1,23 @@
 import mongoose, { Document, Schema, Types } from 'mongoose'
 
 export type BorrowDocument = Document & {
-  userId: Types.ObjectId
-  bookIds: Types.ObjectId[]
+  user: Types.ObjectId
+  book: Types.ObjectId
   borrowDate: Date
   dueDate: Date
 }
 
 const borrowSchema = new mongoose.Schema({
-  userId: {
+  user: {
     type: Schema.Types.ObjectId,
     ref: 'User',
     required: true,
   },
-  bookIds: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'Book',
-      required: true,
-    },
-  ],
+  book: {
+    type: Schema.Types.ObjectId,
+    ref: 'Book',
+    required: true,
+  },
   borrowDate: {
     type: Date,
     require: true,

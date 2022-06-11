@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express'
 
 import UserService from '../services/User'
 import BookService from '../services/Book'
-import Borrow from '../models/Borrow'
+import Borrow, { BorrowDocument } from '../models/Borrow'
 import BorrowService from '../services/Borrow'
 import { BadRequestError } from '../helpers/apiError'
 
@@ -50,24 +50,35 @@ export const createBorrow = async (
     const { userEmail, bookIds, borrowDate, dueDate } = req.body
 
     // Validate and get user by email
-    const user = await UserService.findOneForBorrow(userEmail)
+    const foundUser = await UserService.findOneForBorrow(userEmail)
     let userId = ''
-    if (user !== null) {
-      userId = user._id
+    if (foundUser !== null) {
+      userId = foundUser._id
     }
 
-    // Validate and change status for each book
-    bookIds.forEach((bookId: string) => BookService.borrow(bookId))
+    // Borrow function
+    const borrowBook = async (
+      userId: string,
+      bookId: string,
+      borrowDate: Date,
+      dueDate: Date
+    ) => {
+      const borrow = new Borrow({
+        user: userId,
+        book: bookId,
+        borrowDate,
+        dueDate,
+      })
+      await BorrowService.create(borrow)
+    }
 
-    // Create borrow
-    const borrow = new Borrow({
-      userId,
-      bookIds,
-      borrowDate,
-      dueDate,
+    // Validate, change status for each book and create borrow instance
+    bookIds.forEach((bookId: string) => {
+      BookService.borrow(bookId)
+      borrowBook(userId, bookId, borrowDate, dueDate)
     })
-    await BorrowService.create(borrow)
-    res.json(borrow)
+
+    res.status(204).end()
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
       next(new BadRequestError('Invalid Request', error))
