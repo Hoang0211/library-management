@@ -548,8 +548,9 @@ export type DeleteBookActions =
 
 // ALL BORROWS
 export type Borrow = {
-  userEmail: string;
-  bookIds: string[];
+  _id: string;
+  user: User;
+  book: Book;
   borrowDate: Date;
   dueDate: Date;
 };
@@ -589,6 +590,13 @@ export type GetBorrowsActions =
   | ClearGetAllBorrowsAction;
 
 // BORROW
+export type BorrowRequest = {
+  userEmail: string;
+  bookIds: string[];
+  borrowDate: Date;
+  dueDate: Date;
+};
+
 export type BorrowState = {
   loading: boolean;
   error: Error | null;

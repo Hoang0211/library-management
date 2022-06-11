@@ -8,7 +8,7 @@ import {
   RESET_BORROW,
   CLEAR_BORROW_ERROR,
 } from '../../constants/borrowConstants';
-import { Borrow, BorrowActions, isAxiosError } from '../../types';
+import { BorrowRequest, BorrowActions, isAxiosError } from '../../types';
 
 export function borrowRequest(): BorrowActions {
   return {
@@ -31,7 +31,7 @@ export function borrowFailure(error: Error): BorrowActions {
   };
 }
 
-export function borrow(token: string, borrow: Borrow) {
+export function borrow(token: string, borrow: BorrowRequest) {
   return async (dispatch: Dispatch) => {
     dispatch(borrowRequest());
     try {
