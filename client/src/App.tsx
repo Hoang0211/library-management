@@ -6,7 +6,7 @@ import Header from './components/layout/Header';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
-import BorrowBook from './pages/Borrow';
+import BorrowBook from './pages/BorrowBook';
 import ReturnBook from './pages/ReturnBook';
 import AuthorDetails from './pages/AuthorDetails';
 import AddAuthor from './pages/AddAuthor';

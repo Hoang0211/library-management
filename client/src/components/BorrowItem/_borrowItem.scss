@@ -1,0 +1,32 @@
+@import '../../styles/variables';
+
+.borrow-item {
+  width: 100%;
+  display: flex;
+  text-align: center;
+  border: 2px solid $clr-accent;
+  border-top: none;
+
+  span {
+    padding: 0.5rem 0;
+    &:not(.return) {
+      border-right: 1px solid $clr-accent;
+    }
+  }
+
+  .user {
+    width: 40%;
+  }
+  .book {
+    width: 20%;
+  }
+  .borrow {
+    width: 15%;
+  }
+  .due {
+    width: 15%;
+  }
+  .return {
+    width: 10%;
+  }
+}

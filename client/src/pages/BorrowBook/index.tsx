@@ -4,9 +4,9 @@ import { useNavigate } from 'react-router-dom';
 
 import AllBookModal from '../../components/AllBookModal';
 import { borrow, resetBorrow, clearBorrowError } from '../../redux/actions';
-import { AppState, Book, Borrow } from '../../types';
+import { AppState, Book, BorrowRequest } from '../../types';
 import { dateFormat } from '../../utils/dateFormat';
-import './_borrow.scss';
+import './_borrowBook.scss';
 
 const BorrowBook = () => {
   const dispatch = useDispatch<any>();
@@ -55,7 +55,7 @@ const BorrowBook = () => {
       return;
     }
 
-    const formData: Borrow = {
+    const formData: BorrowRequest = {
       userEmail: emailInput,
       bookIds: booksInput.map((book) => book._id),
       borrowDate: borrowDate,
