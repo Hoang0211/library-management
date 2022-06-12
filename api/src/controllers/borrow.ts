@@ -24,7 +24,7 @@ export const findAllBorrows = async (
 }
 
 // POST /borrows
-export const createBorrow = async (
+export const createBorrows = async (
   req: Request,
   res: Response,
   next: NextFunction
@@ -32,34 +32,6 @@ export const createBorrow = async (
   try {
     const { userEmail, bookIds, borrowDate, dueDate } = req.body
 
-    // // Validate and get user by email
-    // const foundUser = await UserService.findOneForBorrow(userEmail)
-    // let userId = ''
-    // if (foundUser !== null) {
-    //   userId = foundUser._id
-    // }
-
-    // // Borrow function
-    // const borrowBook = async (
-    //   userId: string,
-    //   bookId: string,
-    //   borrowDate: Date,
-    //   dueDate: Date
-    // ) => {
-    //   const borrow = new Borrow({
-    //     user: userId,
-    //     book: bookId,
-    //     borrowDate,
-    //     dueDate,
-    //   })
-    //   await BorrowService.create(borrow)
-    // }
-
-    // // Validate, change status for each book and create borrow instance
-    // bookIds.forEach((bookId: string) => {
-    //   BookService.borrow(bookId)
-    //   borrowBook(userId, bookId, borrowDate, dueDate)
-    // })
     await BorrowService.borrowBooks(userEmail, bookIds, borrowDate, dueDate)
     res.status(204).end()
   } catch (error) {
