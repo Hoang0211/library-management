@@ -33,11 +33,15 @@ export function getAllBorrowsFailure(error: Error): GetBorrowsActions {
   };
 }
 
-export function getAllBorrows() {
+export function getAllBorrows(token: string) {
   return async (dispatch: Dispatch) => {
     dispatch(getAllBorrowsRequest());
     try {
-      const res = await axios.get('http://localhost:5000/api/v1/borrows');
+      const res = await axios.get('http://localhost:5000/api/v1/borrows', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       const borrows = res.data;
       return dispatch(getAllBorrowsSuccess(borrows));
     } catch (err) {

@@ -66,7 +66,7 @@ const BorrowsManagement = () => {
   };
 
   useEffect(() => {
-    dispatch(getAllBorrows());
+    dispatch(getAllBorrows(token));
 
     if (borrowsError) {
       alert(borrowsError);
@@ -82,7 +82,7 @@ const BorrowsManagement = () => {
       alert('Return book successfully!');
       dispatch(resetReturnBook());
     }
-  }, [dispatch, borrowsError, returnError, returned]);
+  }, [dispatch, token, borrowsError, returnError, returned]);
 
   return (
     <PageWrapper
