@@ -85,26 +85,26 @@ const BorrowsManagement = () => {
   }, [dispatch, token, borrowsError, returnError, returned]);
 
   return (
-    <PageWrapper
-      page={'borrows-management'}
-      title='Borrows Management'
-      navigations={[
-        { text: 'Add', navigateHandler: navigateBorrowPageHandler },
-        { text: 'Home', navigateHandler: navigateHomePageHandler },
-      ]}
-      container={
-        <>
-          <div className='headers'>
-            <span className='header header-user'>User</span>
-            <span className='header header-book'>Book</span>
-            <span className='header header-borrow'>Borrow Date</span>
-            <span className='header header-due'>DueDate</span>
-            <span className='header header-return'></span>
-          </div>
-          <div className='results'>{displayResults()}</div>
-        </>
-      }
-    />
+    <PageWrapper className={'borrows-management'}>
+      <div className='title'>
+        <h1>Borrows Management</h1>
+        <div className='actions'>
+          <button className='action' onClick={navigateHomePageHandler}>
+            Home
+          </button>
+        </div>
+      </div>
+      <div className='container'>
+        <div className='headers'>
+          <span className='header header-user'>User</span>
+          <span className='header header-book'>Book</span>
+          <span className='header header-borrow'>Borrow Date</span>
+          <span className='header header-due'>DueDate</span>
+          <span className='header header-return'></span>
+        </div>
+        <div className='results'>{displayResults()}</div>
+      </div>
+    </PageWrapper>
   );
 };
 

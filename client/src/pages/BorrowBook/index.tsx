@@ -77,7 +77,7 @@ const BorrowBook = () => {
 
     if (borrowed) {
       alert('Borrow successfully!');
-      navigate('/');
+      navigate('/borrows');
       dispatch(resetBorrow());
     }
   }, [dispatch, navigate, error, borrowed]);
