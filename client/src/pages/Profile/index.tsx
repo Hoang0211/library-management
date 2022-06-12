@@ -7,6 +7,7 @@ import {
   editUser,
   resetEditUser,
   clearEditUserError,
+  updateStoredUser,
 } from '../../redux/actions';
 import { AppState, User } from '../../types';
 import './_profile.scss';
@@ -16,7 +17,7 @@ const Profile = () => {
   const navigate = useNavigate();
 
   const { user, token } = useSelector((state: AppState) => state.user);
-  const { loading, error, updated } = useSelector(
+  const { loading, error, updated, updatedUser } = useSelector(
     (state: AppState) => state.editUser
   );
 
@@ -63,11 +64,12 @@ const Profile = () => {
       dispatch(clearEditUserError());
     }
 
-    if (updated) {
+    if (updated && updatedUser) {
       alert('Updated user successfully!');
+      dispatch(updateStoredUser(updatedUser));
       dispatch(resetEditUser());
     }
-  }, [dispatch, navigate, error, updated, token]);
+  }, [dispatch, navigate, error, updated, updatedUser]);
 
   return (
     <PageWrapper className={'profile'}>

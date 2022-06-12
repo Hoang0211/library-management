@@ -12,6 +12,7 @@ export default function editUser(
     loading: false,
     error: null,
     updated: false,
+    updatedUser: null,
   },
   action: EditUserActions
 ): EditUserState {
@@ -26,6 +27,7 @@ export default function editUser(
         ...state,
         loading: false,
         updated: true,
+        updatedUser: action.payload.updatedUser,
       };
     case EDIT_USER_FAILURE:
       return {
@@ -37,6 +39,7 @@ export default function editUser(
       return {
         ...state,
         updated: false,
+        updatedUser: null,
       };
     case CLEAR_EDIT_USER_ERROR:
       return {

@@ -4,6 +4,7 @@ import {
   SIGN_IN_SUCCESS,
   SIGN_IN_FAILURE,
   SIGN_OUT,
+  UPDATE_STORED_USER,
   EDIT_USER_REQUEST,
   EDIT_USER_SUCCESS,
   EDIT_USER_FAILURE,
@@ -152,17 +153,26 @@ export type SignOutAction = {
   type: typeof SIGN_OUT;
 };
 
+export type UpdateStoredUserAction = {
+  type: typeof UPDATE_STORED_USER;
+  payload: {
+    user: User;
+  };
+};
+
 export type UserActions =
   | SignInRequestAction
   | SignInSuccessAction
   | SignInFailureAction
-  | SignOutAction;
+  | SignOutAction
+  | UpdateStoredUserAction;
 
 // EDIT USER
 export type EditUserState = {
   loading: boolean;
   error: Error | null;
   updated: boolean;
+  updatedUser: User | null;
 };
 
 export type EditUserRequestAction = {
@@ -171,6 +181,9 @@ export type EditUserRequestAction = {
 
 export type EditUserSuccessAction = {
   type: typeof EDIT_USER_SUCCESS;
+  payload: {
+    updatedUser: User;
+  };
 };
 
 export type EditUserFailureAction = {

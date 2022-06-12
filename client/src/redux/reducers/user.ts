@@ -4,6 +4,7 @@ import {
   SIGN_IN_SUCCESS,
   SIGN_IN_FAILURE,
   SIGN_OUT,
+  UPDATE_STORED_USER,
 } from '../../constants/userConstants';
 import { UserActions, UserState } from '../../types';
 
@@ -45,6 +46,12 @@ export default function user(
         ...state,
         user: null,
         token: '',
+      };
+    case UPDATE_STORED_USER:
+      localStorage.setItem('user', JSON.stringify(action.payload.user));
+      return {
+        ...state,
+        user: action.payload.user,
       };
     default:
       return state;

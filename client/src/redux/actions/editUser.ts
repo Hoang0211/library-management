@@ -16,9 +16,12 @@ export function editUserRequest(): EditUserActions {
   };
 }
 
-export function editUserSuccess(): EditUserActions {
+export function editUserSuccess(updatedUser: User): EditUserActions {
   return {
     type: EDIT_USER_SUCCESS,
+    payload: {
+      updatedUser,
+    },
   };
 }
 
@@ -35,7 +38,7 @@ export function editUser(token: string, userId: string, user: Partial<User>) {
   return async (dispatch: Dispatch) => {
     dispatch(editUserRequest());
     try {
-      await axios.put(
+      const res = await axios.put(
         `http://localhost:5000/api/v1/users/${userId}`,
         {
           firstName: user.firstName,
@@ -47,7 +50,8 @@ export function editUser(token: string, userId: string, user: Partial<User>) {
           },
         }
       );
-      return dispatch(editUserSuccess());
+      const updatedUser = res.data;
+      return dispatch(editUserSuccess(updatedUser));
     } catch (err) {
       if (isAxiosError(err)) {
         return dispatch(editUserFailure(err));

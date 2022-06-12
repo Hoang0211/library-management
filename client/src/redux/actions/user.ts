@@ -6,6 +6,7 @@ import {
   SIGN_IN_SUCCESS,
   SIGN_IN_FAILURE,
   SIGN_OUT,
+  UPDATE_STORED_USER,
 } from '../../constants/userConstants';
 import { UserActions, User, isAxiosError } from '../../types';
 
@@ -65,5 +66,14 @@ export function signIn(googleTokenId: string) {
 export function signOut(): UserActions {
   return {
     type: SIGN_OUT,
+  };
+}
+
+export function updateStoredUser(user: User): UserActions {
+  return {
+    type: UPDATE_STORED_USER,
+    payload: {
+      user,
+    },
   };
 }
