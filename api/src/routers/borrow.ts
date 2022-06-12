@@ -2,9 +2,7 @@ import express from 'express'
 
 import {
   findAllBorrows,
-  findBorrowById,
   createBorrow,
-  // updateBorrow,
   deleteBorrow,
 } from '../controllers/borrow'
 import verifyAuth from '../middlewares/verifyAuth'
@@ -14,10 +12,8 @@ const router = express.Router()
 
 // Every path we define here will get /api/v1/borrows prefix
 
-router.get('/', findAllBorrows)
-router.get('/:borrowId', findBorrowById)
+router.get('/', verifyAuth, verifyAdmin, findAllBorrows)
 router.post('/', verifyAuth, verifyAdmin, createBorrow)
-// router.put('/:borrowId', updateBorrow)
 router.delete('/:borrowId', verifyAuth, verifyAdmin, deleteBorrow)
 
 export default router

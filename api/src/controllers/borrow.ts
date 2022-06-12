@@ -23,23 +23,6 @@ export const findAllBorrows = async (
   }
 }
 
-// GET /borrows/:borrowId
-export const findBorrowById = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  try {
-    res.json(await BorrowService.findById(req.params.borrowId))
-  } catch (error) {
-    if (error instanceof Error && error.name == 'ValidationError') {
-      next(new BadRequestError('Invalid Request', error))
-    } else {
-      next(error)
-    }
-  }
-}
-
 // POST /borrows
 export const createBorrow = async (
   req: Request,
@@ -87,26 +70,6 @@ export const createBorrow = async (
     }
   }
 }
-
-// PUT /borrows/:borrowId
-// export const updateBorrow = async (
-//   req: Request,
-//   res: Response,
-//   next: NextFunction
-// ) => {
-//   try {
-//     const update = req.body
-//     const borrowId = req.params.borrowId
-//     const updatedBorrow = await BorrowService.update(borrowId, update)
-//     res.json(updatedBorrow)
-//   } catch (error) {
-//     if (error instanceof Error && error.name == 'ValidationError') {
-//       next(new BadRequestError('Invalid Request', error))
-//     } else {
-//       next(error)
-//     }
-//   }
-// }
 
 // DELETE /borrows/:borrowId
 export const deleteBorrow = async (
