@@ -7,6 +7,12 @@
   border: 2px solid $clr-accent;
   border-top: none;
 
+  &-placeholder {
+    & > * {
+      color: transparent;
+    }
+  }
+
   span {
     padding: 0.5rem 0;
     &:not(.return) {
@@ -28,5 +34,12 @@
   }
   .return {
     width: 10%;
+    button {
+      font-size: 1rem;
+      outline: none;
+      border: none;
+      background-color: transparent;
+      cursor: pointer;
+    }
   }
 }

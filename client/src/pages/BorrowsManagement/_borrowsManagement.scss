@@ -17,8 +17,31 @@
   .title {
     width: 100%;
     margin: 2rem 0;
-    padding: 0.5rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     background-color: $clr-accent;
+
+    h1 {
+      padding: 0.5rem 1rem;
+    }
+
+    .actions {
+      padding: 0.5rem 1rem;
+      .btn {
+        font-size: 1.5rem;
+        font-weight: bold;
+        outline: none;
+        border: none;
+        border-radius: 5px;
+        background-color: transparent;
+        cursor: pointer;
+
+        &-home {
+          margin-left: 1.25rem;
+        }
+      }
+    }
   }
 
   .container {

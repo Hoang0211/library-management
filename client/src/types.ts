@@ -65,11 +65,11 @@ import {
   BORROW_FAILURE,
   RESET_BORROW,
   CLEAR_BORROW_ERROR,
-  RETURN_REQUEST,
-  RETURN_SUCCESS,
-  RETURN_FAILURE,
-  RESET_RETURN,
-  CLEAR_RETURN_ERROR,
+  RETURN_BOOK_REQUEST,
+  RETURN_BOOK_SUCCESS,
+  RETURN_BOOK_FAILURE,
+  RESET_RETURN_BOOK,
+  CLEAR_RETURN_BOOK_ERROR,
 } from './constants/borrowConstants';
 
 // Type guard
@@ -95,6 +95,7 @@ export type AppState = {
 
   getBorrows: GetBorrowsState;
   borrow: BorrowState;
+  returnBook: ReturnBookState;
 };
 
 // USER
@@ -632,3 +633,40 @@ export type BorrowActions =
   | BorrowFailureAction
   | ResetBorrowAction
   | ClearBorrowErrorAction;
+
+// RETURN
+export type ReturnBookState = {
+  loading: boolean;
+  error: Error | null;
+  returned: boolean;
+};
+
+export type ReturnBookRequestAction = {
+  type: typeof RETURN_BOOK_REQUEST;
+};
+
+export type ReturnBookSuccessAction = {
+  type: typeof RETURN_BOOK_SUCCESS;
+};
+
+export type ReturnBookFailureAction = {
+  type: typeof RETURN_BOOK_FAILURE;
+  payload: {
+    error: Error;
+  };
+};
+
+export type ResetReturnBookAction = {
+  type: typeof RESET_RETURN_BOOK;
+};
+
+export type ClearReturnBookErrorAction = {
+  type: typeof CLEAR_RETURN_BOOK_ERROR;
+};
+
+export type ReturnBookActions =
+  | ReturnBookRequestAction
+  | ReturnBookSuccessAction
+  | ReturnBookFailureAction
+  | ResetReturnBookAction
+  | ClearReturnBookErrorAction;

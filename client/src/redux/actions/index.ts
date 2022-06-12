@@ -11,3 +11,4 @@ export * from './editBook';
 export * from './deleteBook';
 export * from './getBorrows';
 export * from './borrow';
+export * from './returnBook';

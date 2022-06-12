@@ -115,7 +115,7 @@ export const deleteBorrow = async (
   next: NextFunction
 ) => {
   try {
-    await BorrowService.deleteBorrow(req.params.borrowId)
+    await BorrowService.returnBook(req.params.borrowId)
     res.status(204).end()
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {

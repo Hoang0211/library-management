@@ -7,7 +7,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
 import BorrowBook from './pages/BorrowBook';
-import ReturnBook from './pages/ReturnBook';
+import BorrowsManagement from './pages/BorrowsManagement';
 import AuthorDetails from './pages/AuthorDetails';
 import AddAuthor from './pages/AddAuthor';
 import EditAuthor from './pages/EditAuthor';
@@ -30,22 +30,24 @@ const App = () => {
             </ProtectedRoute>
           }
         />
-        <Route
-          path='/borrow'
-          element={
-            <ProtectedRoute adminOnly={true}>
-              <BorrowBook />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path='/return'
-          element={
-            <ProtectedRoute adminOnly={true}>
-              <ReturnBook />
-            </ProtectedRoute>
-          }
-        />
+        <Route path='/borrows'>
+          <Route
+            path=''
+            element={
+              <ProtectedRoute adminOnly={true}>
+                <BorrowsManagement />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path='add'
+            element={
+              <ProtectedRoute adminOnly={true}>
+                <BorrowBook />
+              </ProtectedRoute>
+            }
+          />
+        </Route>
         <Route path='/books'>
           <Route path=':bookId' element={<BookDetails />} />
           <Route

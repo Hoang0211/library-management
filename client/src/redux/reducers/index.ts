@@ -13,6 +13,7 @@ import editBook from './editBook';
 import deleteBook from './deleteBook';
 import getBorrows from './getBorrows';
 import borrow from './borrow';
+import returnBook from './return';
 
 const createRootReducer = () =>
   combineReducers({
@@ -29,6 +30,7 @@ const createRootReducer = () =>
     deleteBook,
     getBorrows,
     borrow,
+    returnBook,
   });
 
 export default createRootReducer;

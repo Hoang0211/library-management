@@ -89,6 +89,11 @@ const initState: AppState = {
     error: null,
     borrowed: false,
   },
+  returnBook: {
+    loading: false,
+    error: null,
+    returned: false,
+  },
 };
 
 export default function makeStore(initialState = initState) {
