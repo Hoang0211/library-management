@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
+import PageWrapper from '../../components/layout/PageWrapper';
 import BorrowItem from '../../components/BorrowItem';
 import {
   getAllBorrows,
@@ -84,29 +85,26 @@ const BorrowsManagement = () => {
   }, [dispatch, borrowsError, returnError, returned]);
 
   return (
-    <main className='page'>
-      <div className='title'>
-        <h1>Borrows Management</h1>
-        <div className='actions'>
-          <button className='btn btn-add' onClick={navigateBorrowPageHandler}>
-            Add
-          </button>
-          <button className='btn btn-home' onClick={navigateHomePageHandler}>
-            Home
-          </button>
-        </div>
-      </div>
-      <div className='container'>
-        <div className='headers'>
-          <span className='header header-user'>User</span>
-          <span className='header header-book'>Book</span>
-          <span className='header header-borrow'>Borrow Date</span>
-          <span className='header header-due'>DueDate</span>
-          <span className='header header-return'></span>
-        </div>
-        <div className='results'>{displayResults()}</div>
-      </div>
-    </main>
+    <PageWrapper
+      page={'borrows-management'}
+      title='Borrows Management'
+      navigations={[
+        { text: 'Add', navigateHandler: navigateBorrowPageHandler },
+        { text: 'Home', navigateHandler: navigateHomePageHandler },
+      ]}
+      container={
+        <>
+          <div className='headers'>
+            <span className='header header-user'>User</span>
+            <span className='header header-book'>Book</span>
+            <span className='header header-borrow'>Borrow Date</span>
+            <span className='header header-due'>DueDate</span>
+            <span className='header header-return'></span>
+          </div>
+          <div className='results'>{displayResults()}</div>
+        </>
+      }
+    />
   );
 };
 

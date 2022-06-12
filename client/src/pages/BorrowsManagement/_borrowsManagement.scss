@@ -1,52 +1,7 @@
 @import '../../styles/variables';
 
-.page {
-  min-height: 100vh;
-  width: 100%;
-  padding: $nav-height 2rem 2rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: $clr-light;
-
-  .title,
+.page-borrows-management {
   .container {
-    max-width: 1200px;
-  }
-
-  .title {
-    width: 100%;
-    margin: 2rem 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: $clr-accent;
-
-    h1 {
-      padding: 0.5rem 1rem;
-    }
-
-    .actions {
-      padding: 0.5rem 1rem;
-      .btn {
-        font-size: 1.5rem;
-        font-weight: bold;
-        outline: none;
-        border: none;
-        border-radius: 5px;
-        background-color: transparent;
-        cursor: pointer;
-
-        &-home {
-          margin-left: 1.25rem;
-        }
-      }
-    }
-  }
-
-  .container {
-    width: 100%;
-
     .headers {
       width: 100%;
       display: flex;
