@@ -1,4 +1,5 @@
 export * from './user';
+export * from './editUser';
 export * from './authors';
 export * from './authorDetails';
 export * from './addAuthor';

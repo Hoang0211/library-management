@@ -4,6 +4,11 @@ import {
   SIGN_IN_SUCCESS,
   SIGN_IN_FAILURE,
   SIGN_OUT,
+  EDIT_USER_REQUEST,
+  EDIT_USER_SUCCESS,
+  EDIT_USER_FAILURE,
+  RESET_EDIT_USER,
+  CLEAR_EDIT_USER_ERROR,
 } from './constants/userConstants';
 import {
   GET_ALL_AUTHOR_REQUEST,
@@ -80,6 +85,7 @@ export function isAxiosError(candidate: any): candidate is AxiosError {
 // APP
 export type AppState = {
   user: UserState;
+  editUser: EditUserState;
 
   authors: AuthorsState;
   authorDetails: AuthorDetailsState;
@@ -105,6 +111,7 @@ export enum Role {
 }
 
 export type User = {
+  _id: string;
   firstName: string;
   lastName: string;
   email: string;
@@ -150,6 +157,43 @@ export type UserActions =
   | SignInSuccessAction
   | SignInFailureAction
   | SignOutAction;
+
+// EDIT USER
+export type EditUserState = {
+  loading: boolean;
+  error: Error | null;
+  updated: boolean;
+};
+
+export type EditUserRequestAction = {
+  type: typeof EDIT_USER_REQUEST;
+};
+
+export type EditUserSuccessAction = {
+  type: typeof EDIT_USER_SUCCESS;
+};
+
+export type EditUserFailureAction = {
+  type: typeof EDIT_USER_FAILURE;
+  payload: {
+    error: Error;
+  };
+};
+
+export type ResetEditUserAction = {
+  type: typeof RESET_EDIT_USER;
+};
+
+export type ClearEditUserErrorAction = {
+  type: typeof CLEAR_EDIT_USER_ERROR;
+};
+
+export type EditUserActions =
+  | EditUserRequestAction
+  | EditUserSuccessAction
+  | EditUserFailureAction
+  | ResetEditUserAction
+  | ClearEditUserErrorAction;
 
 // AUTHORS
 export type Author = {

@@ -29,6 +29,11 @@ const initState: AppState = {
     user: getUserFromLocal(),
     token: getTokenFromLocal(),
   },
+  editUser: {
+    loading: false,
+    error: null,
+    updated: false,
+  },
   authors: {
     loading: false,
     error: null,

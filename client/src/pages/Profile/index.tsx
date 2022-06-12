@@ -1,15 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import PageWrapper from '../../components/layout/PageWrapper';
+import {
+  editUser,
+  resetEditUser,
+  clearEditUserError,
+} from '../../redux/actions';
 import { AppState, User } from '../../types';
 import './_profile.scss';
 
 const Profile = () => {
+  const dispatch = useDispatch<any>();
   const navigate = useNavigate();
 
-  const { user } = useSelector((state: AppState) => state.user);
+  const { user, token } = useSelector((state: AppState) => state.user);
+  const { loading, error, updated } = useSelector(
+    (state: AppState) => state.editUser
+  );
 
   const [editing, setEditing] = useState(false);
   const [firstNameInput, setFirstNameInput] = useState(user?.firstName);
@@ -39,10 +48,25 @@ const Profile = () => {
         firstName: firstNameInput,
         lastName: lastNameInput,
       };
+      if (user) {
+        dispatch(editUser(token, user?._id, inputData));
+      }
     } else {
       alert('Please fill all inputs!');
     }
   };
+
+  useEffect(() => {
+    if (error) {
+      alert(error);
+      dispatch(clearEditUserError());
+    }
+
+    if (updated) {
+      alert('Updated user successfully!');
+      dispatch(resetEditUser());
+    }
+  }, [dispatch, navigate, error, updated]);
 
   return (
     <PageWrapper className={'profile'}>

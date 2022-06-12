@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 
 import user from './user';
+import editUser from './editUser';
 import authors from './authors';
 import authorDetails from './authorDetails';
 import addAuthor from './addAuthor';
@@ -18,6 +19,7 @@ import returnBook from './return';
 const createRootReducer = () =>
   combineReducers({
     user,
+    editUser,
     authors,
     authorDetails,
     addAuthor,
