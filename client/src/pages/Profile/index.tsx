@@ -54,6 +54,7 @@ const Profile = () => {
     } else {
       alert('Please fill all inputs!');
     }
+    toggleEditingHandler();
   };
 
   useEffect(() => {
@@ -66,7 +67,7 @@ const Profile = () => {
       alert('Updated user successfully!');
       dispatch(resetEditUser());
     }
-  }, [dispatch, navigate, error, updated]);
+  }, [dispatch, navigate, error, updated, token]);
 
   return (
     <PageWrapper className={'profile'}>
@@ -136,6 +137,7 @@ const Profile = () => {
                 className='form-action form-action-save'
                 type='submit'
                 onClick={formSubmitHandler}
+                disabled={loading}
               >
                 Save
               </button>

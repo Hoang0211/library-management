@@ -35,8 +35,9 @@ const create = async (user: UserDocument): Promise<UserDocument> => {
   return user.save()
 }
 
-const update = async (
+const updateUser = async (
   userId: string,
+  verifiedEmail: string | undefined,
   update: Partial<UserDocument>
 ): Promise<UserDocument | null> => {
   const foundUser = await User.findByIdAndUpdate(userId, update, {
@@ -46,6 +47,11 @@ const update = async (
 
   if (!foundUser) {
     throw new NotFoundError(`User ${userId} not found`)
+  } else {
+    if (foundUser.email !== verifiedEmail) {
+      // This user is trying to update profile of another user
+      throw new NotFoundError(`User ${userId} not found`)
+    }
   }
 
   return foundUser
@@ -67,6 +73,6 @@ export default {
   findOneForBorrow,
   findById,
   create,
-  update,
+  updateUser,
   deleteUser,
 }
