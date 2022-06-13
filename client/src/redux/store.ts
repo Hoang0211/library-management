@@ -40,6 +40,12 @@ const initState: AppState = {
     error: null,
     authors: [],
   },
+  searchAuthors: {
+    loading: false,
+    error: null,
+    authors: [],
+    count: 0,
+  },
   authorDetails: {
     loading: false,
     error: null,
@@ -64,6 +70,12 @@ const initState: AppState = {
     loading: false,
     error: null,
     books: [],
+  },
+  searchBooks: {
+    loading: false,
+    error: null,
+    books: [],
+    count: 0,
   },
   bookDetails: {
     loading: false,

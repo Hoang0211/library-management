@@ -22,6 +22,61 @@ export const findAllAuthors = async (
   }
 }
 
+// GET /authors/search?keyword=&limit=5&page=1&sortedBy=firstName&sortOrder=asc
+export const searchAllAuthors = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    let { keyword, limit, page, sortedBy, sortOrder } = req.query as {
+      keyword: string
+      limit: string
+      page: string
+      sortedBy: string
+      sortOrder: string
+    }
+    const sortedByArr = ['firstName']
+    const sortOrderArr = ['asc', 'des']
+
+    // Check for undefined
+    if (!keyword) {
+      keyword = ''
+    }
+    if (!limit || /^\?([1-9]\d*)$/.test(limit)) {
+      limit = '5'
+    }
+    if (!page || /^\?([1-9]\d*)$/.test(page)) {
+      page = '1'
+    }
+    if (!sortedBy || !sortedByArr.includes(sortedBy)) {
+      sortedBy = 'firstName'
+    }
+    if (!sortOrder || !sortOrderArr.includes(sortOrder)) {
+      sortOrder = 'asc'
+    }
+
+    const limitNum = Number(limit)
+    const pageNum = Number(page)
+    const sortOrderNum = sortOrder === 'asc' ? 1 : -1
+    res.json(
+      await AuthorService.searchAll(
+        keyword,
+        limitNum,
+        pageNum,
+        sortedBy,
+        sortOrderNum
+      )
+    )
+  } catch (error) {
+    if (error instanceof Error && error.name == 'ValidationError') {
+      next(new BadRequestError('Invalid Request', error))
+    } else {
+      next(error)
+    }
+  }
+}
+
 // GET /authors/:authorId
 export const findAuthorById = async (
   req: Request,

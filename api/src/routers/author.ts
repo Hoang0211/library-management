@@ -2,6 +2,7 @@ import express from 'express'
 
 import {
   findAllAuthors,
+  searchAllAuthors,
   findAuthorById,
   createAuthor,
   updateAuthor,
@@ -15,6 +16,7 @@ const router = express.Router()
 // Every path we define here will get /api/v1/authors prefix
 
 router.get('/', findAllAuthors)
+router.get('/search', searchAllAuthors)
 router.get('/:authorId', findAuthorById)
 router.post('/', verifyAuth, verifyAdmin, createAuthor)
 router.put('/:authorId', verifyAuth, verifyAdmin, updateAuthor)

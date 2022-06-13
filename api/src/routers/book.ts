@@ -2,6 +2,7 @@ import express from 'express'
 
 import {
   findAllBooks,
+  searchAllBooks,
   findBookById,
   createBook,
   updateBook,
@@ -15,6 +16,7 @@ const router = express.Router()
 // Every path we define here will get /api/v1/books prefix
 
 router.get('/', findAllBooks)
+router.get('/search', searchAllBooks)
 router.get('/:bookId', findBookById)
 router.post('/', verifyAuth, verifyAdmin, createBook)
 router.put('/:bookId', verifyAuth, verifyAdmin, updateBook)

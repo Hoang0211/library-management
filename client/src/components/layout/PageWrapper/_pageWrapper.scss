@@ -1,7 +1,6 @@
 @import '../../../styles/variables';
 
 main {
-  min-height: 100vh;
   width: 100%;
   padding: $nav-height 2rem 2rem;
   display: flex;
@@ -23,13 +22,16 @@ main {
     background-color: $clr-accent;
 
     h1 {
-      padding: 0.5rem 1rem;
+      padding: 0.25rem 1rem;
     }
 
     .actions {
       padding: 0.5rem 1rem;
+      display: flex;
       .action {
-        margin-left: 1.25rem;
+        margin-left: 1.5rem;
+        display: flex;
+        align-items: center;
         font-size: 1.5rem;
         font-weight: bold;
         outline: none;
@@ -43,5 +45,9 @@ main {
 
   .container {
     width: 100%;
+  }
+
+  button {
+    cursor: pointer;
   }
 }

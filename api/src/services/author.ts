@@ -7,6 +7,53 @@ const findAll = async (): Promise<AuthorDocument[]> => {
   return Author.find().sort({ firstName: 1 })
 }
 
+type SearchedAuthorResType = {
+  authors: AuthorDocument[]
+  count: number
+}
+
+const searchAll = async (
+  keyword: string,
+  limit: number,
+  page: number,
+  sortedBy: string,
+  sortOrder: number
+): Promise<SearchedAuthorResType> => {
+  const sort: any = {}
+  sort[sortedBy] = sortOrder
+
+  const authors = await Author.find({
+    $or: [
+      {
+        firstName: { $regex: `${keyword}`, $options: 'i' },
+      },
+      {
+        lastName: { $regex: `${keyword}`, $options: 'i' },
+      },
+    ],
+  })
+    .populate('books')
+    .limit(limit)
+    .skip(limit * (page - 1))
+    .sort(sort)
+
+  const count = await Author.find({
+    $or: [
+      {
+        firstName: { $regex: `${keyword}`, $options: 'i' },
+      },
+      {
+        lastName: { $regex: `${keyword}`, $options: 'i' },
+      },
+    ],
+  }).count()
+
+  return {
+    authors,
+    count,
+  }
+}
+
 const findById = async (authorId: string): Promise<AuthorDocument> => {
   const foundAuthor = await Author.findById(authorId).populate('books')
 
@@ -93,6 +140,7 @@ const deleteAuthor = async (
 
 export default {
   findAll,
+  searchAll,
   findById,
   create,
   update,

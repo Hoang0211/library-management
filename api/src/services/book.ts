@@ -1,10 +1,79 @@
 import { Types } from 'mongoose'
 
-import Book, { BookDocument, Status } from '../models/Book'
+import Book, { BookDocument, Category, Status } from '../models/Book'
 import { NotFoundError } from '../helpers/apiError'
 
 const findAll = async (): Promise<BookDocument[]> => {
-  return Book.find().sort({ numPage: 1 }).populate('authors')
+  return Book.find().sort({ title: 1 }).populate('authors')
+}
+
+type SearchedBookResType = {
+  books: BookDocument[]
+  count: number
+}
+
+const searchAll = async (
+  keyword: string,
+  categories: string[],
+  statuses: string[],
+  limit: number,
+  page: number,
+  sortedBy: string,
+  sortOrder: number
+): Promise<SearchedBookResType> => {
+  const sort: any = {}
+  sort[sortedBy] = sortOrder
+
+  const books = await Book.find({
+    $and: [
+      {
+        $or: [
+          {
+            isbn: { $regex: `${keyword}`, $options: 'i' },
+          },
+          {
+            title: { $regex: `${keyword}`, $options: 'i' },
+          },
+        ],
+      },
+      {
+        category: { $in: categories },
+      },
+      {
+        status: { $in: statuses },
+      },
+    ],
+  })
+    .populate('authors')
+    .limit(limit)
+    .skip(limit * (page - 1))
+    .sort(sort)
+
+  const count = await Book.find({
+    $and: [
+      {
+        $or: [
+          {
+            isbn: { $regex: `${keyword}`, $options: 'i' },
+          },
+          {
+            title: { $regex: `${keyword}`, $options: 'i' },
+          },
+        ],
+      },
+      {
+        category: { $in: categories },
+      },
+      {
+        status: { $in: statuses },
+      },
+    ],
+  }).count()
+
+  return {
+    books,
+    count,
+  }
 }
 
 const findById = async (bookId: string): Promise<BookDocument> => {
@@ -88,6 +157,7 @@ const deleteBook = async (bookId: string): Promise<BookDocument | null> => {
 
 export default {
   findAll,
+  searchAll,
   findById,
   create,
   update,

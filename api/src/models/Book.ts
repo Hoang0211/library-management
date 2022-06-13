@@ -22,7 +22,7 @@ export type BookDocument = Document & {
   publishedDate: Date
   category: string
   numPage: number
-  status: Status
+  status: string
 }
 
 const bookSchema = new mongoose.Schema({

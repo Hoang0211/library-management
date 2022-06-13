@@ -1,38 +1,82 @@
 @import '../../styles/variables';
 
-.search-form {
-  height: 50px;
-  width: 100%;
-  max-width: 800px;
-  margin-bottom: 2rem;
-  display: flex;
-
-  .search-bar,
-  .filter,
-  .btn-search {
-    height: 100%;
-    padding: 0 0.5rem;
-    font-size: 1rem;
-    outline: none;
-    border: 2px solid $clr-accent;
+.form-search {
+  &__title,
+  &__controller {
+    width: 100%;
+    margin-bottom: 0.5rem;
+    &-status {
+      margin-bottom: 0;
+    }
   }
 
-  .search-bar {
-    flex-grow: 1;
-    border-right: none;
-  }
-
-  .filter {
-    width: 150px;
-  }
-
-  .btn-search {
-    width: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: none;
+  &__title {
+    padding: 0.25rem 0.5rem;
     background-color: $clr-accent;
-    cursor: pointer;
+  }
+
+  &__controller {
+    &-category,
+    &-status {
+      button,
+      li {
+        width: 100%;
+        padding: 0.25rem 0.5rem;
+      }
+
+      button {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        outline: none;
+        border: none;
+        border: 2px solid $clr-accent;
+        text-align: left;
+        font-size: 1rem;
+        font-weight: bold;
+        background-color: transparent;
+      }
+
+      li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        input {
+          height: 20px;
+          width: 20px;
+        }
+      }
+    }
+
+    &-search {
+      height: 50px;
+      width: 100%;
+      margin-top: 1rem;
+      padding: 0;
+      display: flex;
+      align-items: center;
+
+      input {
+        height: 100%;
+        padding: 0 0.5rem;
+        flex-grow: 1;
+        font-size: 1rem;
+        outline: none;
+        border: none;
+        border: 2px solid $clr-accent;
+      }
+
+      button {
+        height: 100%;
+        width: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1rem;
+        outline: none;
+        border: none;
+        background-color: $clr-accent;
+      }
+    }
   }
 }

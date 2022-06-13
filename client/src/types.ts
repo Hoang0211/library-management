@@ -16,6 +16,10 @@ import {
   GET_ALL_AUTHOR_SUCCESS,
   GET_ALL_AUTHOR_FAILURE,
   CLEAR_GET_ALL_AUTHOR_ERROR,
+  SEARCH_ALL_AUTHORS_REQUEST,
+  SEARCH_ALL_AUTHORS_SUCCESS,
+  SEARCH_ALL_AUTHORS_FAILURE,
+  CLEAR_SEARCH_ALL_AUTHORS_ERROR,
   GET_AUTHOR_DETAILS_REQUEST,
   GET_AUTHOR_DETAILS_SUCCESS,
   GET_AUTHOR_DETAILS_FAILURE,
@@ -41,6 +45,10 @@ import {
   GET_ALL_BOOK_SUCCESS,
   GET_ALL_BOOK_FAILURE,
   CLEAR_GET_ALL_BOOK_ERROR,
+  SEARCH_ALL_BOOKS_REQUEST,
+  SEARCH_ALL_BOOKS_SUCCESS,
+  SEARCH_ALL_BOOKS_FAILURE,
+  CLEAR_SEARCH_ALL_BOOKS_ERROR,
   GET_BOOK_DETAILS_REQUEST,
   GET_BOOK_DETAILS_SUCCESS,
   GET_BOOK_DETAILS_FAILURE,
@@ -89,12 +97,14 @@ export type AppState = {
   editUser: EditUserState;
 
   authors: AuthorsState;
+  searchAuthors: SearchAuthorsState;
   authorDetails: AuthorDetailsState;
   addAuthor: AddAuthorState;
   editAuthor: EditAuthorState;
   deleteAuthor: DeleteAuthorState;
 
   books: BooksState;
+  searchBooks: SearchBooksState;
   bookDetails: BookDetailsState;
   addBook: AddBookState;
   editBook: EditBookState;
@@ -110,7 +120,6 @@ export enum Role {
   User = 'user',
   Admin = 'admin',
 }
-
 export type User = {
   _id: string;
   firstName: string;
@@ -119,21 +128,18 @@ export type User = {
   password: string;
   role: Role;
 };
-
 export type UserState = {
   loading: boolean;
   error: Error | null;
   user: User | null;
   token: string;
 };
-
 export type SignInRequestAction = {
   type: typeof SIGN_IN_REQUEST;
   payload: {
     googleTokenId: string;
   };
 };
-
 export type SignInSuccessAction = {
   type: typeof SIGN_IN_SUCCESS;
   payload: {
@@ -141,25 +147,21 @@ export type SignInSuccessAction = {
     token: string;
   };
 };
-
 export type SignInFailureAction = {
   type: typeof SIGN_IN_FAILURE;
   payload: {
     error: Error;
   };
 };
-
 export type SignOutAction = {
   type: typeof SIGN_OUT;
 };
-
 export type UpdateStoredUserAction = {
   type: typeof UPDATE_STORED_USER;
   payload: {
     user: User;
   };
 };
-
 export type UserActions =
   | SignInRequestAction
   | SignInSuccessAction
@@ -174,33 +176,27 @@ export type EditUserState = {
   updated: boolean;
   updatedUser: User | null;
 };
-
 export type EditUserRequestAction = {
   type: typeof EDIT_USER_REQUEST;
 };
-
 export type EditUserSuccessAction = {
   type: typeof EDIT_USER_SUCCESS;
   payload: {
     updatedUser: User;
   };
 };
-
 export type EditUserFailureAction = {
   type: typeof EDIT_USER_FAILURE;
   payload: {
     error: Error;
   };
 };
-
 export type ResetEditUserAction = {
   type: typeof RESET_EDIT_USER;
 };
-
 export type ClearEditUserErrorAction = {
   type: typeof CLEAR_EDIT_USER_ERROR;
 };
-
 export type EditUserActions =
   | EditUserRequestAction
   | EditUserSuccessAction
@@ -216,40 +212,66 @@ export type Author = {
   biography: string;
   books: Book[];
 };
-
 export type AuthorsState = {
   loading: boolean;
   error: Error | null;
   authors: Author[];
 };
-
 export type GetAllAuthorRequestAction = {
   type: typeof GET_ALL_AUTHOR_REQUEST;
 };
-
 export type GetAllAuthorSuccessAction = {
   type: typeof GET_ALL_AUTHOR_SUCCESS;
   payload: {
     authors: Author[];
   };
 };
-
 export type GetAllAuthorFailureAction = {
   type: typeof GET_ALL_AUTHOR_FAILURE;
   payload: {
     error: Error;
   };
 };
-
 export type ClearGetAllAuthorAction = {
   type: typeof CLEAR_GET_ALL_AUTHOR_ERROR;
 };
-
 export type AuthorsActions =
   | GetAllAuthorRequestAction
   | GetAllAuthorSuccessAction
   | GetAllAuthorFailureAction
   | ClearGetAllAuthorAction;
+
+// SEARCH AUTHORS
+export type SearchAuthorsState = {
+  loading: boolean;
+  error: Error | null;
+  authors: Author[];
+  count: number;
+};
+export type SearchAllAuthorsRequestAction = {
+  type: typeof SEARCH_ALL_AUTHORS_REQUEST;
+};
+export type SearchAllAuthorsSuccessAction = {
+  type: typeof SEARCH_ALL_AUTHORS_SUCCESS;
+  payload: {
+    authors: Author[];
+    count: number;
+  };
+};
+export type SearchAllAuthorsFailureAction = {
+  type: typeof SEARCH_ALL_AUTHORS_FAILURE;
+  payload: {
+    error: Error;
+  };
+};
+export type ClearSearchAllAuthorsAction = {
+  type: typeof CLEAR_SEARCH_ALL_AUTHORS_ERROR;
+};
+export type SearchAllAuthorsActions =
+  | SearchAllAuthorsRequestAction
+  | SearchAllAuthorsSuccessAction
+  | SearchAllAuthorsFailureAction
+  | ClearSearchAllAuthorsAction;
 
 // AUTHOR DETAILS
 export type AuthorDetailsState = {
@@ -257,29 +279,24 @@ export type AuthorDetailsState = {
   error: Error | null;
   author: Author | null;
 };
-
 export type GetAuthorDetailsRequestAction = {
   type: typeof GET_AUTHOR_DETAILS_REQUEST;
 };
-
 export type GetAuthorDetailsSuccessAction = {
   type: typeof GET_AUTHOR_DETAILS_SUCCESS;
   payload: {
     author: Author;
   };
 };
-
 export type GetAuthorDetailsFailureAction = {
   type: typeof GET_AUTHOR_DETAILS_FAILURE;
   payload: {
     error: Error;
   };
 };
-
 export type ClearGetAuthorDetailsAction = {
   type: typeof CLEAR_GET_AUTHOR_DETAILS_ERROR;
 };
-
 export type AuthorDetailsActions =
   | GetAuthorDetailsRequestAction
   | GetAuthorDetailsSuccessAction
@@ -292,30 +309,24 @@ export type AddAuthorState = {
   error: Error | null;
   added: boolean;
 };
-
 export type AddAuthorRequestAction = {
   type: typeof ADD_AUTHOR_REQUEST;
 };
-
 export type AddAuthorSuccessAction = {
   type: typeof ADD_AUTHOR_SUCCESS;
 };
-
 export type AddAuthorFailureAction = {
   type: typeof ADD_AUTHOR_FAILURE;
   payload: {
     error: Error;
   };
 };
-
 export type ResetAddAuthorAction = {
   type: typeof RESET_ADD_AUTHOR;
 };
-
 export type ClearAddAuthorErrorAction = {
   type: typeof CLEAR_ADD_AUTHOR_ERROR;
 };
-
 export type AddAuthorActions =
   | AddAuthorRequestAction
   | AddAuthorSuccessAction
@@ -329,30 +340,24 @@ export type EditAuthorState = {
   error: Error | null;
   updated: boolean;
 };
-
 export type EditAuthorRequestAction = {
   type: typeof EDIT_AUTHOR_REQUEST;
 };
-
 export type EditAuthorSuccessAction = {
   type: typeof EDIT_AUTHOR_SUCCESS;
 };
-
 export type EditAuthorFailureAction = {
   type: typeof EDIT_AUTHOR_FAILURE;
   payload: {
     error: Error;
   };
 };
-
 export type ResetEditAuthorAction = {
   type: typeof RESET_EDIT_AUTHOR;
 };
-
 export type ClearEditAuthorErrorAction = {
   type: typeof CLEAR_EDIT_AUTHOR_ERROR;
 };
-
 export type EditAuthorActions =
   | EditAuthorRequestAction
   | EditAuthorSuccessAction
@@ -366,30 +371,24 @@ export type DeleteAuthorState = {
   error: Error | null;
   deleted: boolean;
 };
-
 export type DeleteAuthorRequestAction = {
   type: typeof DELETE_AUTHOR_REQUEST;
 };
-
 export type DeleteAuthorSuccessAction = {
   type: typeof DELETE_AUTHOR_SUCCESS;
 };
-
 export type DeleteAuthorFailureAction = {
   type: typeof DELETE_AUTHOR_FAILURE;
   payload: {
     error: Error;
   };
 };
-
 export type ResetDeleteAuthorAction = {
   type: typeof RESET_DELETE_AUTHOR;
 };
-
 export type ClearDeleteAuthorErrorAction = {
   type: typeof CLEAR_DELETE_AUTHOR_ERROR;
 };
-
 export type DeleteAuthorActions =
   | DeleteAuthorRequestAction
   | DeleteAuthorSuccessAction
@@ -405,12 +404,10 @@ export enum Category {
   Thesis = 'thesis',
   Other = 'other',
 }
-
 export enum Status {
   Available = 'available',
   Borrowed = 'borrowed',
 }
-
 export type Book = {
   _id: string;
   isbn: string;
@@ -423,40 +420,66 @@ export type Book = {
   numPage: number;
   status: Status;
 };
-
 export type BooksState = {
   loading: boolean;
   error: Error | null;
   books: Book[];
 };
-
 export type GetAllBookRequestAction = {
   type: typeof GET_ALL_BOOK_REQUEST;
 };
-
 export type GetAllBookSuccessAction = {
   type: typeof GET_ALL_BOOK_SUCCESS;
   payload: {
     books: Book[];
   };
 };
-
 export type GetAllBookFailureAction = {
   type: typeof GET_ALL_BOOK_FAILURE;
   payload: {
     error: Error;
   };
 };
-
 export type ClearGetAllBookAction = {
   type: typeof CLEAR_GET_ALL_BOOK_ERROR;
 };
-
 export type BooksActions =
   | GetAllBookRequestAction
   | GetAllBookSuccessAction
   | GetAllBookFailureAction
   | ClearGetAllBookAction;
+
+// SEARCH BOOKS
+export type SearchBooksState = {
+  loading: boolean;
+  error: Error | null;
+  books: Book[];
+  count: number;
+};
+export type SearchAllBooksRequestAction = {
+  type: typeof SEARCH_ALL_BOOKS_REQUEST;
+};
+export type SearchAllBooksSuccessAction = {
+  type: typeof SEARCH_ALL_BOOKS_SUCCESS;
+  payload: {
+    books: Book[];
+    count: number;
+  };
+};
+export type SearchAllBooksFailureAction = {
+  type: typeof SEARCH_ALL_BOOKS_FAILURE;
+  payload: {
+    error: Error;
+  };
+};
+export type ClearSearchAllBooksAction = {
+  type: typeof CLEAR_SEARCH_ALL_BOOKS_ERROR;
+};
+export type SearchAllBooksActions =
+  | SearchAllBooksRequestAction
+  | SearchAllBooksSuccessAction
+  | SearchAllBooksFailureAction
+  | ClearSearchAllBooksAction;
 
 // BOOK DETAILS
 export type BookDetailsState = {
@@ -464,29 +487,24 @@ export type BookDetailsState = {
   error: Error | null;
   book: Book | null;
 };
-
 export type GetBookDetailsRequestAction = {
   type: typeof GET_BOOK_DETAILS_REQUEST;
 };
-
 export type GetBookDetailsSuccessAction = {
   type: typeof GET_BOOK_DETAILS_SUCCESS;
   payload: {
     book: Book;
   };
 };
-
 export type GetBookDetailsFailureAction = {
   type: typeof GET_BOOK_DETAILS_FAILURE;
   payload: {
     error: Error;
   };
 };
-
 export type ClearGetBookDetailsAction = {
   type: typeof CLEAR_GET_BOOK_DETAILS_ERROR;
 };
-
 export type BookDetailsActions =
   | GetBookDetailsRequestAction
   | GetBookDetailsSuccessAction
@@ -499,30 +517,24 @@ export type AddBookState = {
   error: Error | null;
   added: boolean;
 };
-
 export type AddBookRequestAction = {
   type: typeof ADD_BOOK_REQUEST;
 };
-
 export type AddBookSuccessAction = {
   type: typeof ADD_BOOK_SUCCESS;
 };
-
 export type AddBookFailureAction = {
   type: typeof ADD_BOOK_FAILURE;
   payload: {
     error: Error;
   };
 };
-
 export type ResetAddBookAction = {
   type: typeof RESET_ADD_BOOK;
 };
-
 export type ClearAddBookErrorAction = {
   type: typeof CLEAR_ADD_BOOK_ERROR;
 };
-
 export type AddBookActions =
   | AddBookRequestAction
   | AddBookSuccessAction
@@ -536,30 +548,24 @@ export type EditBookState = {
   error: Error | null;
   updated: boolean;
 };
-
 export type EditBookRequestAction = {
   type: typeof EDIT_BOOK_REQUEST;
 };
-
 export type EditBookSuccessAction = {
   type: typeof EDIT_BOOK_SUCCESS;
 };
-
 export type EditBookFailureAction = {
   type: typeof EDIT_BOOK_FAILURE;
   payload: {
     error: Error;
   };
 };
-
 export type ResetEditBookAction = {
   type: typeof RESET_EDIT_BOOK;
 };
-
 export type ClearEditBookErrorAction = {
   type: typeof CLEAR_EDIT_BOOK_ERROR;
 };
-
 export type EditBookActions =
   | EditBookRequestAction
   | EditBookSuccessAction
@@ -573,30 +579,24 @@ export type DeleteBookState = {
   error: Error | null;
   deleted: boolean;
 };
-
 export type DeleteBookRequestAction = {
   type: typeof DELETE_BOOK_REQUEST;
 };
-
 export type DeleteBookSuccessAction = {
   type: typeof DELETE_BOOK_SUCCESS;
 };
-
 export type DeleteBookFailureAction = {
   type: typeof DELETE_BOOK_FAILURE;
   payload: {
     error: Error;
   };
 };
-
 export type ResetDeleteBookAction = {
   type: typeof RESET_DELETE_BOOK;
 };
-
 export type ClearDeleteBookErrorAction = {
   type: typeof CLEAR_DELETE_BOOK_ERROR;
 };
-
 export type DeleteBookActions =
   | DeleteBookRequestAction
   | DeleteBookSuccessAction
@@ -612,35 +612,29 @@ export type Borrow = {
   borrowDate: Date;
   dueDate: Date;
 };
-
 export type GetBorrowsState = {
   loading: boolean;
   error: Error | null;
   borrows: Borrow[];
 };
-
 export type GetAllBorrowsRequestAction = {
   type: typeof GET_ALL_BORROWS_REQUEST;
 };
-
 export type GetAllBorrowsSuccessAction = {
   type: typeof GET_ALL_BORROWS_SUCCESS;
   payload: {
     borrows: Borrow[];
   };
 };
-
 export type GetAllBorrowsFailureAction = {
   type: typeof GET_ALL_BORROWS_FAILURE;
   payload: {
     error: Error;
   };
 };
-
 export type ClearGetAllBorrowsAction = {
   type: typeof CLEAR_GET_ALL_BORROWS_ERROR;
 };
-
 export type GetBorrowsActions =
   | GetAllBorrowsRequestAction
   | GetAllBorrowsSuccessAction
@@ -654,36 +648,29 @@ export type BorrowRequest = {
   borrowDate: Date;
   dueDate: Date;
 };
-
 export type BorrowState = {
   loading: boolean;
   error: Error | null;
   borrowed: boolean;
 };
-
 export type BorrowRequestAction = {
   type: typeof BORROW_REQUEST;
 };
-
 export type BorrowSuccessAction = {
   type: typeof BORROW_SUCCESS;
 };
-
 export type BorrowFailureAction = {
   type: typeof BORROW_FAILURE;
   payload: {
     error: Error;
   };
 };
-
 export type ResetBorrowAction = {
   type: typeof RESET_BORROW;
 };
-
 export type ClearBorrowErrorAction = {
   type: typeof CLEAR_BORROW_ERROR;
 };
-
 export type BorrowActions =
   | BorrowRequestAction
   | BorrowSuccessAction
@@ -697,30 +684,24 @@ export type ReturnBookState = {
   error: Error | null;
   returned: boolean;
 };
-
 export type ReturnBookRequestAction = {
   type: typeof RETURN_BOOK_REQUEST;
 };
-
 export type ReturnBookSuccessAction = {
   type: typeof RETURN_BOOK_SUCCESS;
 };
-
 export type ReturnBookFailureAction = {
   type: typeof RETURN_BOOK_FAILURE;
   payload: {
     error: Error;
   };
 };
-
 export type ResetReturnBookAction = {
   type: typeof RESET_RETURN_BOOK;
 };
-
 export type ClearReturnBookErrorAction = {
   type: typeof CLEAR_RETURN_BOOK_ERROR;
 };
-
 export type ReturnBookActions =
   | ReturnBookRequestAction
   | ReturnBookSuccessAction
