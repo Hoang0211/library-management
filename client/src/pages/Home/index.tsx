@@ -5,16 +5,12 @@ import { MdNavigateNext } from 'react-icons/md';
 
 import PageWrapper from '../../components/layout/PageWrapper';
 import SearchForm from '../../components/SearchForm';
-import BookItem from '../../components/BookItem';
-import AuthorItem from '../../components/AuthorItem';
 import ResultPanel from '../../components/ResultPanel';
 import {
   searchAllBooks,
   clearSearchAllBooksError,
   searchAllAuthors,
   clearSearchAllAuthorsError,
-  getAllAuthor,
-  clearGetAllAuthorError,
 } from '../../redux/actions';
 import { AppState, Role, Category, Status } from '../../types';
 import './_home.scss';
@@ -24,18 +20,12 @@ const Home = () => {
   const navigate = useNavigate();
 
   const { user } = useSelector((state: AppState) => state.user);
-  const {
-    loading: booksLoading,
-    error: booksError,
-    books,
-    count: booksCount,
-  } = useSelector((state: AppState) => state.searchBooks);
-  const {
-    loading: authorsLoading,
-    error: authorsError,
-    authors,
-    count: authorsCount,
-  } = useSelector((state: AppState) => state.searchAuthors);
+  const { error: booksError, count: booksCount } = useSelector(
+    (state: AppState) => state.searchBooks
+  );
+  const { error: authorsError, count: authorsCount } = useSelector(
+    (state: AppState) => state.searchAuthors
+  );
 
   const [currentDisplay, setCurrentDisplay] = useState<'books' | 'authors'>(
     'books'

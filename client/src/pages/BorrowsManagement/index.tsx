@@ -89,6 +89,9 @@ const BorrowsManagement = () => {
       <div className='title'>
         <h1>Borrows Management</h1>
         <div className='actions'>
+          <button className='action' onClick={navigateBorrowPageHandler}>
+            Borrow Book
+          </button>
           <button className='action' onClick={navigateHomePageHandler}>
             Home
           </button>
