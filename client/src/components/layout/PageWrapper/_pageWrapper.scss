@@ -45,6 +45,52 @@ main {
 
   .container {
     width: 100%;
+
+    &-edit {
+      padding: 1rem 2rem;
+      border: 2px solid $clr-accent;
+      .input-controller {
+        width: 100%;
+        margin-bottom: 1rem;
+        display: flex;
+        flex-direction: column;
+
+        label {
+          margin-bottom: 0.25rem;
+          font-size: 1.25rem;
+        }
+
+        input,
+        textarea {
+          padding: 0.25rem 0.5rem;
+          outline: none;
+          border: 2px solid $clr-accent;
+          border-radius: 5px;
+          font-size: 1rem;
+        }
+
+        input {
+          height: 45px;
+        }
+
+        textarea {
+          min-height: 100px;
+          overflow-y: visible;
+        }
+
+        .select {
+          width: 100%;
+          padding: 0.25rem 0.5rem;
+          font-size: 1rem;
+          outline: none;
+          border: 2px solid $clr-accent;
+          border-radius: 5px;
+          color: $clr-dark;
+          background-color: transparent;
+          cursor: pointer;
+        }
+      }
+    }
   }
 
   button {

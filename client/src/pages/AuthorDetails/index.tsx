@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams, useNavigate } from 'react-router-dom';
-import { MdEdit, MdDelete } from 'react-icons/md';
+import { useNavigate, useParams } from 'react-router-dom';
 
+import PageWrapper from '../../components/layout/PageWrapper';
 import {
   clearGetAuthorDetailsError,
   deleteAuthor,
@@ -11,7 +11,6 @@ import {
 } from '../../redux/actions';
 import { AppState, Role } from '../../types';
 import './_authorDetails.scss';
-import PageWrapper from '../../components/layout/PageWrapper';
 
 const AuthorDetails = () => {
   const dispatch = useDispatch<any>();
@@ -96,41 +95,6 @@ const AuthorDetails = () => {
         </ul>
       </div>
     </PageWrapper>
-    // <main className='author-details'>
-    //   <div className='container'>
-    //     <div className='header'>
-    //       <h2 className='title'>Author Details</h2>
-    //       {user?.role === Role.Admin && (
-    //         <div className='btns'>
-    //           <button className='btn btn-edit' onClick={navigateToEditHandler}>
-    //             <MdEdit />
-    //           </button>
-    //           <button className='btn btn-delete' onClick={deleteAuthorHandler}>
-    //             <MdDelete />
-    //           </button>
-    //         </div>
-    //       )}
-    //     </div>
-    //     <p className='first-name'>
-    //       First name: {!loading && author && author.firstName}
-    //     </p>
-    //     <p className='last-name'>
-    //       Last name: {!loading && author && author.lastName}
-    //     </p>
-    //     <p className='biography'>
-    //       Biography: {!loading && author && author.biography}
-    //     </p>
-    //     <p className='book-list'>List of book:</p>
-    //     <ul>
-    //       {!loading &&
-    //         author &&
-    //         author.books.map((book) => <li key={book._id}>{book.title}</li>)}
-    //     </ul>
-    //     <button className='btn btn-home' onClick={navigateToHomeHandler}>
-    //       Home
-    //     </button>
-    //   </div>
-    // </main>
   );
 };
 
