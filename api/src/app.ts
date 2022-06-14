@@ -5,7 +5,6 @@ import cors from 'cors'
 import passport from 'passport'
 
 import googleLoginRouter from './routers/google-login'
-import movieRouter from './routers/movie'
 import bookRouter from './routers/book'
 import authorRouter from './routers/author'
 import userRouter from './routers/user'
@@ -30,7 +29,6 @@ passport.use(loginWithGoogle())
 
 // Set up routers
 app.use('/google-login', googleLoginRouter)
-app.use('/api/v1/movies', movieRouter)
 app.use('/api/v1/books', bookRouter)
 app.use('/api/v1/authors', authorRouter)
 app.use('/api/v1/users', userRouter)
