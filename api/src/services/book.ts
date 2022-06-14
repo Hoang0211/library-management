@@ -1,6 +1,8 @@
 import { Types } from 'mongoose'
 
 import Book, { BookDocument, Category, Status } from '../models/Book'
+import Author from '../models/Author'
+import Borrow from '../models/Borrow'
 import { NotFoundError } from '../helpers/apiError'
 
 const findAll = async (): Promise<BookDocument[]> => {
@@ -146,11 +148,30 @@ const borrow = async (bookId: string): Promise<BookDocument | null> => {
 }
 
 const deleteBook = async (bookId: string): Promise<BookDocument | null> => {
-  const foundBook = Book.findByIdAndDelete(bookId)
-
+  // Delete book
+  const foundBook = await Book.findByIdAndDelete(bookId)
   if (!foundBook) {
     throw new NotFoundError(`Book ${bookId} not found`)
   }
+
+  // Remove deleted book from its authors'books list
+  const removeBookForAuthor = async (authorId: Types.ObjectId) => {
+    const foundAuthor = await Author.findByIdAndUpdate(
+      authorId,
+      { $pull: { books: bookId } },
+      {
+        new: true,
+        runValidators: true,
+      }
+    )
+    if (!foundAuthor) {
+      throw new NotFoundError(`Author ${authorId} not found`)
+    }
+  }
+  await foundBook.authors.forEach((authorId) => removeBookForAuthor(authorId))
+
+  // Remove its borrow
+  await Borrow.findOneAndRemove({ book: bookId })
 
   return foundBook
 }
