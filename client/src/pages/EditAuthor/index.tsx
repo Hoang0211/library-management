@@ -16,7 +16,7 @@ const EditAuthor = () => {
   const navigate = useNavigate();
 
   const { token } = useSelector((state: AppState) => state.user);
-  const { author } = useSelector((state: AppState) => state.authorDetails);
+  const { author } = useSelector((state: AppState) => state.getAuthorDetails);
   const { loading, error, updated } = useSelector(
     (state: AppState) => state.editAuthor
   );

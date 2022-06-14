@@ -105,7 +105,7 @@ export type AppState = {
 
   authors: AuthorsState;
   searchAuthors: SearchAuthorsState;
-  authorDetails: AuthorDetailsState;
+  getAuthorDetails: GetAuthorDetailsState;
   addAuthor: AddAuthorState;
   editAuthor: EditAuthorState;
   deleteAuthor: DeleteAuthorState;
@@ -203,198 +203,6 @@ export type EditUserActions =
   | EditUserFailureAction
   | ResetEditUserAction
   | ClearEditUserErrorAction;
-
-// AUTHORS
-export type Author = {
-  _id: string;
-  firstName: string;
-  lastName: string;
-  biography: string;
-  books: Book[];
-};
-export type AuthorsState = {
-  loading: boolean;
-  error: Error | null;
-  authors: Author[];
-};
-export type GetAllAuthorRequestAction = {
-  type: typeof GET_ALL_AUTHOR_REQUEST;
-};
-export type GetAllAuthorSuccessAction = {
-  type: typeof GET_ALL_AUTHOR_SUCCESS;
-  payload: {
-    authors: Author[];
-  };
-};
-export type GetAllAuthorFailureAction = {
-  type: typeof GET_ALL_AUTHOR_FAILURE;
-  payload: {
-    error: Error;
-  };
-};
-export type ClearGetAllAuthorAction = {
-  type: typeof CLEAR_GET_ALL_AUTHOR_ERROR;
-};
-export type AuthorsActions =
-  | GetAllAuthorRequestAction
-  | GetAllAuthorSuccessAction
-  | GetAllAuthorFailureAction
-  | ClearGetAllAuthorAction;
-
-// SEARCH AUTHORS
-export type SearchAuthorsState = {
-  loading: boolean;
-  error: Error | null;
-  authors: Author[];
-  count: number;
-};
-export type SearchAllAuthorsRequestAction = {
-  type: typeof SEARCH_ALL_AUTHORS_REQUEST;
-};
-export type SearchAllAuthorsSuccessAction = {
-  type: typeof SEARCH_ALL_AUTHORS_SUCCESS;
-  payload: {
-    authors: Author[];
-    count: number;
-  };
-};
-export type SearchAllAuthorsFailureAction = {
-  type: typeof SEARCH_ALL_AUTHORS_FAILURE;
-  payload: {
-    error: Error;
-  };
-};
-export type ClearSearchAllAuthorsAction = {
-  type: typeof CLEAR_SEARCH_ALL_AUTHORS_ERROR;
-};
-export type SearchAllAuthorsActions =
-  | SearchAllAuthorsRequestAction
-  | SearchAllAuthorsSuccessAction
-  | SearchAllAuthorsFailureAction
-  | ClearSearchAllAuthorsAction;
-
-// AUTHOR DETAILS
-export type AuthorDetailsState = {
-  loading: boolean;
-  error: Error | null;
-  author: Author | null;
-};
-export type GetAuthorDetailsRequestAction = {
-  type: typeof GET_AUTHOR_DETAILS_REQUEST;
-};
-export type GetAuthorDetailsSuccessAction = {
-  type: typeof GET_AUTHOR_DETAILS_SUCCESS;
-  payload: {
-    author: Author;
-  };
-};
-export type GetAuthorDetailsFailureAction = {
-  type: typeof GET_AUTHOR_DETAILS_FAILURE;
-  payload: {
-    error: Error;
-  };
-};
-export type ClearGetAuthorDetailsAction = {
-  type: typeof CLEAR_GET_AUTHOR_DETAILS_ERROR;
-};
-export type AuthorDetailsActions =
-  | GetAuthorDetailsRequestAction
-  | GetAuthorDetailsSuccessAction
-  | GetAuthorDetailsFailureAction
-  | ClearGetAuthorDetailsAction;
-
-// NEW AUTHOR
-export type AddAuthorState = {
-  loading: boolean;
-  error: Error | null;
-  added: boolean;
-};
-export type AddAuthorRequestAction = {
-  type: typeof ADD_AUTHOR_REQUEST;
-};
-export type AddAuthorSuccessAction = {
-  type: typeof ADD_AUTHOR_SUCCESS;
-};
-export type AddAuthorFailureAction = {
-  type: typeof ADD_AUTHOR_FAILURE;
-  payload: {
-    error: Error;
-  };
-};
-export type ResetAddAuthorAction = {
-  type: typeof RESET_ADD_AUTHOR;
-};
-export type ClearAddAuthorErrorAction = {
-  type: typeof CLEAR_ADD_AUTHOR_ERROR;
-};
-export type AddAuthorActions =
-  | AddAuthorRequestAction
-  | AddAuthorSuccessAction
-  | AddAuthorFailureAction
-  | ResetAddAuthorAction
-  | ClearAddAuthorErrorAction;
-
-// EDIT AUTHOR
-export type EditAuthorState = {
-  loading: boolean;
-  error: Error | null;
-  updated: boolean;
-};
-export type EditAuthorRequestAction = {
-  type: typeof EDIT_AUTHOR_REQUEST;
-};
-export type EditAuthorSuccessAction = {
-  type: typeof EDIT_AUTHOR_SUCCESS;
-};
-export type EditAuthorFailureAction = {
-  type: typeof EDIT_AUTHOR_FAILURE;
-  payload: {
-    error: Error;
-  };
-};
-export type ResetEditAuthorAction = {
-  type: typeof RESET_EDIT_AUTHOR;
-};
-export type ClearEditAuthorErrorAction = {
-  type: typeof CLEAR_EDIT_AUTHOR_ERROR;
-};
-export type EditAuthorActions =
-  | EditAuthorRequestAction
-  | EditAuthorSuccessAction
-  | EditAuthorFailureAction
-  | ResetEditAuthorAction
-  | ClearEditAuthorErrorAction;
-
-// DELETE AUTHOR
-export type DeleteAuthorState = {
-  loading: boolean;
-  error: Error | null;
-  deleted: boolean;
-};
-export type DeleteAuthorRequestAction = {
-  type: typeof DELETE_AUTHOR_REQUEST;
-};
-export type DeleteAuthorSuccessAction = {
-  type: typeof DELETE_AUTHOR_SUCCESS;
-};
-export type DeleteAuthorFailureAction = {
-  type: typeof DELETE_AUTHOR_FAILURE;
-  payload: {
-    error: Error;
-  };
-};
-export type ResetDeleteAuthorAction = {
-  type: typeof RESET_DELETE_AUTHOR;
-};
-export type ClearDeleteAuthorErrorAction = {
-  type: typeof CLEAR_DELETE_AUTHOR_ERROR;
-};
-export type DeleteAuthorActions =
-  | DeleteAuthorRequestAction
-  | DeleteAuthorSuccessAction
-  | DeleteAuthorFailureAction
-  | ResetDeleteAuthorAction
-  | ClearDeleteAuthorErrorAction;
 
 // BOOKS
 export enum Category {
@@ -603,6 +411,198 @@ export type DeleteBookActions =
   | DeleteBookFailureAction
   | ResetDeleteBookAction
   | ClearDeleteBookErrorAction;
+
+// AUTHORS
+export type Author = {
+  _id: string;
+  firstName: string;
+  lastName: string;
+  biography: string;
+  books: Book[];
+};
+export type AuthorsState = {
+  loading: boolean;
+  error: Error | null;
+  authors: Author[];
+};
+export type GetAllAuthorRequestAction = {
+  type: typeof GET_ALL_AUTHOR_REQUEST;
+};
+export type GetAllAuthorSuccessAction = {
+  type: typeof GET_ALL_AUTHOR_SUCCESS;
+  payload: {
+    authors: Author[];
+  };
+};
+export type GetAllAuthorFailureAction = {
+  type: typeof GET_ALL_AUTHOR_FAILURE;
+  payload: {
+    error: Error;
+  };
+};
+export type ClearGetAllAuthorAction = {
+  type: typeof CLEAR_GET_ALL_AUTHOR_ERROR;
+};
+export type AuthorsActions =
+  | GetAllAuthorRequestAction
+  | GetAllAuthorSuccessAction
+  | GetAllAuthorFailureAction
+  | ClearGetAllAuthorAction;
+
+// SEARCH AUTHORS
+export type SearchAuthorsState = {
+  loading: boolean;
+  error: Error | null;
+  authors: Author[];
+  count: number;
+};
+export type SearchAllAuthorsRequestAction = {
+  type: typeof SEARCH_ALL_AUTHORS_REQUEST;
+};
+export type SearchAllAuthorsSuccessAction = {
+  type: typeof SEARCH_ALL_AUTHORS_SUCCESS;
+  payload: {
+    authors: Author[];
+    count: number;
+  };
+};
+export type SearchAllAuthorsFailureAction = {
+  type: typeof SEARCH_ALL_AUTHORS_FAILURE;
+  payload: {
+    error: Error;
+  };
+};
+export type ClearSearchAllAuthorsAction = {
+  type: typeof CLEAR_SEARCH_ALL_AUTHORS_ERROR;
+};
+export type SearchAllAuthorsActions =
+  | SearchAllAuthorsRequestAction
+  | SearchAllAuthorsSuccessAction
+  | SearchAllAuthorsFailureAction
+  | ClearSearchAllAuthorsAction;
+
+// GET AUTHOR DETAILS
+export type GetAuthorDetailsState = {
+  loading: boolean;
+  error: Error | null;
+  author: Author | null;
+};
+export type GetAuthorDetailsRequestAction = {
+  type: typeof GET_AUTHOR_DETAILS_REQUEST;
+};
+export type GetAuthorDetailsSuccessAction = {
+  type: typeof GET_AUTHOR_DETAILS_SUCCESS;
+  payload: {
+    author: Author;
+  };
+};
+export type GetAuthorDetailsFailureAction = {
+  type: typeof GET_AUTHOR_DETAILS_FAILURE;
+  payload: {
+    error: Error;
+  };
+};
+export type ClearGetAuthorDetailsAction = {
+  type: typeof CLEAR_GET_AUTHOR_DETAILS_ERROR;
+};
+export type GetAuthorDetailsActions =
+  | GetAuthorDetailsRequestAction
+  | GetAuthorDetailsSuccessAction
+  | GetAuthorDetailsFailureAction
+  | ClearGetAuthorDetailsAction;
+
+// NEW AUTHOR
+export type AddAuthorState = {
+  loading: boolean;
+  error: Error | null;
+  added: boolean;
+};
+export type AddAuthorRequestAction = {
+  type: typeof ADD_AUTHOR_REQUEST;
+};
+export type AddAuthorSuccessAction = {
+  type: typeof ADD_AUTHOR_SUCCESS;
+};
+export type AddAuthorFailureAction = {
+  type: typeof ADD_AUTHOR_FAILURE;
+  payload: {
+    error: Error;
+  };
+};
+export type ResetAddAuthorAction = {
+  type: typeof RESET_ADD_AUTHOR;
+};
+export type ClearAddAuthorErrorAction = {
+  type: typeof CLEAR_ADD_AUTHOR_ERROR;
+};
+export type AddAuthorActions =
+  | AddAuthorRequestAction
+  | AddAuthorSuccessAction
+  | AddAuthorFailureAction
+  | ResetAddAuthorAction
+  | ClearAddAuthorErrorAction;
+
+// EDIT AUTHOR
+export type EditAuthorState = {
+  loading: boolean;
+  error: Error | null;
+  updated: boolean;
+};
+export type EditAuthorRequestAction = {
+  type: typeof EDIT_AUTHOR_REQUEST;
+};
+export type EditAuthorSuccessAction = {
+  type: typeof EDIT_AUTHOR_SUCCESS;
+};
+export type EditAuthorFailureAction = {
+  type: typeof EDIT_AUTHOR_FAILURE;
+  payload: {
+    error: Error;
+  };
+};
+export type ResetEditAuthorAction = {
+  type: typeof RESET_EDIT_AUTHOR;
+};
+export type ClearEditAuthorErrorAction = {
+  type: typeof CLEAR_EDIT_AUTHOR_ERROR;
+};
+export type EditAuthorActions =
+  | EditAuthorRequestAction
+  | EditAuthorSuccessAction
+  | EditAuthorFailureAction
+  | ResetEditAuthorAction
+  | ClearEditAuthorErrorAction;
+
+// DELETE AUTHOR
+export type DeleteAuthorState = {
+  loading: boolean;
+  error: Error | null;
+  deleted: boolean;
+};
+export type DeleteAuthorRequestAction = {
+  type: typeof DELETE_AUTHOR_REQUEST;
+};
+export type DeleteAuthorSuccessAction = {
+  type: typeof DELETE_AUTHOR_SUCCESS;
+};
+export type DeleteAuthorFailureAction = {
+  type: typeof DELETE_AUTHOR_FAILURE;
+  payload: {
+    error: Error;
+  };
+};
+export type ResetDeleteAuthorAction = {
+  type: typeof RESET_DELETE_AUTHOR;
+};
+export type ClearDeleteAuthorErrorAction = {
+  type: typeof CLEAR_DELETE_AUTHOR_ERROR;
+};
+export type DeleteAuthorActions =
+  | DeleteAuthorRequestAction
+  | DeleteAuthorSuccessAction
+  | DeleteAuthorFailureAction
+  | ResetDeleteAuthorAction
+  | ClearDeleteAuthorErrorAction;
 
 // ALL BORROWS
 export type Borrow = {

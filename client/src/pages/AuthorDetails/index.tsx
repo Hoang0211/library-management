@@ -18,7 +18,7 @@ const AuthorDetails = () => {
 
   const { user, token } = useSelector((state: AppState) => state.user);
   const { loading, error, author } = useSelector(
-    (state: AppState) => state.authorDetails
+    (state: AppState) => state.getAuthorDetails
   );
   const { error: deleteError, deleted } = useSelector(
     (state: AppState) => state.deleteAuthor

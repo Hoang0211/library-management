@@ -4,7 +4,7 @@ import {
   GET_BOOK_DETAILS_FAILURE,
   CLEAR_GET_BOOK_DETAILS_ERROR,
 } from '../../constants/bookConstants';
-import { GetBookDetailsActions, GetBookDetailsState } from '../../types';
+import { GetBookDetailsState, GetBookDetailsActions } from '../../types';
 
 export default function getBookDetails(
   state: GetBookDetailsState = {

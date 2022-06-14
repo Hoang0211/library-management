@@ -11,13 +11,11 @@
     border-bottom: none;
   }
 
-  .info {
-    .title {
-      font-weight: bold;
-    }
+  &__title {
+    font-weight: bold;
   }
 
-  .btn-details {
+  &__details {
     padding: 0.5rem 1rem;
     font-size: 0.85rem;
     outline: none;

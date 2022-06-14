@@ -79,7 +79,7 @@ const initState: AppState = {
     authors: [],
     count: 0,
   },
-  authorDetails: {
+  getAuthorDetails: {
     loading: false,
     error: null,
     author: null,

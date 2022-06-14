@@ -4,16 +4,16 @@ import {
   GET_AUTHOR_DETAILS_FAILURE,
   CLEAR_GET_AUTHOR_DETAILS_ERROR,
 } from '../../constants/authorConstants';
-import { AuthorDetailsActions, AuthorDetailsState } from '../../types';
+import { GetAuthorDetailsState, GetAuthorDetailsActions } from '../../types';
 
-export default function authorDetails(
-  state: AuthorDetailsState = {
+export default function getAuthorDetails(
+  state: GetAuthorDetailsState = {
     loading: false,
     error: null,
     author: null,
   },
-  action: AuthorDetailsActions
-): AuthorDetailsState {
+  action: GetAuthorDetailsActions
+): GetAuthorDetailsState {
   switch (action.type) {
     case GET_AUTHOR_DETAILS_REQUEST:
       return {

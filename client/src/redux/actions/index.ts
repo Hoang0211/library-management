@@ -10,7 +10,7 @@ export * from './deleteBook';
 
 export * from './authors';
 export * from './searchAuthors';
-export * from './authorDetails';
+export * from './getAuthorDetails';
 export * from './addAuthor';
 export * from './deleteAuthor';
 export * from './editAuthor';

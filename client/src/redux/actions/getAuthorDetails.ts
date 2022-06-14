@@ -7,15 +7,17 @@ import {
   GET_AUTHOR_DETAILS_FAILURE,
   CLEAR_GET_AUTHOR_DETAILS_ERROR,
 } from '../../constants/authorConstants';
-import { AuthorDetailsActions, Author, isAxiosError } from '../../types';
+import { GetAuthorDetailsActions, Author, isAxiosError } from '../../types';
 
-export function getAuthorDetailsRequest(): AuthorDetailsActions {
+export function getAuthorDetailsRequest(): GetAuthorDetailsActions {
   return {
     type: GET_AUTHOR_DETAILS_REQUEST,
   };
 }
 
-export function getAuthorDetailsSuccess(author: Author): AuthorDetailsActions {
+export function getAuthorDetailsSuccess(
+  author: Author
+): GetAuthorDetailsActions {
   return {
     type: GET_AUTHOR_DETAILS_SUCCESS,
     payload: {
@@ -24,7 +26,7 @@ export function getAuthorDetailsSuccess(author: Author): AuthorDetailsActions {
   };
 }
 
-export function getAuthorDetailsFailure(error: Error): AuthorDetailsActions {
+export function getAuthorDetailsFailure(error: Error): GetAuthorDetailsActions {
   return {
     type: GET_AUTHOR_DETAILS_FAILURE,
     payload: {
@@ -50,7 +52,7 @@ export function getAuthorDetails(authorId: string) {
   };
 }
 
-export function clearGetAuthorDetailsError(): AuthorDetailsActions {
+export function clearGetAuthorDetailsError(): GetAuthorDetailsActions {
   return {
     type: CLEAR_GET_AUTHOR_DETAILS_ERROR,
   };

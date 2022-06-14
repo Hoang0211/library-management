@@ -12,7 +12,7 @@ import deleteBook from './deleteBook';
 
 import authors from './authors';
 import searchAuthors from './searchAuthors';
-import authorDetails from './authorDetails';
+import getAuthorDetails from './getAuthorDetails';
 import addAuthor from './addAuthor';
 import editAuthor from './editAuthor';
 import deleteAuthor from './deleteAuthor';
@@ -35,7 +35,7 @@ const createRootReducer = () =>
 
     authors,
     searchAuthors,
-    authorDetails,
+    getAuthorDetails,
     addAuthor,
     editAuthor,
     deleteAuthor,
