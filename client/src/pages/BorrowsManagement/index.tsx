@@ -71,6 +71,7 @@ const BorrowsManagement = () => {
     if (borrowsError) {
       alert(borrowsError);
       dispatch(clearGetAllBorrowsError());
+      navigate('/');
     }
 
     if (returnError) {
@@ -82,7 +83,7 @@ const BorrowsManagement = () => {
       alert('Return book successfully!');
       dispatch(resetReturnBook());
     }
-  }, [dispatch, token, borrowsError, returnError, returned]);
+  }, [dispatch, navigate, token, borrowsError, returnError, returned]);
 
   return (
     <PageWrapper className={'borrows-management'}>

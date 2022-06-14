@@ -43,6 +43,7 @@ const BookDetails = () => {
     if (error) {
       alert(error.message);
       dispatch(clearGetBookDetailsError());
+      navigate('/');
     }
 
     if (deleteError) {

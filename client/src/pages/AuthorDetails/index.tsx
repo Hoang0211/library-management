@@ -43,6 +43,7 @@ const AuthorDetails = () => {
     if (error) {
       alert(error.message);
       dispatch(clearGetAuthorDetailsError());
+      navigate('/');
     }
 
     if (deleteError) {
