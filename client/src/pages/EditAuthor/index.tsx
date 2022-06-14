@@ -1,19 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
+import PageWrapper from '../../components/layout/PageWrapper';
 import {
   getAuthorDetails,
   editAuthor,
   resetEditAuthor,
   clearEditAuthorError,
 } from '../../redux/actions';
-import { Author, AppState } from '../../types';
+import { AppState, Author } from '../../types';
 import './_editAuthor.scss';
 
 const EditAuthor = () => {
   const dispatch = useDispatch<any>();
   const navigate = useNavigate();
+  const { authorId } = useParams<{ authorId?: string }>();
 
   const { token } = useSelector((state: AppState) => state.user);
   const { author } = useSelector((state: AppState) => state.getAuthorDetails);
@@ -21,25 +23,21 @@ const EditAuthor = () => {
     (state: AppState) => state.editAuthor
   );
 
-  const { authorId } = useParams<{ authorId?: string }>();
-
   const [firstNameInput, setFirstNameInput] = useState(author?.firstName);
   const [lastNameInput, setLastNameInput] = useState(author?.lastName);
   const [biographyInput, setBiographyInput] = useState(author?.biography);
 
   const firstNameInputChangeHandler = (
     e: React.FormEvent<HTMLInputElement>
-  ): void => {
+  ) => {
     setFirstNameInput(e.currentTarget.value);
   };
-  const lastNameInputChangeHandler = (
-    e: React.FormEvent<HTMLInputElement>
-  ): void => {
+  const lastNameInputChangeHandler = (e: React.FormEvent<HTMLInputElement>) => {
     setLastNameInput(e.currentTarget.value);
   };
   const biographyInputChangeHandler = (
     e: React.FormEvent<HTMLTextAreaElement>
-  ): void => {
+  ) => {
     setBiographyInput(e.currentTarget.value);
   };
   const formSubmitHandler = (e: React.FormEvent) => {
@@ -57,7 +55,8 @@ const EditAuthor = () => {
       alert('Please fill all inputs!');
     }
   };
-  const discardHandler = (): void => {
+
+  const discardHandler = () => {
     navigate(`/authors/${authorId}`);
   };
 
@@ -78,57 +77,56 @@ const EditAuthor = () => {
   }, [dispatch, navigate, authorId, error, updated]);
 
   return (
-    <main className='edit-author'>
-      <form className='container' onSubmit={formSubmitHandler}>
-        <h2 className='title'>Edit Author</h2>
-        <div className='input-controller'>
-          <label htmlFor='firstName'>First name</label>
-          <input
-            id='firstName'
-            type='text'
-            placeholder='Enter first name...'
-            onChange={firstNameInputChangeHandler}
-            value={firstNameInput}
-          ></input>
-        </div>
-        <div className='input-controller'>
-          <label htmlFor='lastName'>Last name</label>
-          <input
-            id='lastName'
-            type='text'
-            placeholder='Enter last name...'
-            onChange={lastNameInputChangeHandler}
-            value={lastNameInput}
-          ></input>
-        </div>
-        <div className='input-controller'>
-          <label htmlFor='biography'>Biography</label>
-          <textarea
-            id='biography'
-            placeholder='Enter biography...'
-            onChange={biographyInputChangeHandler}
-            value={biographyInput}
-          ></textarea>
-        </div>
-        <div className='btns'>
+    <PageWrapper className='edit-author'>
+      <div className='title'>
+        <h1>Edit Author</h1>
+        <div className='actions'>
           <button
-            className='btn btn-save'
-            type='submit'
+            className='action'
             onClick={formSubmitHandler}
-            disabled={loading ? true : false}
+            disabled={loading}
           >
             Save
           </button>
-          <button
-            className='btn btn-discard'
-            type='button'
-            onClick={discardHandler}
-          >
+          <button className='action' onClick={discardHandler}>
             Discard
           </button>
         </div>
-      </form>
-    </main>
+      </div>
+      <div className='container container-edit'>
+        <form onSubmit={formSubmitHandler}>
+          <div className='input-controller'>
+            <label htmlFor='firstName'>First name</label>
+            <input
+              id='firstName'
+              type='text'
+              placeholder='Enter first name...'
+              onChange={firstNameInputChangeHandler}
+              value={firstNameInput}
+            ></input>
+          </div>
+          <div className='input-controller'>
+            <label htmlFor='lastName'>Last name</label>
+            <input
+              id='lastName'
+              type='text'
+              placeholder='Enter last name...'
+              onChange={lastNameInputChangeHandler}
+              value={lastNameInput}
+            ></input>
+          </div>
+          <div className='input-controller'>
+            <label htmlFor='biography'>Biography</label>
+            <textarea
+              id='biography'
+              placeholder='Enter biography...'
+              onChange={biographyInputChangeHandler}
+              value={biographyInput}
+            ></textarea>
+          </div>
+        </form>
+      </div>
+    </PageWrapper>
   );
 };
 
