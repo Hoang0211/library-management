@@ -147,13 +147,8 @@ export const createBook = async (
       status,
     })
 
-    await BookService.create(book)
-
-    await authors.forEach((authorId: string) => {
-      AuthorService.addToBooks(authorId, book._id)
-    })
-
-    res.json(book)
+    const createdBook = await BookService.createBook(book)
+    res.json(createdBook)
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
       next(new BadRequestError('Invalid Request', error))

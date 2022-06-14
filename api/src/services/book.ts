@@ -87,8 +87,14 @@ const findBookById = async (bookId: string): Promise<BookDocument> => {
   return foundBook
 }
 
-const create = async (book: BookDocument): Promise<BookDocument> => {
-  return book.save()
+const createBook = async (book: BookDocument): Promise<BookDocument> => {
+  const createdBook = await book.save()
+
+  await createdBook.authors.forEach((authorId) => {
+    addBookForAuthor(authorId, createdBook._id)
+  })
+
+  return createdBook
 }
 
 const updateBook = async (
@@ -102,20 +108,9 @@ const updateBook = async (
   }
 
   // Remove update book from its authors'books list
-  const removeBookForAuthor = async (authorId: Types.ObjectId) => {
-    const foundAuthor = await Author.findByIdAndUpdate(
-      authorId,
-      { $pull: { books: bookId } },
-      {
-        new: true,
-        runValidators: true,
-      }
-    )
-    if (!foundAuthor) {
-      throw new NotFoundError(`Author ${authorId} not found`)
-    }
-  }
-  await foundBook.authors.forEach((authorId) => removeBookForAuthor(authorId))
+  await foundBook.authors.forEach((authorId) =>
+    removeBookForAuthor(authorId, bookId)
+  )
 
   // Update book
   const updatedBook = await Book.findByIdAndUpdate(bookId, update, {
@@ -127,20 +122,9 @@ const updateBook = async (
   }
 
   // Add update book to its authors'books list
-  const addBookForAuthor = async (authorId: Types.ObjectId) => {
-    const foundAuthor = await Author.findByIdAndUpdate(
-      authorId,
-      { $push: { books: bookId } },
-      {
-        new: true,
-        runValidators: true,
-      }
-    )
-    if (!foundAuthor) {
-      throw new NotFoundError(`Author ${authorId} not found`)
-    }
-  }
-  await updatedBook.authors.forEach((authorId) => addBookForAuthor(authorId))
+  await updatedBook.authors.forEach((authorId) =>
+    addBookForAuthor(authorId, bookId)
+  )
 
   return updatedBook
 }
@@ -166,7 +150,6 @@ const removeFromAuthors = async (
   return foundBook
 }
 
-// Borrow
 const borrow = async (bookId: string): Promise<BookDocument | null> => {
   const foundBook = await Book.findByIdAndUpdate(
     bookId,
@@ -192,20 +175,9 @@ const deleteBook = async (bookId: string): Promise<BookDocument | null> => {
   }
 
   // Remove deleted book from its authors'books list
-  const removeBookForAuthor = async (authorId: Types.ObjectId) => {
-    const foundAuthor = await Author.findByIdAndUpdate(
-      authorId,
-      { $pull: { books: bookId } },
-      {
-        new: true,
-        runValidators: true,
-      }
-    )
-    if (!foundAuthor) {
-      throw new NotFoundError(`Author ${authorId} not found`)
-    }
-  }
-  await foundBook.authors.forEach((authorId) => removeBookForAuthor(authorId))
+  await foundBook.authors.forEach((authorId) =>
+    removeBookForAuthor(authorId, bookId)
+  )
 
   // Remove its borrow
   await Borrow.findOneAndRemove({ book: bookId })
@@ -213,11 +185,42 @@ const deleteBook = async (bookId: string): Promise<BookDocument | null> => {
   return foundBook
 }
 
+// Helper functions
+const removeBookForAuthor = async (
+  authorId: Types.ObjectId,
+  bookId: string
+) => {
+  const foundAuthor = await Author.findByIdAndUpdate(
+    authorId,
+    { $pull: { books: bookId } },
+    {
+      new: true,
+      runValidators: true,
+    }
+  )
+  if (!foundAuthor) {
+    throw new NotFoundError(`Author ${authorId} not found`)
+  }
+}
+const addBookForAuthor = async (authorId: Types.ObjectId, bookId: string) => {
+  const foundAuthor = await Author.findByIdAndUpdate(
+    authorId,
+    { $push: { books: bookId } },
+    {
+      new: true,
+      runValidators: true,
+    }
+  )
+  if (!foundAuthor) {
+    throw new NotFoundError(`Author ${authorId} not found`)
+  }
+}
+
 export default {
   findAllBooks,
   searchAllBooks,
   findBookById,
-  create,
+  createBook,
   updateBook,
   removeFromAuthors,
   borrow,
