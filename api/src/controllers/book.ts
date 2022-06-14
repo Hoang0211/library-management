@@ -13,7 +13,7 @@ export const findAllBooks = async (
   next: NextFunction
 ) => {
   try {
-    res.json(await BookService.findAll())
+    res.json(await BookService.findAllBooks())
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
       next(new BadRequestError('Invalid Request', error))
@@ -80,7 +80,7 @@ export const searchAllBooks = async (
     const pageNum = Number(page)
     const sortOrderNum = sortOrder === 'asc' ? 1 : -1
     res.json(
-      await BookService.searchAll(
+      await BookService.searchAllBooks(
         keyword,
         categories,
         statuses,
@@ -106,7 +106,7 @@ export const findBookById = async (
   next: NextFunction
 ) => {
   try {
-    res.json(await BookService.findById(req.params.bookId))
+    res.json(await BookService.findBookById(req.params.bookId))
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
       next(new BadRequestError('Invalid Request', error))
@@ -172,23 +172,7 @@ export const updateBook = async (
   try {
     const update = req.body
     const bookId = req.params.bookId
-
-    // Validate book
-    const updateBook = await BookService.findById(req.params.bookId)
-
-    // Remove this book from all author's books list before updating book
-    await updateBook.authors.forEach((authorId) =>
-      AuthorService.removeFromBooks(authorId, updateBook._id)
-    )
-
-    // Update book
-    const updatedBook = await BookService.update(bookId, update)
-
-    // Add this book to all author's books list after updating book
-    await updatedBook?.authors.forEach((authorId) => {
-      AuthorService.addToBooks(authorId, updateBook._id)
-    })
-
+    const updatedBook = await BookService.updateBook(bookId, update)
     res.json(updatedBook)
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {

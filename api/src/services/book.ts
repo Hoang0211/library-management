@@ -5,7 +5,7 @@ import Author from '../models/Author'
 import Borrow from '../models/Borrow'
 import { NotFoundError } from '../helpers/apiError'
 
-const findAll = async (): Promise<BookDocument[]> => {
+const findAllBooks = async (): Promise<BookDocument[]> => {
   return Book.find().sort({ title: 1 }).populate('authors')
 }
 
@@ -13,8 +13,7 @@ type SearchedBookResType = {
   books: BookDocument[]
   count: number
 }
-
-const searchAll = async (
+const searchAllBooks = async (
   keyword: string,
   categories: string[],
   statuses: string[],
@@ -78,7 +77,7 @@ const searchAll = async (
   }
 }
 
-const findById = async (bookId: string): Promise<BookDocument> => {
+const findBookById = async (bookId: string): Promise<BookDocument> => {
   const foundBook = await Book.findById(bookId).populate('authors')
 
   if (!foundBook) {
@@ -92,20 +91,58 @@ const create = async (book: BookDocument): Promise<BookDocument> => {
   return book.save()
 }
 
-const update = async (
+const updateBook = async (
   bookId: string,
   update: Partial<BookDocument>
 ): Promise<BookDocument | null> => {
-  const foundBook = await Book.findByIdAndUpdate(bookId, update, {
-    new: true,
-    runValidators: true,
-  })
-
+  // Get book
+  const foundBook = await Book.findById(bookId)
   if (!foundBook) {
     throw new NotFoundError(`Book ${bookId} not found`)
   }
 
-  return foundBook
+  // Remove update book from its authors'books list
+  const removeBookForAuthor = async (authorId: Types.ObjectId) => {
+    const foundAuthor = await Author.findByIdAndUpdate(
+      authorId,
+      { $pull: { books: bookId } },
+      {
+        new: true,
+        runValidators: true,
+      }
+    )
+    if (!foundAuthor) {
+      throw new NotFoundError(`Author ${authorId} not found`)
+    }
+  }
+  await foundBook.authors.forEach((authorId) => removeBookForAuthor(authorId))
+
+  // Update book
+  const updatedBook = await Book.findByIdAndUpdate(bookId, update, {
+    new: true,
+    runValidators: true,
+  })
+  if (!updatedBook) {
+    throw new NotFoundError(`Book ${bookId} not found`)
+  }
+
+  // Add update book to its authors'books list
+  const addBookForAuthor = async (authorId: Types.ObjectId) => {
+    const foundAuthor = await Author.findByIdAndUpdate(
+      authorId,
+      { $push: { books: bookId } },
+      {
+        new: true,
+        runValidators: true,
+      }
+    )
+    if (!foundAuthor) {
+      throw new NotFoundError(`Author ${authorId} not found`)
+    }
+  }
+  await updatedBook.authors.forEach((authorId) => addBookForAuthor(authorId))
+
+  return updatedBook
 }
 
 // Remove author from book's authors list when deleting author
@@ -177,11 +214,11 @@ const deleteBook = async (bookId: string): Promise<BookDocument | null> => {
 }
 
 export default {
-  findAll,
-  searchAll,
-  findById,
+  findAllBooks,
+  searchAllBooks,
+  findBookById,
   create,
-  update,
+  updateBook,
   removeFromAuthors,
   borrow,
   deleteBook,
