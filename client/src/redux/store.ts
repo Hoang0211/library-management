@@ -36,7 +36,7 @@ const initState: AppState = {
     updatedUser: null,
   },
 
-  books: {
+  getBooks: {
     loading: false,
     error: null,
     books: [],
@@ -68,7 +68,7 @@ const initState: AppState = {
     deleted: false,
   },
 
-  authors: {
+  getAuthors: {
     loading: false,
     error: null,
     authors: [],

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Modal from '../ui/Modal';
-import { getAllBook, clearGetAllBookError } from '../../redux/actions';
+import { getAllBooks, clearGetAllBooksError } from '../../redux/actions';
 import { AppState, Book, Status } from '../../types';
 import './_allBookModal.scss';
 
@@ -76,15 +76,15 @@ const AllBookModal = ({
   const dispatch = useDispatch<any>();
 
   const { loading, error, books } = useSelector(
-    (state: AppState) => state.books
+    (state: AppState) => state.getBooks
   );
 
   useEffect(() => {
     if (error) {
       alert(error);
-      dispatch(clearGetAllBookError());
+      dispatch(clearGetAllBooksError());
     }
-    dispatch(getAllBook());
+    dispatch(getAllBooks());
   }, [dispatch, error]);
 
   return (

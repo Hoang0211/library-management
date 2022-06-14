@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Modal from '../ui/Modal';
-import { getAllAuthor, clearGetAllAuthorError } from '../../redux/actions';
+import { getAllAuthors, clearGetAllAuthorsError } from '../../redux/actions';
 import { AppState, Author } from '../../types';
 import './_allAuthorModal.scss';
 
@@ -75,15 +75,15 @@ const AllAuthorModal = ({
   const dispatch = useDispatch<any>();
 
   const { loading, error, authors } = useSelector(
-    (state: AppState) => state.authors
+    (state: AppState) => state.getAuthors
   );
 
   useEffect(() => {
     if (error) {
       alert(error);
-      dispatch(clearGetAllAuthorError());
+      dispatch(clearGetAllAuthorsError());
     }
-    dispatch(getAllAuthor());
+    dispatch(getAllAuthors());
   }, [dispatch, error]);
 
   return (

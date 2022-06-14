@@ -3,14 +3,14 @@ import { combineReducers } from 'redux';
 import user from './user';
 import editUser from './editUser';
 
-import books from './books';
+import getBooks from './getBooks';
 import searchBooks from './searchBooks';
 import getBookDetails from './getBookDetails';
 import addBook from './addBook';
 import editBook from './editBook';
 import deleteBook from './deleteBook';
 
-import authors from './authors';
+import getAuthors from './getAuthors';
 import searchAuthors from './searchAuthors';
 import getAuthorDetails from './getAuthorDetails';
 import addAuthor from './addAuthor';
@@ -26,14 +26,14 @@ const createRootReducer = () =>
     user,
     editUser,
 
-    books,
+    getBooks,
     searchBooks,
     getBookDetails,
     addBook,
     editBook,
     deleteBook,
 
-    authors,
+    getAuthors,
     searchAuthors,
     getAuthorDetails,
     addAuthor,

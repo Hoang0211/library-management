@@ -12,10 +12,10 @@ import {
   CLEAR_EDIT_USER_ERROR,
 } from './constants/userConstants';
 import {
-  GET_ALL_AUTHOR_REQUEST,
-  GET_ALL_AUTHOR_SUCCESS,
-  GET_ALL_AUTHOR_FAILURE,
-  CLEAR_GET_ALL_AUTHOR_ERROR,
+  GET_ALL_AUTHORS_REQUEST,
+  GET_ALL_AUTHORS_SUCCESS,
+  GET_ALL_AUTHORS_FAILURE,
+  CLEAR_GET_ALL_AUTHORS_ERROR,
   SEARCH_ALL_AUTHORS_REQUEST,
   SEARCH_ALL_AUTHORS_SUCCESS,
   SEARCH_ALL_AUTHORS_FAILURE,
@@ -41,10 +41,10 @@ import {
   CLEAR_DELETE_AUTHOR_ERROR,
 } from './constants/authorConstants';
 import {
-  GET_ALL_BOOK_REQUEST,
-  GET_ALL_BOOK_SUCCESS,
-  GET_ALL_BOOK_FAILURE,
-  CLEAR_GET_ALL_BOOK_ERROR,
+  GET_ALL_BOOKS_REQUEST,
+  GET_ALL_BOOKS_SUCCESS,
+  GET_ALL_BOOKS_FAILURE,
+  CLEAR_GET_ALL_BOOKS_ERROR,
   SEARCH_ALL_BOOKS_REQUEST,
   SEARCH_ALL_BOOKS_SUCCESS,
   SEARCH_ALL_BOOKS_FAILURE,
@@ -96,14 +96,14 @@ export type AppState = {
   user: UserState;
   editUser: EditUserState;
 
-  books: BooksState;
+  getBooks: GetBooksState;
   searchBooks: SearchBooksState;
   getBookDetails: GetBookDetailsState;
   addBook: AddBookState;
   editBook: EditBookState;
   deleteBook: DeleteBookState;
 
-  authors: AuthorsState;
+  getAuthors: GetAuthorsState;
   searchAuthors: SearchAuthorsState;
   getAuthorDetails: GetAuthorDetailsState;
   addAuthor: AddAuthorState;
@@ -204,7 +204,7 @@ export type EditUserActions =
   | ResetEditUserAction
   | ClearEditUserErrorAction;
 
-// BOOKS
+// GET BOOKS
 export enum Category {
   Journal = 'journal',
   Article = 'article',
@@ -228,34 +228,34 @@ export type Book = {
   numPage: number;
   status: Status;
 };
-export type BooksState = {
+export type GetBooksState = {
   loading: boolean;
   error: Error | null;
   books: Book[];
 };
-export type GetAllBookRequestAction = {
-  type: typeof GET_ALL_BOOK_REQUEST;
+export type GetAllBooksRequestAction = {
+  type: typeof GET_ALL_BOOKS_REQUEST;
 };
-export type GetAllBookSuccessAction = {
-  type: typeof GET_ALL_BOOK_SUCCESS;
+export type GetAllBooksSuccessAction = {
+  type: typeof GET_ALL_BOOKS_SUCCESS;
   payload: {
     books: Book[];
   };
 };
-export type GetAllBookFailureAction = {
-  type: typeof GET_ALL_BOOK_FAILURE;
+export type GetAllBooksFailureAction = {
+  type: typeof GET_ALL_BOOKS_FAILURE;
   payload: {
     error: Error;
   };
 };
-export type ClearGetAllBookAction = {
-  type: typeof CLEAR_GET_ALL_BOOK_ERROR;
+export type ClearGetAllBooksAction = {
+  type: typeof CLEAR_GET_ALL_BOOKS_ERROR;
 };
-export type BooksActions =
-  | GetAllBookRequestAction
-  | GetAllBookSuccessAction
-  | GetAllBookFailureAction
-  | ClearGetAllBookAction;
+export type GetBooksActions =
+  | GetAllBooksRequestAction
+  | GetAllBooksSuccessAction
+  | GetAllBooksFailureAction
+  | ClearGetAllBooksAction;
 
 // SEARCH BOOKS
 export type SearchBooksState = {
@@ -420,34 +420,34 @@ export type Author = {
   biography: string;
   books: Book[];
 };
-export type AuthorsState = {
+export type GetAuthorsState = {
   loading: boolean;
   error: Error | null;
   authors: Author[];
 };
-export type GetAllAuthorRequestAction = {
-  type: typeof GET_ALL_AUTHOR_REQUEST;
+export type GetAllAuthorsRequestAction = {
+  type: typeof GET_ALL_AUTHORS_REQUEST;
 };
-export type GetAllAuthorSuccessAction = {
-  type: typeof GET_ALL_AUTHOR_SUCCESS;
+export type GetAllAuthorsSuccessAction = {
+  type: typeof GET_ALL_AUTHORS_SUCCESS;
   payload: {
     authors: Author[];
   };
 };
-export type GetAllAuthorFailureAction = {
-  type: typeof GET_ALL_AUTHOR_FAILURE;
+export type GetAllAuthorsFailureAction = {
+  type: typeof GET_ALL_AUTHORS_FAILURE;
   payload: {
     error: Error;
   };
 };
-export type ClearGetAllAuthorAction = {
-  type: typeof CLEAR_GET_ALL_AUTHOR_ERROR;
+export type ClearGetAllAuthorsAction = {
+  type: typeof CLEAR_GET_ALL_AUTHORS_ERROR;
 };
-export type AuthorsActions =
-  | GetAllAuthorRequestAction
-  | GetAllAuthorSuccessAction
-  | GetAllAuthorFailureAction
-  | ClearGetAllAuthorAction;
+export type GetAuthorsActions =
+  | GetAllAuthorsRequestAction
+  | GetAllAuthorsSuccessAction
+  | GetAllAuthorsFailureAction
+  | ClearGetAllAuthorsAction;
 
 // SEARCH AUTHORS
 export type SearchAuthorsState = {

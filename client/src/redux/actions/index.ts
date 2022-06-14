@@ -1,7 +1,7 @@
 export * from './user';
 export * from './editUser';
 
-export * from './books';
+export * from './getBooks';
 export * from './searchBooks';
 export * from './getBookDetails';
 export * from './addBook';

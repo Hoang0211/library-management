@@ -2,54 +2,54 @@ import { Dispatch } from 'redux';
 import axios from 'axios';
 
 import {
-  GET_ALL_AUTHOR_REQUEST,
-  GET_ALL_AUTHOR_SUCCESS,
-  GET_ALL_AUTHOR_FAILURE,
-  CLEAR_GET_ALL_AUTHOR_ERROR,
+  GET_ALL_AUTHORS_REQUEST,
+  GET_ALL_AUTHORS_SUCCESS,
+  GET_ALL_AUTHORS_FAILURE,
+  CLEAR_GET_ALL_AUTHORS_ERROR,
 } from '../../constants/authorConstants';
-import { AuthorsActions, Author, isAxiosError } from '../../types';
+import { GetAuthorsActions, Author, isAxiosError } from '../../types';
 
-export function getAllAuthorRequest(): AuthorsActions {
+export function getAllAuthorsRequest(): GetAuthorsActions {
   return {
-    type: GET_ALL_AUTHOR_REQUEST,
+    type: GET_ALL_AUTHORS_REQUEST,
   };
 }
 
-export function getAllAuthorSuccess(authors: Author[]): AuthorsActions {
+export function getAllAuthorsSuccess(authors: Author[]): GetAuthorsActions {
   return {
-    type: GET_ALL_AUTHOR_SUCCESS,
+    type: GET_ALL_AUTHORS_SUCCESS,
     payload: {
       authors,
     },
   };
 }
 
-export function getAllAuthorFailure(error: Error): AuthorsActions {
+export function getAllAuthorsFailure(error: Error): GetAuthorsActions {
   return {
-    type: GET_ALL_AUTHOR_FAILURE,
+    type: GET_ALL_AUTHORS_FAILURE,
     payload: {
       error,
     },
   };
 }
 
-export function getAllAuthor() {
+export function getAllAuthors() {
   return async (dispatch: Dispatch) => {
-    dispatch(getAllAuthorRequest());
+    dispatch(getAllAuthorsRequest());
     try {
       const res = await axios.get('http://localhost:5000/api/v1/authors');
       const authors = res.data;
-      return dispatch(getAllAuthorSuccess(authors));
+      return dispatch(getAllAuthorsSuccess(authors));
     } catch (err) {
       if (isAxiosError(err)) {
-        return dispatch(getAllAuthorFailure(err));
+        return dispatch(getAllAuthorsFailure(err));
       }
     }
   };
 }
 
-export function clearGetAllAuthorError(): AuthorsActions {
+export function clearGetAllAuthorsError(): GetAuthorsActions {
   return {
-    type: CLEAR_GET_ALL_AUTHOR_ERROR,
+    type: CLEAR_GET_ALL_AUTHORS_ERROR,
   };
 }
