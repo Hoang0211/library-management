@@ -22,4 +22,9 @@
   box-shadow: 2px 2px $clr-dark;
   z-index: 999;
   animation: slide-down 0.5s ease-out forwards;
+  overflow-y: hidden;
+  .content {
+    height: 500px;
+    overflow-y: scroll;
+  }
 }

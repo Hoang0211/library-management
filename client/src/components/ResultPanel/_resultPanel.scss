@@ -40,6 +40,10 @@
     }
   }
 
+  .display {
+    min-height: 100px;
+  }
+
   .pagination {
     height: 64px;
     background-color: $clr-accent;

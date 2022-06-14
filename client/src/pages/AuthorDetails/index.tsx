@@ -63,7 +63,7 @@ const AuthorDetails = () => {
   return (
     <PageWrapper className='author-details'>
       <div className='title'>
-        <h1>Book Details</h1>
+        <h1>Author Details</h1>
         <div className='actions'>
           {user?.role === Role.Admin && (
             <>
