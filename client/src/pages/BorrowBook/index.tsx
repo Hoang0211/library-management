@@ -111,9 +111,9 @@ const BorrowBook = () => {
             <label className='label label-books' htmlFor='books'>
               Borrow books:{' '}
             </label>
-            <ul className='borrow-items'>
+            <ul>
               {booksInput.map((book) => (
-                <li className='borrow-item' key={book._id}>
+                <li key={book._id}>
                   {book.title} ({book.isbn})
                 </li>
               ))}
