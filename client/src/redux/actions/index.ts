@@ -8,7 +8,7 @@ export * from './addBook';
 export * from './editBook';
 export * from './deleteBook';
 
-export * from './authors';
+export * from './getAuthors';
 export * from './searchAuthors';
 export * from './getAuthorDetails';
 export * from './addAuthor';
