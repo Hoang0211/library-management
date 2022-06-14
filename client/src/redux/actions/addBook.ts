@@ -35,6 +35,7 @@ export function addBook(token: string, book: Partial<Book>) {
   return async (dispatch: Dispatch) => {
     dispatch(addBookRequest());
     try {
+      console.log(book.publishedDate);
       await axios.post(
         `http://localhost:5000/api/v1/books/`,
         {

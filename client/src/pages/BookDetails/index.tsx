@@ -10,6 +10,7 @@ import {
   clearDeleteBookError,
 } from '../../redux/actions';
 import { AppState, Role } from '../../types';
+import { dateFormat } from '../../utils/dateFormat';
 import './_bookDetails.scss';
 
 const BookDetails = () => {
@@ -120,9 +121,7 @@ const BookDetails = () => {
             </p>
             <p className='book-details__published-date'>
               Published date:{' '}
-              {!loading &&
-                book &&
-                new Date(book.publishedDate).toLocaleDateString()}
+              {!loading && book && dateFormat(new Date(book.publishedDate))}
             </p>
             <p className='book-details__num-page'>
               Number of pages: {!loading && book && book.numPage}
