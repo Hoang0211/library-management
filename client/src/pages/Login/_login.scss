@@ -6,11 +6,9 @@
   padding-top: $nav-height;
   display: flex;
   flex-direction: column;
-  // justify-content: center;
   align-items: center;
 
   &__container {
-    // min-height: 500px;
     min-width: 400px;
     margin-top: 2rem;
     padding: 1rem 1.5rem;
@@ -22,11 +20,10 @@
     outline: none;
     border: 2px solid $clr-accent;
     border-radius: 5px;
-
-    .title {
-      margin-bottom: 1.5rem;
-      font-size: 1.75rem;
-      font-weight: 600;
-    }
+  }
+  &__title {
+    margin-bottom: 1.5rem;
+    font-size: 1.75rem;
+    font-weight: 600;
   }
 }

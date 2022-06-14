@@ -28,28 +28,13 @@ const Login = () => {
     dispatch(signIn(googleTokenId));
   };
 
-  // This is for testing
-  const getAllUsers = async () => {
-    try {
-      const response = await axios.get('http://localhost:5000/api/v1/users', {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      console.log('response:', response);
-    } catch (error: any) {
-      console.log('error:', error.response.data);
-    }
-  };
-
   return (
     <main className='login'>
       <div className='login__container'>
-        <p className='title'>Log In</p>
+        <p className='login__title'>Log In</p>
         <GoogleOAuthProvider clientId={clientId}>
           <GoogleLogin onSuccess={handleSucess} />
         </GoogleOAuthProvider>
-        <button onClick={getAllUsers}>Get all users</button>
       </div>
     </main>
   );
