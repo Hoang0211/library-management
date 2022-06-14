@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
+import PageWrapper from '../../components/layout/PageWrapper';
 import {
   addAuthor,
   resetAddAuthor,
@@ -25,20 +26,17 @@ const AddAuthor = () => {
 
   const firstNameInputChangeHandler = (
     e: React.FormEvent<HTMLInputElement>
-  ): void => {
+  ) => {
     setFirstNameInput(e.currentTarget.value);
   };
-  const lastNameInputChangeHandler = (
-    e: React.FormEvent<HTMLInputElement>
-  ): void => {
+  const lastNameInputChangeHandler = (e: React.FormEvent<HTMLInputElement>) => {
     setLastNameInput(e.currentTarget.value);
   };
   const biographyInputChangeHandler = (
     e: React.FormEvent<HTMLTextAreaElement>
-  ): void => {
+  ) => {
     setBiographyInput(e.currentTarget.value);
   };
-
   const formSubmitHandler = (e: React.FormEvent) => {
     e.preventDefault();
     if (firstNameInput && lastNameInput && biographyInput) {
@@ -53,7 +51,7 @@ const AddAuthor = () => {
     }
   };
 
-  const discardHandler = (): void => {
+  const discardHandler = () => {
     navigate('/');
   };
 
@@ -71,57 +69,66 @@ const AddAuthor = () => {
   }, [dispatch, navigate, error, added]);
 
   return (
-    <main className='add-author'>
-      <form className='container' onSubmit={formSubmitHandler}>
-        <h2 className='title'>New Author</h2>
-        <div className='input-controller'>
-          <label htmlFor='firstName'>First name</label>
-          <input
-            id='firstName'
-            type='text'
-            placeholder='Enter first name...'
-            onChange={firstNameInputChangeHandler}
-            value={firstNameInput}
-          ></input>
-        </div>
-        <div className='input-controller'>
-          <label htmlFor='lastName'>Last name</label>
-          <input
-            id='lastName'
-            type='text'
-            placeholder='Enter last name...'
-            onChange={lastNameInputChangeHandler}
-            value={lastNameInput}
-          ></input>
-        </div>
-        <div className='input-controller'>
-          <label htmlFor='biography'>Biography</label>
-          <textarea
-            id='biography'
-            placeholder='Enter biography...'
-            onChange={biographyInputChangeHandler}
-            value={biographyInput}
-          ></textarea>
-        </div>
-        <div className='btns'>
-          <button
-            className='btn btn-save'
-            type='submit'
-            onClick={formSubmitHandler}
-            disabled={loading ? true : false}
-          >
-            Add
-          </button>
-          <button
-            className='btn btn-discard'
-            type='button'
-            onClick={discardHandler}
-          >
-            Discard
+    <PageWrapper className='add-author'>
+      <div className='title'>
+        <h1>New Author</h1>
+        <div className='actions'>
+          <button className='action' onClick={discardHandler}>
+            Home
           </button>
         </div>
-      </form>
-    </main>
+      </div>
+      <div className='container container-add'>
+        <form onSubmit={formSubmitHandler}>
+          <div className='input-controller'>
+            <label htmlFor='firstName'>First name</label>
+            <input
+              id='firstName'
+              type='text'
+              placeholder='Enter first name...'
+              onChange={firstNameInputChangeHandler}
+              value={firstNameInput}
+            ></input>
+          </div>
+          <div className='input-controller'>
+            <label htmlFor='lastName'>Last name</label>
+            <input
+              id='lastName'
+              type='text'
+              placeholder='Enter last name...'
+              onChange={lastNameInputChangeHandler}
+              value={lastNameInput}
+            ></input>
+          </div>
+          <div className='input-controller'>
+            <label htmlFor='biography'>Biography</label>
+            <textarea
+              id='biography'
+              placeholder='Enter biography...'
+              onChange={biographyInputChangeHandler}
+              value={biographyInput}
+            ></textarea>
+          </div>
+          <div className='form-actions'>
+            <button
+              className='form-action form-action-add'
+              type='submit'
+              onClick={formSubmitHandler}
+              disabled={loading}
+            >
+              Add
+            </button>
+            <button
+              className='form-action form-action-discard'
+              type='button'
+              onClick={discardHandler}
+            >
+              Discard
+            </button>
+          </div>
+        </form>
+      </div>
+    </PageWrapper>
   );
 };
 
