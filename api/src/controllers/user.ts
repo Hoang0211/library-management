@@ -11,7 +11,7 @@ export const findUserById = async (
   next: NextFunction
 ) => {
   try {
-    res.json(await UserService.findById(req.params.userId))
+    res.json(await UserService.findUserById(req.params.userId))
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
       next(new BadRequestError('Invalid Request', error))
@@ -38,24 +38,6 @@ export const updateUser = async (
       update
     )
     res.json(updatedUser)
-  } catch (error) {
-    if (error instanceof Error && error.name == 'ValidationError') {
-      next(new BadRequestError('Invalid Request', error))
-    } else {
-      next(error)
-    }
-  }
-}
-
-// DELETE /users/:userId
-export const deleteUser = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  try {
-    await UserService.deleteUser(req.params.userId)
-    res.status(204).end()
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
       next(new BadRequestError('Invalid Request', error))

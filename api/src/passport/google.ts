@@ -29,7 +29,7 @@ const loginWithGoogle = () => {
       done: Function
     ) => {
       try {
-        let user = await UserService.findOneForLogin(parsedToken.payload.email)
+        let user = await UserService.findUserByEmail(parsedToken.payload.email)
         console.log('isUserExists:', !!user)
 
         if (!user) {
@@ -42,7 +42,7 @@ const loginWithGoogle = () => {
           } as UserDocument
 
           const newUser = new User(user)
-          await UserService.create(newUser)
+          await UserService.createUser(newUser)
         }
         // Append user object to req.user
         done(null, user)

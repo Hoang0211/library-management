@@ -1,6 +1,6 @@
 import express from 'express'
 
-import { findUserById, updateUser, deleteUser } from '../controllers/user'
+import { findUserById, updateUser } from '../controllers/user'
 import verifyAuth from '../middlewares/verifyAuth'
 
 const router = express.Router()
@@ -9,6 +9,5 @@ const router = express.Router()
 
 router.get('/:userId', findUserById)
 router.put('/:userId', verifyAuth, updateUser)
-router.delete('/:userId', deleteUser)
 
 export default router
