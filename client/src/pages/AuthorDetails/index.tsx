@@ -21,9 +21,11 @@ const AuthorDetails = () => {
   const { loading, error, author } = useSelector(
     (state: AppState) => state.getAuthorDetails
   );
-  const { error: deleteError, deleted } = useSelector(
-    (state: AppState) => state.deleteAuthor
-  );
+  const {
+    loading: deleteLoading,
+    error: deleteError,
+    deleted,
+  } = useSelector((state: AppState) => state.deleteAuthor);
 
   const navigateToEditPage = () => {
     navigate(`/authors/edit/${authorId}`);
@@ -68,7 +70,11 @@ const AuthorDetails = () => {
               <button className='action' onClick={navigateToEditPage}>
                 Edit
               </button>
-              <button className='action' onClick={deleteAuthorHandler}>
+              <button
+                className='action'
+                onClick={deleteAuthorHandler}
+                disabled={deleteLoading}
+              >
                 Delete
               </button>
             </>

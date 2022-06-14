@@ -21,9 +21,11 @@ const BookDetails = () => {
   const { loading, error, book } = useSelector(
     (state: AppState) => state.getBookDetails
   );
-  const { error: deleteError, deleted } = useSelector(
-    (state: AppState) => state.deleteBook
-  );
+  const {
+    loading: deleteLoading,
+    error: deleteError,
+    deleted,
+  } = useSelector((state: AppState) => state.deleteBook);
 
   const navigateToEditPage = () => {
     navigate(`/books/edit/${bookId}`);
@@ -68,7 +70,11 @@ const BookDetails = () => {
               <button className='action' onClick={navigateToEditPage}>
                 Edit
               </button>
-              <button className='action' onClick={deleteBookHandler}>
+              <button
+                className='action'
+                onClick={deleteBookHandler}
+                disabled={deleteLoading}
+              >
                 Delete
               </button>
             </>

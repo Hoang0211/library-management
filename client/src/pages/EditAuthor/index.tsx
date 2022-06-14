@@ -42,6 +42,11 @@ const EditAuthor = () => {
   };
   const formSubmitHandler = (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (loading) {
+      return;
+    }
+
     if (firstNameInput && lastNameInput && biographyInput) {
       const inputData: Partial<Author> = {
         firstName: firstNameInput,

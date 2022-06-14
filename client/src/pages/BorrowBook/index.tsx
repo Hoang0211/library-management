@@ -90,10 +90,10 @@ const BorrowBook = () => {
   return (
     <PageWrapper className='borrow-book'>
       <div className='title'>
-        <h1>New Author</h1>
+        <h1>Borrow Book</h1>
         <div className='actions'>
           <button className='action' onClick={discardHandler}>
-            Home
+            Back
           </button>
         </div>
       </div>

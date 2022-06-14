@@ -78,7 +78,7 @@ const ResultPanel = ({
   const displayResults = () => {
     if (currentDisplay === 'books') {
       if (booksLoading) {
-        return <p>Loading...</p>;
+        return <></>;
       } else {
         return books.map((book) => (
           <BookItem
@@ -90,7 +90,7 @@ const ResultPanel = ({
       }
     } else {
       if (authorsLoading) {
-        return <p>Loading...</p>;
+        return <></>;
       } else {
         return authors.map((author) => (
           <AuthorItem

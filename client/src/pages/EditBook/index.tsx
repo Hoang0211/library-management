@@ -73,6 +73,11 @@ const EditBook = () => {
 
   const formSubmitHandler = (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (loading) {
+      return;
+    }
+
     if (!isbnInput) {
       alert('Please enter ISBN number!');
       return;

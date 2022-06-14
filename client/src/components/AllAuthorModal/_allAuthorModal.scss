@@ -11,8 +11,10 @@
     margin-bottom: 1rem;
   }
 
-  &__rows-title {
-    margin-bottom: 0.5rem;
+  &__rows {
+    &-title {
+      margin-bottom: 0.5rem;
+    }
   }
 
   &__row {
