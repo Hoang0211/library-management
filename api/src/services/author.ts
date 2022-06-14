@@ -1,9 +1,10 @@
 import { Types } from 'mongoose'
 
+import Book from '../models/Book'
 import Author, { AuthorDocument } from '../models/Author'
 import { NotFoundError } from '../helpers/apiError'
 
-const findAll = async (): Promise<AuthorDocument[]> => {
+const findAllAuthors = async (): Promise<AuthorDocument[]> => {
   return Author.find().sort({ firstName: 1 })
 }
 
@@ -11,8 +12,7 @@ type SearchedAuthorResType = {
   authors: AuthorDocument[]
   count: number
 }
-
-const searchAll = async (
+const searchAllAuthors = async (
   keyword: string,
   limit: number,
   page: number,
@@ -54,7 +54,7 @@ const searchAll = async (
   }
 }
 
-const findById = async (authorId: string): Promise<AuthorDocument> => {
+const findAuthorById = async (authorId: string): Promise<AuthorDocument> => {
   const foundAuthor = await Author.findById(authorId).populate('books')
 
   if (!foundAuthor) {
@@ -64,11 +64,13 @@ const findById = async (authorId: string): Promise<AuthorDocument> => {
   return foundAuthor
 }
 
-const create = async (author: AuthorDocument): Promise<AuthorDocument> => {
+const createAuthor = async (
+  author: AuthorDocument
+): Promise<AuthorDocument> => {
   return author.save()
 }
 
-const update = async (
+const updateAuthor = async (
   authorId: string,
   update: Partial<AuthorDocument>
 ): Promise<AuthorDocument | null> => {
@@ -84,67 +86,47 @@ const update = async (
   return foundAuthor
 }
 
-// Add book to author's books list when adding new book
-const addToBooks = async (
-  authorId: string | Types.ObjectId,
-  bookId: string
-): Promise<AuthorDocument | null> => {
-  const foundAuthor = await Author.findByIdAndUpdate(
-    authorId,
-    { $push: { books: bookId } },
-    {
-      new: true,
-      runValidators: true,
-    }
-  )
-
-  if (!foundAuthor) {
-    throw new NotFoundError(`Author ${authorId} not found`)
-  }
-
-  return foundAuthor
-}
-
-// Remove book from author's books list when deleting book
-const removeFromBooks = async (
-  authorId: Types.ObjectId,
-  bookId: string
-): Promise<AuthorDocument | null> => {
-  const foundAuthor = await Author.findByIdAndUpdate(
-    authorId,
-    { $pull: { books: bookId } },
-    {
-      new: true,
-      runValidators: true,
-    }
-  )
-
-  if (!foundAuthor) {
-    throw new NotFoundError(`Author ${authorId} not found`)
-  }
-
-  return foundAuthor
-}
-
 const deleteAuthor = async (
   authorId: string
 ): Promise<AuthorDocument | null> => {
-  const foundAuthor = Author.findByIdAndDelete(authorId)
-
+  // Delete author
+  const foundAuthor = await Author.findByIdAndDelete(authorId)
   if (!foundAuthor) {
     throw new NotFoundError(`Author ${authorId} not found`)
   }
 
+  // Remove deleted author from its books'authors list
+  await foundAuthor.books.forEach((bookId) =>
+    removeAuthorForBook(bookId, authorId)
+  )
+
   return foundAuthor
 }
 
+// Helper functions
+const removeAuthorForBook = async (
+  bookId: Types.ObjectId,
+  authorId: string
+) => {
+  const foundBook = await Book.findByIdAndUpdate(
+    bookId,
+    { $pull: { authors: authorId } },
+    {
+      new: true,
+      runValidators: true,
+    }
+  )
+
+  if (!foundBook) {
+    throw new NotFoundError(`Book ${bookId} not found`)
+  }
+}
+
 export default {
-  findAll,
-  searchAll,
-  findById,
-  create,
-  update,
-  addToBooks,
-  removeFromBooks,
+  findAllAuthors,
+  searchAllAuthors,
+  findAuthorById,
+  createAuthor,
+  updateAuthor,
   deleteAuthor,
 }

@@ -1,9 +1,7 @@
 import { Request, Response, NextFunction } from 'express'
 
-import Book, { Category, Status } from '../models/Book'
+import Book from '../models/Book'
 import BookService from '../services/Book'
-import Author from '../models/Author'
-import AuthorService from '../services/Author'
 import { BadRequestError } from '../helpers/apiError'
 
 // GET /books/

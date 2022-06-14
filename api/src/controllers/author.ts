@@ -12,7 +12,7 @@ export const findAllAuthors = async (
   next: NextFunction
 ) => {
   try {
-    res.json(await AuthorService.findAll())
+    res.json(await AuthorService.findAllAuthors())
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
       next(new BadRequestError('Invalid Request', error))
@@ -60,7 +60,7 @@ export const searchAllAuthors = async (
     const pageNum = Number(page)
     const sortOrderNum = sortOrder === 'asc' ? 1 : -1
     res.json(
-      await AuthorService.searchAll(
+      await AuthorService.searchAllAuthors(
         keyword,
         limitNum,
         pageNum,
@@ -84,7 +84,7 @@ export const findAuthorById = async (
   next: NextFunction
 ) => {
   try {
-    res.json(await AuthorService.findById(req.params.authorId))
+    res.json(await AuthorService.findAuthorById(req.params.authorId))
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
       next(new BadRequestError('Invalid Request', error))
@@ -109,8 +109,8 @@ export const createAuthor = async (
       biography,
     })
 
-    await AuthorService.create(author)
-    res.json(author)
+    const createdAuthor = await AuthorService.createAuthor(author)
+    res.json(createdAuthor)
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
       next(new BadRequestError('Invalid Request', error))
@@ -129,7 +129,7 @@ export const updateAuthor = async (
   try {
     const update = req.body
     const authorId = req.params.authorId
-    const updatedAuthor = await AuthorService.update(authorId, update)
+    const updatedAuthor = await AuthorService.updateAuthor(authorId, update)
     res.json(updatedAuthor)
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
@@ -147,15 +147,15 @@ export const deleteAuthor = async (
   next: NextFunction
 ) => {
   try {
-    // Validate author
-    const deletedAuthor = await AuthorService.findById(req.params.authorId)
+    // // Validate author
+    // const deletedAuthor = await AuthorService.findById(req.params.authorId)
 
-    // Update author list for each book
-    await deletedAuthor.books.forEach((bookId) =>
-      BookService.removeFromAuthors(bookId, deletedAuthor._id)
-    )
+    // // Update author list for each book
+    // await deletedAuthor.books.forEach((bookId) =>
+    //   BookService.removeFromAuthors(bookId, deletedAuthor._id)
+    // )
 
-    // Delete author
+    // // Delete author
     await AuthorService.deleteAuthor(req.params.authorId)
     res.status(204).end()
   } catch (error) {
