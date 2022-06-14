@@ -18,7 +18,7 @@ const BookDetails = () => {
 
   const { user, token } = useSelector((state: AppState) => state.user);
   const { loading, error, book } = useSelector(
-    (state: AppState) => state.bookDetails
+    (state: AppState) => state.getBookDetails
   );
   const { error: deleteError, deleted } = useSelector(
     (state: AppState) => state.deleteBook

@@ -96,19 +96,19 @@ export type AppState = {
   user: UserState;
   editUser: EditUserState;
 
+  books: BooksState;
+  searchBooks: SearchBooksState;
+  getBookDetails: GetBookDetailsState;
+  addBook: AddBookState;
+  editBook: EditBookState;
+  deleteBook: DeleteBookState;
+
   authors: AuthorsState;
   searchAuthors: SearchAuthorsState;
   authorDetails: AuthorDetailsState;
   addAuthor: AddAuthorState;
   editAuthor: EditAuthorState;
   deleteAuthor: DeleteAuthorState;
-
-  books: BooksState;
-  searchBooks: SearchBooksState;
-  bookDetails: BookDetailsState;
-  addBook: AddBookState;
-  editBook: EditBookState;
-  deleteBook: DeleteBookState;
 
   getBorrows: GetBorrowsState;
   borrow: BorrowState;
@@ -481,8 +481,8 @@ export type SearchAllBooksActions =
   | SearchAllBooksFailureAction
   | ClearSearchAllBooksAction;
 
-// BOOK DETAILS
-export type BookDetailsState = {
+// GET BOOK DETAILS
+export type GetBookDetailsState = {
   loading: boolean;
   error: Error | null;
   book: Book | null;
@@ -505,13 +505,13 @@ export type GetBookDetailsFailureAction = {
 export type ClearGetBookDetailsAction = {
   type: typeof CLEAR_GET_BOOK_DETAILS_ERROR;
 };
-export type BookDetailsActions =
+export type GetBookDetailsActions =
   | GetBookDetailsRequestAction
   | GetBookDetailsSuccessAction
   | GetBookDetailsFailureAction
   | ClearGetBookDetailsAction;
 
-// NEW BOOK
+// ADD BOOK
 export type AddBookState = {
   loading: boolean;
   error: Error | null;

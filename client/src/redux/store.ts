@@ -35,6 +35,39 @@ const initState: AppState = {
     updated: false,
     updatedUser: null,
   },
+
+  books: {
+    loading: false,
+    error: null,
+    books: [],
+  },
+  searchBooks: {
+    loading: false,
+    error: null,
+    books: [],
+    count: 0,
+  },
+  getBookDetails: {
+    loading: false,
+    error: null,
+    book: null,
+  },
+  addBook: {
+    loading: false,
+    error: null,
+    added: false,
+  },
+  editBook: {
+    loading: false,
+    error: null,
+    updated: false,
+  },
+  deleteBook: {
+    loading: false,
+    error: null,
+    deleted: false,
+  },
+
   authors: {
     loading: false,
     error: null,
@@ -66,37 +99,7 @@ const initState: AppState = {
     error: null,
     deleted: false,
   },
-  books: {
-    loading: false,
-    error: null,
-    books: [],
-  },
-  searchBooks: {
-    loading: false,
-    error: null,
-    books: [],
-    count: 0,
-  },
-  bookDetails: {
-    loading: false,
-    error: null,
-    book: null,
-  },
-  addBook: {
-    loading: false,
-    error: null,
-    added: false,
-  },
-  editBook: {
-    loading: false,
-    error: null,
-    updated: false,
-  },
-  deleteBook: {
-    loading: false,
-    error: null,
-    deleted: false,
-  },
+
   getBorrows: {
     loading: false,
     error: null,

@@ -17,7 +17,7 @@ const EditBook = () => {
   const navigate = useNavigate();
 
   const { token } = useSelector((state: AppState) => state.user);
-  const { book } = useSelector((state: AppState) => state.bookDetails);
+  const { book } = useSelector((state: AppState) => state.getBookDetails);
   const { loading, error, updated } = useSelector(
     (state: AppState) => state.editBook
   );

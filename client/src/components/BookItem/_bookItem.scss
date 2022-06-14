@@ -11,21 +11,19 @@
     border-bottom: none;
   }
 
-  .info {
-    .title {
-      font-weight: bold;
-    }
-    .category {
-      display: flex;
-      align-items: center;
+  &__title {
+    font-weight: bold;
+  }
+  &__category {
+    display: flex;
+    align-items: center;
 
-      &__icon {
-        margin-right: 0.25rem;
-      }
+    .icon {
+      margin-right: 0.25rem;
     }
   }
 
-  .btn {
+  &__details {
     height: min-content;
     padding: 0.5rem 1rem;
     font-size: 0.85rem;

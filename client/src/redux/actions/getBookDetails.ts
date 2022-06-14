@@ -7,15 +7,15 @@ import {
   GET_BOOK_DETAILS_FAILURE,
   CLEAR_GET_BOOK_DETAILS_ERROR,
 } from '../../constants/bookConstants';
-import { BookDetailsActions, Book, isAxiosError } from '../../types';
+import { GetBookDetailsActions, Book, isAxiosError } from '../../types';
 
-export function getBookDetailsRequest(): BookDetailsActions {
+export function getBookDetailsRequest(): GetBookDetailsActions {
   return {
     type: GET_BOOK_DETAILS_REQUEST,
   };
 }
 
-export function getBookDetailsSuccess(book: Book): BookDetailsActions {
+export function getBookDetailsSuccess(book: Book): GetBookDetailsActions {
   return {
     type: GET_BOOK_DETAILS_SUCCESS,
     payload: {
@@ -24,7 +24,7 @@ export function getBookDetailsSuccess(book: Book): BookDetailsActions {
   };
 }
 
-export function getBookDetailsFailure(error: Error): BookDetailsActions {
+export function getBookDetailsFailure(error: Error): GetBookDetailsActions {
   return {
     type: GET_BOOK_DETAILS_FAILURE,
     payload: {
@@ -50,7 +50,7 @@ export function getBookDetails(bookId: string) {
   };
 }
 
-export function clearGetBookDetailsError(): BookDetailsActions {
+export function clearGetBookDetailsError(): GetBookDetailsActions {
   return {
     type: CLEAR_GET_BOOK_DETAILS_ERROR,
   };

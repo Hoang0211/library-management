@@ -4,16 +4,16 @@ import {
   GET_BOOK_DETAILS_FAILURE,
   CLEAR_GET_BOOK_DETAILS_ERROR,
 } from '../../constants/bookConstants';
-import { BookDetailsActions, BookDetailsState } from '../../types';
+import { GetBookDetailsActions, GetBookDetailsState } from '../../types';
 
-export default function bookDetails(
-  state: BookDetailsState = {
+export default function getBookDetails(
+  state: GetBookDetailsState = {
     loading: false,
     error: null,
     book: null,
   },
-  action: BookDetailsActions
-): BookDetailsState {
+  action: GetBookDetailsActions
+): GetBookDetailsState {
   switch (action.type) {
     case GET_BOOK_DETAILS_REQUEST:
       return {

@@ -16,34 +16,34 @@ const BookItem = ({ book, lastItem }: BookItemProps) => {
   const dispatch = useDispatch<any>();
   const navigate = useNavigate();
 
-  const navigateToAuthorDetailsHandler = () => {
+  const navigateToBookDetailsHandler = () => {
     navigate(`/books/${book._id}`);
     dispatch(getBookDetails(book._id));
   };
 
   return (
     <div className={`book-item ${lastItem && 'book-item-last'}`}>
-      <div className='info'>
-        <p className='title'>
+      <div className='book-item__info'>
+        <p className='book-item__title'>
           {book.title} ({new Date(book.publishedDate).getFullYear()})
         </p>
-        <div className='category'>
+        <div className='book-item__category'>
           <RiBookFill className='icon category__icon' />
           <span className='category__text'>{book.category}</span>
         </div>
-        <p className='authors'>
+        <p className='book-item__authors'>
           Authors:{' '}
           {book.authors
             .map((author) => author.firstName + ' ' + author.lastName)
             .join(', ')}
         </p>
-        <p className='status'>
+        <p className='book-item__status'>
           Status: {book.status.charAt(0).toUpperCase() + book.status.slice(1)}
         </p>
       </div>
       <button
-        className='btn btn-details'
-        onClick={navigateToAuthorDetailsHandler}
+        className='book-item__details'
+        onClick={navigateToBookDetailsHandler}
       >
         More Details
       </button>
