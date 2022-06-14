@@ -1,8 +1,5 @@
 import { Request, Response, NextFunction } from 'express'
 
-import UserService from '../services/User'
-import BookService from '../services/Book'
-import Borrow, { BorrowDocument } from '../models/Borrow'
 import BorrowService from '../services/Borrow'
 import { BadRequestError } from '../helpers/apiError'
 
@@ -13,7 +10,7 @@ export const findAllBorrows = async (
   next: NextFunction
 ) => {
   try {
-    res.json(await BorrowService.findAll())
+    res.json(await BorrowService.findAllBorrows())
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
       next(new BadRequestError('Invalid Request', error))
@@ -31,7 +28,6 @@ export const createBorrows = async (
 ) => {
   try {
     const { userEmail, bookIds, borrowDate, dueDate } = req.body
-
     await BorrowService.borrowBooks(userEmail, bookIds, borrowDate, dueDate)
     res.status(204).end()
   } catch (error) {

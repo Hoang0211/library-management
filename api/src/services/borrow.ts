@@ -4,12 +4,8 @@ import Book from '../models/Book'
 import Borrow, { BorrowDocument } from '../models/Borrow'
 import { NotFoundError } from '../helpers/apiError'
 
-const findAll = async (): Promise<BorrowDocument[]> => {
+const findAllBorrows = async (): Promise<BorrowDocument[]> => {
   return Borrow.find().sort({ returnDate: 1 }).populate('user').populate('book')
-}
-
-const create = async (borrow: BorrowDocument): Promise<BorrowDocument> => {
-  return borrow.save()
 }
 
 const borrowBooks = async (
@@ -25,7 +21,7 @@ const borrowBooks = async (
   }
 
   // Verify book existed and create new borrow
-  const borrow = Promise.all(
+  return Promise.all(
     bookIds.map(async (bookId: string) => {
       const foundBook = await Book.findByIdAndUpdate(
         bookId,
@@ -48,8 +44,6 @@ const borrowBooks = async (
       return await borrow.save()
     })
   )
-
-  return borrow
 }
 
 const returnBook = async (borrowId: string): Promise<BorrowDocument | null> => {
@@ -74,8 +68,7 @@ const returnBook = async (borrowId: string): Promise<BorrowDocument | null> => {
 }
 
 export default {
-  findAll,
-  create,
+  findAllBorrows,
   borrowBooks,
   returnBook,
 }
