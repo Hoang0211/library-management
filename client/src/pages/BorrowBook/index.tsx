@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
+import PageWrapper from '../../components/layout/PageWrapper';
 import AllBookModal from '../../components/AllBookModal';
 import { borrow, resetBorrow, clearBorrowError } from '../../redux/actions';
 import { AppState, Book, BorrowRequest } from '../../types';
@@ -83,71 +84,80 @@ const BorrowBook = () => {
   }, [dispatch, navigate, error, borrowed]);
 
   return (
-    <main className='borrow-book'>
-      <form className='container' onSubmit={formSubmitHandler}>
-        <h2 className='title'>Borrow</h2>
-        <div className='input-controller'>
-          <label className='label label-email' htmlFor='email'>
-            Email:
-          </label>
-          <input
-            id='email'
-            type='text'
-            placeholder='Enter user email...'
-            onChange={emailInputChangeHandler}
-            value={emailInput}
-          ></input>
-        </div>
-        <div className='input-controller'>
-          <label className='label label-books' htmlFor='books'>
-            Borrow books:{' '}
-          </label>
-          <ul className='borrow-items'>
-            {booksInput.map((book) => (
-              <li className='borrow-item' key={book._id}>
-                {book.title} ({book.isbn})
-              </li>
-            ))}
-          </ul>
-          <button
-            id='books'
-            className='books-select'
-            type='button'
-            onClick={toggleListOfBooksHandler}
-          >
-            Show list of books
-          </button>
-          {showBookList && (
-            <AllBookModal
-              booksInput={booksInput}
-              addBookInputHandler={addBookInputHandler}
-              removeBookInputHandler={removeBookInputHandler}
-              onCloseHandler={toggleListOfBooksHandler}
-            />
-          )}
-        </div>
-        <p className='label label-due'>
-          Due date: {dateFormat(new Date(Date.now() + 12096e5))}
-        </p>
-        <div className='btns'>
-          <button
-            className='btn btn-save'
-            type='submit'
-            onClick={formSubmitHandler}
-            disabled={loading ? true : false}
-          >
-            Add
-          </button>
-          <button
-            className='btn btn-discard'
-            type='button'
-            onClick={discardHandler}
-          >
-            Discard
+    <PageWrapper className='borrow-book'>
+      <div className='title'>
+        <h1>New Author</h1>
+        <div className='actions'>
+          <button className='action' onClick={discardHandler}>
+            Home
           </button>
         </div>
-      </form>
-    </main>
+      </div>
+      <div className='container container-add'>
+        <form onSubmit={formSubmitHandler}>
+          <div className='input-controller'>
+            <label className='label label-email' htmlFor='email'>
+              Email:
+            </label>
+            <input
+              id='email'
+              type='text'
+              placeholder='Enter user email...'
+              onChange={emailInputChangeHandler}
+              value={emailInput}
+            ></input>
+          </div>
+          <div className='input-controller'>
+            <label className='label label-books' htmlFor='books'>
+              Borrow books:{' '}
+            </label>
+            <ul className='borrow-items'>
+              {booksInput.map((book) => (
+                <li className='borrow-item' key={book._id}>
+                  {book.title} ({book.isbn})
+                </li>
+              ))}
+            </ul>
+            <button
+              id='books'
+              className='select select-books'
+              type='button'
+              onClick={toggleListOfBooksHandler}
+            >
+              Show list of books
+            </button>
+            {showBookList && (
+              <AllBookModal
+                booksInput={booksInput}
+                addBookInputHandler={addBookInputHandler}
+                removeBookInputHandler={removeBookInputHandler}
+                onCloseHandler={toggleListOfBooksHandler}
+              />
+            )}
+          </div>
+          <p className='label label-due'>
+            Due date: {dateFormat(new Date(Date.now() + 12096e5))}
+          </p>
+          <div className='form-actions'>
+            <button
+              className='form-action form-action-add'
+              type='submit'
+              onClick={formSubmitHandler}
+              disabled={loading}
+            >
+              Borrow
+            </button>
+            <button
+              className='form-action form-action-discard'
+              type='button'
+              onClick={discardHandler}
+            >
+              Discard
+            </button>
+          </div>
+        </form>
+      </div>
+    </PageWrapper>
   );
 };
 
