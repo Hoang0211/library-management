@@ -74,11 +74,11 @@ import {
   GET_ALL_BORROWS_SUCCESS,
   GET_ALL_BORROWS_FAILURE,
   CLEAR_GET_ALL_BORROWS_ERROR,
-  BORROW_REQUEST,
-  BORROW_SUCCESS,
-  BORROW_FAILURE,
-  RESET_BORROW,
-  CLEAR_BORROW_ERROR,
+  BORROW_BOOKS_REQUEST,
+  BORROW_BOOKS_SUCCESS,
+  BORROW_BOOKS_FAILURE,
+  RESET_BORROW_BOOKS,
+  CLEAR_BORROW_BOOKS_ERROR,
   RETURN_BOOK_REQUEST,
   RETURN_BOOK_SUCCESS,
   RETURN_BOOK_FAILURE,
@@ -111,7 +111,7 @@ export type AppState = {
   deleteAuthor: DeleteAuthorState;
 
   getBorrows: GetBorrowsState;
-  borrow: BorrowState;
+  borrowBooks: BorrowBooksState;
   returnBook: ReturnBookState;
 };
 
@@ -641,42 +641,42 @@ export type GetBorrowsActions =
   | GetAllBorrowsFailureAction
   | ClearGetAllBorrowsAction;
 
-// BORROW
-export type BorrowRequest = {
+// BORROW BOOKS
+export type BorrowBooksRequest = {
   userEmail: string;
   bookIds: string[];
   borrowDate: Date;
   dueDate: Date;
 };
-export type BorrowState = {
+export type BorrowBooksState = {
   loading: boolean;
   error: Error | null;
   borrowed: boolean;
 };
-export type BorrowRequestAction = {
-  type: typeof BORROW_REQUEST;
+export type BorrowBooksRequestAction = {
+  type: typeof BORROW_BOOKS_REQUEST;
 };
-export type BorrowSuccessAction = {
-  type: typeof BORROW_SUCCESS;
+export type BorrowBooksSuccessAction = {
+  type: typeof BORROW_BOOKS_SUCCESS;
 };
-export type BorrowFailureAction = {
-  type: typeof BORROW_FAILURE;
+export type BorrowBooksFailureAction = {
+  type: typeof BORROW_BOOKS_FAILURE;
   payload: {
     error: Error;
   };
 };
-export type ResetBorrowAction = {
-  type: typeof RESET_BORROW;
+export type ResetBorrowBooksAction = {
+  type: typeof RESET_BORROW_BOOKS;
 };
-export type ClearBorrowErrorAction = {
-  type: typeof CLEAR_BORROW_ERROR;
+export type ClearBorrowBooksErrorAction = {
+  type: typeof CLEAR_BORROW_BOOKS_ERROR;
 };
-export type BorrowActions =
-  | BorrowRequestAction
-  | BorrowSuccessAction
-  | BorrowFailureAction
-  | ResetBorrowAction
-  | ClearBorrowErrorAction;
+export type BorrowBooksActions =
+  | BorrowBooksRequestAction
+  | BorrowBooksSuccessAction
+  | BorrowBooksFailureAction
+  | ResetBorrowBooksAction
+  | ClearBorrowBooksErrorAction;
 
 // RETURN
 export type ReturnBookState = {

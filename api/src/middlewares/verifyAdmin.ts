@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken'
 import { User, Role } from '../models/User'
 import { ForbiddenError } from '../helpers/apiError'
 
-export default function verifyAuth(
+export default function verifyAdmin(
   req: Request,
   res: Response,
   next: NextFunction

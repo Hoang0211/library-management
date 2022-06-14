@@ -18,7 +18,7 @@ import editAuthor from './editAuthor';
 import deleteAuthor from './deleteAuthor';
 
 import getBorrows from './getBorrows';
-import borrow from './borrow';
+import borrowBooks from './borrowBooks';
 import returnBook from './return';
 
 const createRootReducer = () =>
@@ -41,7 +41,7 @@ const createRootReducer = () =>
     deleteAuthor,
 
     getBorrows,
-    borrow,
+    borrowBooks,
     returnBook,
   });
 

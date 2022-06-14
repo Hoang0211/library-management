@@ -105,7 +105,7 @@ const initState: AppState = {
     error: null,
     borrows: [],
   },
-  borrow: {
+  borrowBooks: {
     loading: false,
     error: null,
     borrowed: false,

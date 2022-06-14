@@ -4,8 +4,12 @@ import { useNavigate } from 'react-router-dom';
 
 import PageWrapper from '../../components/layout/PageWrapper';
 import AllBookModal from '../../components/AllBookModal';
-import { borrow, resetBorrow, clearBorrowError } from '../../redux/actions';
-import { AppState, Book, BorrowRequest } from '../../types';
+import {
+  borrowBooks,
+  resetBorrowBooks,
+  clearBorrowBooksError,
+} from '../../redux/actions';
+import { AppState, Book, BorrowBooksRequest } from '../../types';
 import { dateFormat } from '../../utils/dateFormat';
 import './_borrowBook.scss';
 
@@ -15,7 +19,7 @@ const BorrowBook = () => {
 
   const { token } = useSelector((state: AppState) => state.user);
   const { loading, error, borrowed } = useSelector(
-    (state: AppState) => state.borrow
+    (state: AppState) => state.borrowBooks
   );
 
   // Form inputs state
@@ -56,14 +60,14 @@ const BorrowBook = () => {
       return;
     }
 
-    const formData: BorrowRequest = {
+    const formData: BorrowBooksRequest = {
       userEmail: emailInput,
       bookIds: booksInput.map((book) => book._id),
       borrowDate: borrowDate,
       dueDate: dueDate,
     };
 
-    dispatch(borrow(token, formData));
+    dispatch(borrowBooks(token, formData));
   };
 
   const discardHandler = () => {
@@ -73,13 +77,13 @@ const BorrowBook = () => {
   useEffect(() => {
     if (error) {
       alert(error);
-      dispatch(clearBorrowError());
+      dispatch(clearBorrowBooksError());
     }
 
     if (borrowed) {
       alert('Borrow successfully!');
       navigate('/borrows');
-      dispatch(resetBorrow());
+      dispatch(resetBorrowBooks());
     }
   }, [dispatch, navigate, error, borrowed]);
 
