@@ -126,6 +126,10 @@ const EditBook = () => {
     }
   };
 
+  const navigateToHomePage = () => {
+    navigate('/');
+  };
+
   const discardHandler = () => {
     navigate(`/books/${bookId}`);
   };
@@ -165,15 +169,8 @@ const EditBook = () => {
       <div className='title'>
         <h1>Edit Book</h1>
         <div className='actions'>
-          <button
-            className='action'
-            onClick={formSubmitHandler}
-            disabled={loading}
-          >
-            Save
-          </button>
-          <button className='action' onClick={discardHandler}>
-            Discard
+          <button className='action' onClick={navigateToHomePage}>
+            Home
           </button>
         </div>
       </div>
@@ -276,6 +273,23 @@ const EditBook = () => {
               onChange={pageNumInputChangeHandler}
               value={pageNumInput}
             ></input>
+          </div>
+          <div className='form-actions'>
+            <button
+              className='form-action form-action-save'
+              type='submit'
+              onClick={formSubmitHandler}
+              disabled={loading}
+            >
+              Save
+            </button>
+            <button
+              className='form-action form-action-discard'
+              type='button'
+              onClick={discardHandler}
+            >
+              Discard
+            </button>
           </div>
         </form>
       </div>

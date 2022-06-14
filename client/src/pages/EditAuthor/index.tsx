@@ -56,6 +56,10 @@ const EditAuthor = () => {
     }
   };
 
+  const navigateToHomePage = () => {
+    navigate('/');
+  };
+
   const discardHandler = () => {
     navigate(`/authors/${authorId}`);
   };
@@ -81,15 +85,8 @@ const EditAuthor = () => {
       <div className='title'>
         <h1>Edit Author</h1>
         <div className='actions'>
-          <button
-            className='action'
-            onClick={formSubmitHandler}
-            disabled={loading}
-          >
-            Save
-          </button>
-          <button className='action' onClick={discardHandler}>
-            Discard
+          <button className='action' onClick={navigateToHomePage}>
+            Home
           </button>
         </div>
       </div>
@@ -123,6 +120,23 @@ const EditAuthor = () => {
               onChange={biographyInputChangeHandler}
               value={biographyInput}
             ></textarea>
+          </div>
+          <div className='form-actions'>
+            <button
+              className='form-action form-action-save'
+              type='submit'
+              onClick={formSubmitHandler}
+              disabled={loading}
+            >
+              Save
+            </button>
+            <button
+              className='form-action form-action-discard'
+              type='button'
+              onClick={discardHandler}
+            >
+              Discard
+            </button>
           </div>
         </form>
       </div>
