@@ -7,6 +7,7 @@ import PageWrapper from '../../components/layout/PageWrapper';
 import SearchForm from '../../components/SearchForm';
 import ResultPanel from '../../components/ResultPanel';
 import {
+  changeCurrentDisplay,
   searchAllBooks,
   clearSearchAllBooksError,
   searchAllAuthors,
@@ -19,16 +20,13 @@ const Home = () => {
   const dispatch = useDispatch<any>();
   const navigate = useNavigate();
 
+  const { currentDisplay } = useSelector((state: AppState) => state.display);
   const { user } = useSelector((state: AppState) => state.user);
   const { error: booksError, count: booksCount } = useSelector(
     (state: AppState) => state.searchBooks
   );
   const { error: authorsError, count: authorsCount } = useSelector(
     (state: AppState) => state.searchAuthors
-  );
-
-  const [currentDisplay, setCurrentDisplay] = useState<'books' | 'authors'>(
-    'books'
   );
 
   // ResultPanel states
@@ -68,11 +66,7 @@ const Home = () => {
 
   // Title action handlers
   const changeCurrentDisplayHandler = () => {
-    if (currentDisplay === 'books') {
-      setCurrentDisplay('authors');
-    } else {
-      setCurrentDisplay('books');
-    }
+    dispatch(changeCurrentDisplay());
   };
   const navigateToAddPage = () => {
     if (currentDisplay === 'books') {
@@ -231,7 +225,6 @@ const Home = () => {
       <div className='container'>
         <div className='container__column container__column-left'>
           <ResultPanel
-            currentDisplay={currentDisplay}
             currentPage={currentPage}
             limit={limit}
             sort={sort}

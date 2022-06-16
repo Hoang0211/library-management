@@ -1,5 +1,7 @@
 import { combineReducers } from 'redux';
 
+import display from './display';
+
 import user from './user';
 import editUser from './editUser';
 
@@ -23,6 +25,8 @@ import returnBook from './return';
 
 const createRootReducer = () =>
   combineReducers({
+    display,
+
     user,
     editUser,
 

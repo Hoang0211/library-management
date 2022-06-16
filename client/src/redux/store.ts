@@ -23,6 +23,10 @@ export const getTokenFromLocal = (): string => {
 };
 
 const initState: AppState = {
+  display: {
+    currentDisplay: 'books',
+  },
+
   user: {
     loading: false,
     error: null,

@@ -1,4 +1,5 @@
 import { AxiosError } from 'axios';
+import { CHANGE_CURRENT_DISPLAY } from './constants/displayConstants';
 import {
   SIGN_IN_REQUEST,
   SIGN_IN_SUCCESS,
@@ -93,6 +94,8 @@ export function isAxiosError(candidate: any): candidate is AxiosError {
 
 // APP
 export type AppState = {
+  display: DisplayState;
+
   user: UserState;
   editUser: EditUserState;
 
@@ -114,6 +117,15 @@ export type AppState = {
   borrowBooks: BorrowBooksState;
   returnBook: ReturnBookState;
 };
+
+// DISPLAY
+export type DisplayState = {
+  currentDisplay: 'books' | 'authors';
+};
+export type ChangeCurrentDisplayAction = {
+  type: typeof CHANGE_CURRENT_DISPLAY;
+};
+export type DisplayActions = ChangeCurrentDisplayAction;
 
 // USER
 export enum Role {

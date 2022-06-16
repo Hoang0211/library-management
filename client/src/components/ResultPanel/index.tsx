@@ -9,7 +9,6 @@ import { AppState } from '../../types';
 import './_resultPanel.scss';
 
 type ResultPanelProps = {
-  currentDisplay: 'books' | 'authors';
   currentPage: number;
   limit: number;
   sort: string;
@@ -22,7 +21,6 @@ type ResultPanelProps = {
 };
 
 const ResultPanel = ({
-  currentDisplay,
   currentPage,
   limit,
   sort,
@@ -31,6 +29,7 @@ const ResultPanel = ({
   changePageByArrowHandler,
   changePageByNumHandler,
 }: ResultPanelProps) => {
+  const { currentDisplay } = useSelector((state: AppState) => state.display);
   const {
     loading: booksLoading,
     books,
