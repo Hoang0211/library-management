@@ -20,7 +20,6 @@ export default function searchBooks(
       return {
         ...state,
         loading: true,
-        books: [],
       };
     case SEARCH_ALL_BOOKS_SUCCESS:
       return {

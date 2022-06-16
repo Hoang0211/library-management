@@ -20,7 +20,6 @@ export default function searchAuthors(
       return {
         ...state,
         loading: true,
-        authors: [],
       };
     case SEARCH_ALL_AUTHORS_SUCCESS:
       return {

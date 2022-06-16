@@ -30,16 +30,12 @@ const ResultPanel = ({
   changePageByNumHandler,
 }: ResultPanelProps) => {
   const { currentDisplay } = useSelector((state: AppState) => state.display);
-  const {
-    loading: booksLoading,
-    books,
-    count: booksCount,
-  } = useSelector((state: AppState) => state.searchBooks);
-  const {
-    loading: authorsLoading,
-    authors,
-    count: authorsCount,
-  } = useSelector((state: AppState) => state.searchAuthors);
+  const { books, count: booksCount } = useSelector(
+    (state: AppState) => state.searchBooks
+  );
+  const { authors, count: authorsCount } = useSelector(
+    (state: AppState) => state.searchAuthors
+  );
 
   let maxPageNum = 0;
   if (currentDisplay === 'books') {
@@ -76,29 +72,21 @@ const ResultPanel = ({
   // For results
   const displayResults = () => {
     if (currentDisplay === 'books') {
-      if (booksLoading) {
-        return <></>;
-      } else {
-        return books.map((book) => (
-          <BookItem
-            key={book._id}
-            book={book}
-            lastItem={book === books[books.length - 1]}
-          />
-        ));
-      }
+      return books.map((book) => (
+        <BookItem
+          key={book._id}
+          book={book}
+          lastItem={book === books[books.length - 1]}
+        />
+      ));
     } else {
-      if (authorsLoading) {
-        return <></>;
-      } else {
-        return authors.map((author) => (
-          <AuthorItem
-            key={author._id}
-            author={author}
-            lastItem={author === authors[authors.length - 1]}
-          />
-        ));
-      }
+      return authors.map((author) => (
+        <AuthorItem
+          key={author._id}
+          author={author}
+          lastItem={author === authors[authors.length - 1]}
+        />
+      ));
     }
   };
 
