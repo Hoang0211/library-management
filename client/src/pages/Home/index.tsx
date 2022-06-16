@@ -66,6 +66,12 @@ const Home = () => {
 
   // Title action handlers
   const changeCurrentDisplayHandler = () => {
+    if (currentDisplay === 'authors') {
+      setSort('title-asc');
+    } else {
+      setSort('firstName-asc');
+    }
+    setCurrentPage(1);
     dispatch(changeCurrentDisplay());
   };
   const navigateToAddPage = () => {
@@ -78,9 +84,11 @@ const Home = () => {
 
   // Result panel handlers
   const limitChangeHandler = (e: React.FormEvent<HTMLSelectElement>) => {
+    setCurrentPage(1);
     setLimit(Number(e.currentTarget.value));
   };
   const sortChangeHandler = (e: React.FormEvent<HTMLSelectElement>) => {
+    setCurrentPage(1);
     setSort(e.currentTarget.value);
   };
   const changePageByArrowHandler = (
@@ -154,6 +162,8 @@ const Home = () => {
   };
   const searchBookSubmitHandler = (e: React.FormEvent) => {
     e.preventDefault();
+    setCurrentPage(1);
+    setLimit(5);
     setKeyword(keywordInput);
     setCategory(selectedCategories);
     setStatus(selectedStatuses);
