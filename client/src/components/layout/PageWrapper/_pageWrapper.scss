@@ -115,6 +115,16 @@ main {
     }
   }
 
+  .btn-top {
+    padding: 0.9rem 1rem;
+    position: fixed;
+    bottom: 30px;
+    right: 50px;
+    outline: none;
+    border: none;
+    opacity: 0.5;
+  }
+
   button {
     cursor: pointer;
   }
